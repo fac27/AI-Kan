@@ -33,3 +33,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 # AI-Kan
+
+## Guidance on naming conventions
+
+Guidance on the naming conventions applied in this code base can be found [here](https://github.com/fac27/AI-Kan/blob/main/documentation/conventions.md)
