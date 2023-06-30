@@ -7,19 +7,24 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "write": "prettier --write \"**/pages/**/*\"",
+    "write": "prettier --write \"**/app/**/*\"",
     "test": "jest --coverage",
     "prepare": "husky install"
   },
   "dependencies": {
     "auto-git-update": "^1.1.1",
-    "next": "13.4.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@supabase/auth-helpers-nextjs": "^0.7.2",
+    "@supabase/auth-ui-react": "^0.4.2",
+    "@supabase/auth-ui-shared": "^0.1.6",
+    "@supabase/supabase-js": "^2.26.0",
+    "next": "^13.4.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "20.3.2",
-    "@types/react": "18.2.14",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "eslint": "^8.43.0",
