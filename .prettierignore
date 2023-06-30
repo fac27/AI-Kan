@@ -1,0 +1,9 @@
+node_modules/
+documentation/
+*.json
+.gitignore
+*.node_modules
+next.config.js
+tsconfig.json
+.husky/**/*
+*.md
