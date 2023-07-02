@@ -1,5 +1,5 @@
-import React from "react";
-import AuthForm from "./auth-form";
+import React from "react"
+import AuthForm from "./auth-form"
 
 const Home: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const Home: React.FC = () => {
       <h1>Hello World</h1>
       <AuthForm />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
