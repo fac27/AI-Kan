@@ -1,62 +1,62 @@
-"use client";
-import { useCallback, useEffect, useState } from "react";
-import { Database } from "../database.types";
+"use client"
+import { useCallback, useEffect, useState } from "react"
+import { Database } from "../database.types"
 import {
   Session,
   createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+} from "@supabase/auth-helpers-nextjs"
 
 export default function AccountForm({ session }: { session: Session | null }) {
-  const supabase = createClientComponentClient<Database>();
-  const [loading, setLoading] = useState(true);
+  const supabase = createClientComponentClient<Database>()
+  const [loading, setLoading] = useState(true)
 
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(null)
 
-  const user = session?.user;
+  const user = session?.user
 
   const getProfile = useCallback(async () => {
     try {
-      setLoading(true);
+      setLoading(true)
 
-      let { data, error, status } = await supabase
+      const { data, error, status } = await supabase
         .from("profiles")
         .select(`username`)
         .eq("id", user?.id)
-        .single();
+        .single()
 
       if (error && status !== 406) {
-        throw error;
+        throw error
       }
 
       if (data) {
-        setUsername(data.username);
+        setUsername(data.username)
       }
     } catch (error) {
-      alert("Error loading user data!");
+      alert("Error loading user data!")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [user, supabase]);
+  }, [user, supabase])
 
   useEffect(() => {
-    getProfile();
-  }, [user, getProfile]);
+    getProfile()
+  }, [user, getProfile])
 
   async function updateProfile({ username }: { username: string | null }) {
     try {
-      setLoading(true);
+      setLoading(true)
 
-      let { error } = await supabase.from("profiles").upsert({
+      const { error } = await supabase.from("profiles").upsert({
         id: user?.id as string,
         username,
         updated_at: new Date().toISOString(),
-      });
-      if (error) throw error;
-      alert("Profile updated!");
+      })
+      if (error) throw error
+      alert("Profile updated!")
     } catch (error) {
-      alert("Error updating the data!");
+      alert("Error updating the data!")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
@@ -72,7 +72,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
           id="username"
           type="text"
           value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={e => setUsername(e.target.value)}
         />
       </div>
       <div>
@@ -93,5 +93,5 @@ export default function AccountForm({ session }: { session: Session | null }) {
         </form>
       </div>
     </div>
-  );
+  )
 }

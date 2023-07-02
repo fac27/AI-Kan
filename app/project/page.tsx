@@ -50,6 +50,6 @@ import Grandparent from "./Grandparent"
 //   }
 // }
 
-export default function Project({ props }) {
+export default function Project({}) {
   return <Grandparent />
 }
