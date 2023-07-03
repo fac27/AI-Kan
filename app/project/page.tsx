@@ -9,8 +9,7 @@ import { useState } from "react"
 import Xarrow from "react-xarrows"
 import { useRef } from "react"
 
-
-export default function Project({ }) {
+export default function Project({}) {
   const [projectInput, setProjectInput] = useState("")
   const [result, setResult] = useState()
 
@@ -48,11 +47,7 @@ export default function Project({ }) {
         ))}
       </div>
       <Logout />
-      <Xarrow
-        start={taskRef}
-        end={issueRef}>
-          
-        </Xarrow>
+      <Xarrow start={taskRef} end={issueRef}></Xarrow>
       <Logout />
     </>
   )

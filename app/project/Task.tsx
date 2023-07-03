@@ -1,6 +1,5 @@
 import { FC } from "react"
 
-
 interface TaskProps {
   title: string
   description: string
