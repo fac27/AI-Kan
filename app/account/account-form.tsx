@@ -18,7 +18,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
     try {
       setLoading(true)
 
-      let { data, error, status } = await supabase
+      const { data, error, status } = await supabase
         .from("profiles")
         .select(`username`)
         .eq("id", user?.id)
@@ -46,7 +46,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
     try {
       setLoading(true)
 
-      let { error } = await supabase.from("profiles").upsert({
+      const { error } = await supabase.from("profiles").upsert({
         id: user?.id as string,
         username,
         updated_at: new Date().toISOString(),
