@@ -1,3 +1,6 @@
+import { COMPILER_NAMES } from "next/dist/shared/lib/constants"
+import { FC } from "react"
+
 const APIGrandparent: FC = ({
   projectInput,
   setProjectInput,
@@ -6,7 +9,6 @@ const APIGrandparent: FC = ({
 }) => {
   async function onSubmit(event) {
     event.preventDefault()
-    console.log(projectInput)
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -17,6 +19,9 @@ const APIGrandparent: FC = ({
       })
 
       const data = await response.json()
+      if (response.status === 404) {
+        console.error(data.error)
+      }
       if (response.status !== 200) {
         throw (
           data.error ||
