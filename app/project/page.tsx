@@ -4,7 +4,7 @@ import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
-import APITitle from "./APITitle"
+import Logout from "./Logout"
 import { useState } from "react"
 
 // type Params = {
@@ -79,6 +79,7 @@ export default function Project({ props }) {
           ))}
         </div>
       ))}
+      <Logout />
     </>
   )
 }
