@@ -1,6 +1,6 @@
 import { FC } from "react"
 
-const Grandparent: FC = () => {
+const Title: FC = () => {
   return (
     <div>
       <label htmlFor="promptInput">I want to make a...</label>
@@ -10,4 +10,4 @@ const Grandparent: FC = () => {
   )
 }
 
-export default Grandparent
+export default Title

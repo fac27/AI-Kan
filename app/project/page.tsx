@@ -1,8 +1,10 @@
 // import { GetStaticPaths, GetStaticProps } from "next"
 
-// import exampleData from "../../../data/exampleData"
-"use client"
-import Grandparent from "./Grandparent"
+import exampleData from "../../data/exampleData"
+;("use client")
+import Title from "./Title"
+import Task from "./Task"
+import Issue from "./Issue"
 import APIGrandparent from "./APIGrandparent"
 import { useState } from "react"
 
@@ -59,7 +61,25 @@ export default function Project({ props }) {
 
   return (
     <>
-      {/* <Grandparent /> */}
+      {/* <Title />
+      {exampleData[0].tasks.map(task => (
+        <div key={task.id}>
+          <Task
+            key={task.id}
+            title={task.title}
+            description={task.description}
+            done={task.done}
+          />
+          {task.issues.map((issue, index) => (
+            <Issue
+              key={index}
+              title={issue.title}
+              description={issue.description}
+              done={issue.done}
+            />
+          ))}
+        </div>
+      ))} */}
       <APIGrandparent
         projectInput={projectInput}
         setProjectInput={setProjectInput}
