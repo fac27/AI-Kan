@@ -56,7 +56,7 @@ export default function Project({}) {
   return (
     <>
       <Title />
-      <div className="m-4 flex">
+      <div className="m-4 mt-10 flex space-x-4 w-500">
         {exampleData[0].tasks.map(task => (
           <Task
             key={task.id}
@@ -66,9 +66,12 @@ export default function Project({}) {
           />
         ))}
       </div>
-      <div className="m-4 flex border border-black">
+      <div className="m-4 mt-10 flex space-x-4">
         {exampleData[0].tasks.map((task, index) => (
-          <div key={index} className="flex flex-col overflow-hidden border border-black">
+          <div
+            key={index}
+            className="flex flex-col overflow-hidden border border-black"
+          >
             {task.issues.map((issue, index) => (
               <Issue
                 key={index}
