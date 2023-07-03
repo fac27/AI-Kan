@@ -75,7 +75,7 @@ export default function Project({}) {
           ))}
         </div>
       ))}
-      <Logout/>
+      <Logout />
     </>
   )
 }
