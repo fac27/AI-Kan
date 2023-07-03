@@ -1,0 +1,35 @@
+{"project": [
+    {
+      "title": "Setup development environment",
+      "description": "Install and setup necessary software to begin development",
+      "timeEstimate": "2 hours",
+      "done": false
+    },
+    {
+      "title": "Create game board",
+      "description":
+        "Implement the main game board where the game will be played",
+      "timeEstimate": "4 hours",
+      "done": false
+    },
+    {
+      "title": "Create snake",
+      "description": "Implement the snake that the player will control",
+      "timeEstimate": "6 hours",
+      "done": false
+    },
+    {
+      "title": "Implement game logic",
+      "description":
+        "Handle the main game mechanics like snake movement, score keeping, and collision detection",
+      "timeEstimate": "8 hours",
+      "done": false
+    },
+    {
+      "title": "Testing and Debugging",
+      "description":
+        "Run tests and debug to ensure that the game runs as expected",
+      "timeEstimate": "4 hours",
+      "done": false
+    }
+  ]}
