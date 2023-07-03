@@ -10,55 +10,6 @@ import Xarrow from "react-xarrows"
 import { useRef } from "react"
 
 
-// import type xarrowPropsType 
-
-// type Params = {
-//   project: string
-// }
-
-// export const getStaticPaths: GetStaticPaths<Params> = () => {
-//   const paths = exampleData.map(project => ({
-//     params: {
-//       project: project.name.toLowerCase().replace(/\s/g, "-"),
-//     },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
-
-// type Props = {
-//   tasks: Task[]
-// }
-
-// type Task = {
-//   id: number
-//   title: string
-//   description: string
-//   timeEstimate: string
-//   issues: Issue[]
-//   done: boolean
-// }
-
-// type Issue = {
-//   id: number
-//   taskId: number
-//   description: string
-//   timeEstimate: string
-//   done: boolean
-// }
-
-// export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) => {
-//   const tasks = exampleData[0].tasks
-//   return {
-//     props: {
-//       tasks,
-//     },
-//   }
-// }
-
 export default function Project({ }) {
   const [projectInput, setProjectInput] = useState("")
   const [result, setResult] = useState()
@@ -69,7 +20,7 @@ export default function Project({ }) {
   return (
     <>
       <Title />
-      <div className="m-4 flex" ref={taskRef}>
+      <div className="m-4 mt-10 flex space-x-4 w-500" ref={taskRef}>
         {exampleData[0].tasks.map(task => (
           <Task
             key={task.id}
@@ -79,9 +30,12 @@ export default function Project({ }) {
           />
         ))}
       </div>
-      <div ref={issueRef} className="m-4 flex border border-black">
+      <div ref={issueRef} className="m-4 mt-10 flex space-x-4">
         {exampleData[0].tasks.map((task, index) => (
-          <div key={index} className="flex flex-col overflow-hidden border border-black">
+          <div
+            key={index}
+            className="flex flex-col overflow-hidden border border-black"
+          >
             {task.issues.map((issue, index) => (
               <Issue
                 key={index}
@@ -93,6 +47,7 @@ export default function Project({ }) {
           </div>
         ))}
       </div>
+      <Logout />
       <Xarrow
         start={taskRef}
         end={issueRef}>
