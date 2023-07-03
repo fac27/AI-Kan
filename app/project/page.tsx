@@ -3,6 +3,7 @@
 import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
+import Issue from "./Issue"
 
 // type Params = {
 //   project: string
@@ -52,17 +53,19 @@ import Task from "./Task"
 // }
 
 
-export default function Project({ }) {
+export default function Project({}) {
   return (
     <>
-    <Title />
-    {exampleData[0].tasks.map((task) => (
-      <Task key={task.id} title={task.title} description={task.description} />
-    ))
-    
-    }
-
+      <Title />
+      {exampleData[0].tasks.map((task) => (
+        <div key={task.id}>
+          <Task key={task.id} title={task.title} description={task.description} />
+          {task.issues.map((issue, index) => (
+            <Issue key={index} title={issue.title} description={issue.description} />
+          ))}
+        </div>
+      ))}
     </>
-    
-  )
+  );
 }
+
