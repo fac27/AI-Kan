@@ -5,7 +5,7 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useState } from "react"
+// import { useState } from "react"
 
 // type Params = {
 //   project: string
@@ -54,9 +54,9 @@ import { useState } from "react"
 //   }
 // }
 
-export default function Project({ props }) {
-  const [projectInput, setProjectInput] = useState("")
-  const [result, setResult] = useState()
+export default function Project() {
+  // const [projectInput, setProjectInput] = useState("")
+  // const [result, setResult] = useState()
 
   return (
     <>
