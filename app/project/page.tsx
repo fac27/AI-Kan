@@ -6,6 +6,7 @@ import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
 import { useState } from "react"
+import APITitle from "./APITitle"
 
 // type Params = {
 //   project: string
@@ -61,7 +62,7 @@ export default function Project({ props }) {
   return (
     <>
       <Title />
-      {exampleData[0].tasks.map(task => (
+      {exampleData[1].tasks.map(task => (
         <div key={task.id}>
           <Task
             key={task.id}
@@ -79,6 +80,12 @@ export default function Project({ props }) {
           ))}
         </div>
       ))}
+      {/* <APITitle
+        projectInput={projectInput}
+        setProjectInput={setProjectInput}
+        result={result}
+        setResult={setResult}
+      /> */}
       <Logout />
     </>
   )
