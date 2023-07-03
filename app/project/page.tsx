@@ -1,9 +1,16 @@
 // import { GetStaticPaths, GetStaticProps } from "next"
-
+"use client"
 import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
+import Logout from "./Logout"
+import { useState } from "react"
+import Xarrow from "react-xarrows"
+import { useRef } from "react"
+
+
+// import type xarrowPropsType 
 
 // type Params = {
 //   project: string
@@ -52,11 +59,17 @@ import Issue from "./Issue"
 //   }
 // }
 
-export default function Project({}) {
+export default function Project({ }) {
+  const [projectInput, setProjectInput] = useState("")
+  const [result, setResult] = useState()
+
+  const taskRef = useRef(null)
+  const issueRef = useRef(null)
+
   return (
     <>
       <Title />
-      <div className="m-4 flex">
+      <div className="m-4 flex" ref={taskRef}>
         {exampleData[0].tasks.map(task => (
           <Task
             key={task.id}
@@ -66,7 +79,7 @@ export default function Project({}) {
           />
         ))}
       </div>
-      <div className="m-4 flex border border-black">
+      <div ref={issueRef} className="m-4 flex border border-black">
         {exampleData[0].tasks.map((task, index) => (
           <div key={index} className="flex flex-col overflow-hidden border border-black">
             {task.issues.map((issue, index) => (
@@ -80,6 +93,12 @@ export default function Project({}) {
           </div>
         ))}
       </div>
+      <Xarrow
+        start={taskRef}
+        end={issueRef}>
+          
+        </Xarrow>
+      <Logout />
     </>
   )
 }
