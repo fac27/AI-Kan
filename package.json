@@ -17,10 +17,13 @@
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/supabase-js": "^2.26.0",
     "auto-git-update": "^1.1.1",
+    "autoprefixer": "^10.4.14",
     "next": "^13.4.7",
+    "postcss": "^8.4.24",
     "openai": "^3.3.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "20.3.2",
