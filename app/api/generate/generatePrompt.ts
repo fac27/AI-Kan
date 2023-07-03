@@ -11,39 +11,6 @@ export default function generatePrompt(project) {
       "tasks" : 
       [
         {
-          "id": 0,
-          "title": "Setup development environment",
-          "description": "Install and setup necessary software to begin development",
-          "timeEstimate": "2 hours",
-          "issues": [
-            {
-              "id": 0,
-              "taskId": 0,
-              "title": "Install Node.js",
-              "description": "Download and install Node.js from the official website",
-              "timeEstimate": "30 minutes",
-              "done": false
-            },
-            {
-              "id": 1,
-              "taskId": 0,
-              "title": "Install create-react-app",
-              "description": "Install create-react-app using npm",
-              "timeEstimate": "30 minutes",
-              "done": false
-            },
-            {
-              "id": 2,
-              "taskId": 0,    
-              "title": "Initialize project",
-              "description": "Use create-react-app to initialize the new project",
-              "timeEstimate": "1 hour",
-              "done": false
-            }
-          ],
-          "done": false
-        },
-        {
           "id": 1,
           "title": "Create game board",
           "description": "Implement the main game board where the game will be played",
