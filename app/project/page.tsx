@@ -4,6 +4,7 @@ import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
+import Logout from "./Logout"
 
 // type Params = {
 //   project: string
@@ -74,6 +75,7 @@ export default function Project({}) {
           ))}
         </div>
       ))}
+      <Logout/>
     </>
   )
 }
