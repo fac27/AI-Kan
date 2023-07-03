@@ -1,11 +1,10 @@
 // import { GetStaticPaths, GetStaticProps } from "next"
-
+"use client"
 import exampleData from "../../data/exampleData"
-;("use client")
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
-import APIGrandparent from "./APIGrandparent"
+import APITitle from "./APITitle"
 import { useState } from "react"
 
 // type Params = {
@@ -61,7 +60,7 @@ export default function Project({ props }) {
 
   return (
     <>
-      {/* <Title />
+      <Title />
       {exampleData[0].tasks.map(task => (
         <div key={task.id}>
           <Task
@@ -79,13 +78,7 @@ export default function Project({ props }) {
             />
           ))}
         </div>
-      ))} */}
-      <APIGrandparent
-        projectInput={projectInput}
-        setProjectInput={setProjectInput}
-        result={result}
-        setResult={setResult}
-      />
+      ))}
     </>
   )
 }

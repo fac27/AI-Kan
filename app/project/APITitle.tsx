@@ -1,13 +1,20 @@
 import { COMPILER_NAMES } from "next/dist/shared/lib/constants"
 import { FC } from "react"
 
-const APIGrandparent: FC = ({
+interface Props {
+  projectInput: string
+  setProjectInput: React.Dispatch<React.SetStateAction<string>>
+  result: string
+  setResult: React.Dispatch<React.SetStateAction<string>>
+}
+
+const APITitle: FC = ({
   projectInput,
   setProjectInput,
   result,
   setResult,
-}) => {
-  async function onSubmit(event) {
+}: Props) => {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
       const response = await fetch("/api/generate", {
@@ -55,4 +62,4 @@ const APIGrandparent: FC = ({
   )
 }
 
-export default APIGrandparent
+export default APITitle
