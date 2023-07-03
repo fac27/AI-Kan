@@ -52,20 +52,28 @@ import Issue from "./Issue"
 //   }
 // }
 
-
 export default function Project({}) {
   return (
     <>
       <Title />
-      {exampleData[0].tasks.map((task) => (
+      {exampleData[0].tasks.map(task => (
         <div key={task.id}>
-          <Task key={task.id} title={task.title} description={task.description} />
+          <Task
+            key={task.id}
+            title={task.title}
+            description={task.description}
+            done={task.done}
+          />
           {task.issues.map((issue, index) => (
-            <Issue key={index} title={issue.title} description={issue.description} />
+            <Issue
+              key={index}
+              title={issue.title}
+              description={issue.description}
+              done={issue.done}
+            />
           ))}
         </div>
       ))}
     </>
-  );
+  )
 }
-
