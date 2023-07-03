@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react"
 
 const Grandparent: FC = () => {
   return (
@@ -7,7 +7,7 @@ const Grandparent: FC = () => {
       <input type="text" id="promptInput" placeholder="Snake game in React" />
       <button type="submit">Submit</button>
     </div>
-  );
-};
+  )
+}
 
-export default Grandparent;
+export default Grandparent
