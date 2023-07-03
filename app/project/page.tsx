@@ -1,7 +1,8 @@
 // import { GetStaticPaths, GetStaticProps } from "next"
 
-// import exampleData from "../../../data/exampleData"
-import Grandparent from "./Grandparent"
+import exampleData from "../../data/exampleData"
+import Title from "./Title"
+import Task from "./Task"
 
 // type Params = {
 //   project: string
@@ -50,6 +51,18 @@ import Grandparent from "./Grandparent"
 //   }
 // }
 
+
 export default function Project({ }) {
-  return <Grandparent />
+  return (
+    <>
+    <Title />
+    {exampleData[0].tasks.map((task) => (
+      <Task key={task.id} title={task.title} description={task.description} />
+    ))
+    
+    }
+
+    </>
+    
+  )
 }
