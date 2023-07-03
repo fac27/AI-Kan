@@ -1,9 +1,11 @@
 // import { GetStaticPaths, GetStaticProps } from "next"
-
+"use client"
 import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
+import APITitle from "./APITitle"
+import { useState } from "react"
 
 // type Params = {
 //   project: string
@@ -52,7 +54,10 @@ import Issue from "./Issue"
 //   }
 // }
 
-export default function Project({}) {
+export default function Project({ props }) {
+  const [projectInput, setProjectInput] = useState("")
+  const [result, setResult] = useState()
+
   return (
     <>
       <Title />
