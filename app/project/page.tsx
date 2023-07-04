@@ -4,13 +4,13 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useGlobalContext } from "../Context/store"
 
 
-export default function Project({ props }) {
-  const [projectInput, setProjectInput] = useState("")
-  const [result, setResult] = useState()
+export default function Project() {
+  // const [projectInput, setProjectInput] = useState("")
+  // const [result, setResult] = useState()
 
   const {taskId, setTaskId, task, setTask } = useGlobalContext()
 
@@ -18,6 +18,7 @@ export default function Project({ props }) {
     setTaskId(1)
     setTask('hoover my room')
   }, [setTaskId, setTask])
+
 
   return (
     <>
