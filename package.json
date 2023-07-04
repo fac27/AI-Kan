@@ -9,7 +9,8 @@
     "lint": "next lint",
     "write": "prettier --write \"**/app/**/*\"",
     "prepare": "husky install",
-    "cypress": "cypress open"
+    "cypress:open": "cypress open",
+    "test": "npx cypress run"
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.7.2",
