@@ -1,14 +1,15 @@
 import { FC } from "react"
 
 interface TaskProps {
+  id: string
   title: string
   description: string
   done: boolean
 }
 
-const Task: FC<TaskProps> = ({ title, description, done }) => {
+const Task: FC<TaskProps> = ({ id, title, description, done }) => {
   return (
-    <div className="p-4 w-25 break-normal border border-black">
+    <div id={id} className="p-4 w-25 break-normal border border-black">
       <input type="checkbox" checked={done}></input>
       <input type="text" value={title} className="border border-black" />
       <textarea

@@ -1,8 +1,12 @@
 import { FC } from "react"
 
-const Title: FC = () => {
+interface Props {
+  id: string
+}
+
+const Title: FC = ({ id }: Props) => {
   return (
-    <div className="m-4 mt-0 border border-black">
+    <div id={id} className="">
       <label htmlFor="promptInput">I want to make a...</label>
       <input type="text" id="promptInput" placeholder="Snake game in React" />
       <button type="submit">Submit</button>
