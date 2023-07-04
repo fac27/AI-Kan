@@ -4,14 +4,42 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useEffect } from "react"
+import { useEffect, useReducer } from "react"
 import { useGlobalContext } from "../Context/store"
+
+//define reducer
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "CHANGE_TASK": {
+      return {
+        ...state,
+        task: action.payload
+      }
+    }
+    default: {
+      return state
+    }
+  }
+}
 
 
 export default function Project() {
   // const [projectInput, setProjectInput] = useState("")
   // const [result, setResult] = useState()
 
+  ///implement reducer
+  const [state, dispatch] = useReducer(reducer, {task})
+
+  function handleChangeTask(event) {
+    const newTask = event.target.value
+    dispatch({
+      type: "CHANGE_TASK",
+      payload: newTask
+    })
+  }
+
+  ///implement context
   const {taskId, setTaskId, task, setTask } = useGlobalContext()
 
   useEffect(() => {
@@ -19,12 +47,12 @@ export default function Project() {
     setTask('hoover my room')
   }, [setTaskId, setTask])
 
-
   return (
     <>
     <div>
       <p>Task Id: {taskId}</p>
-      <p>Task: {task}</p>
+      <input type="text" value={state.task} onChange={handleChangeTask}></input>
+      <p>{state.task}</p>
     </div>
 
 
