@@ -26,7 +26,7 @@ export default function Project() {
         <div className="m-4 mt-10 flex space-x-4 w-500">
           {exampleData[0].tasks.map((task, index) => (
             <Task
-              key={task.id}
+              key={index}
               title={task.title}
               description={task.description}
               done={task.done}

@@ -5,7 +5,7 @@ interface Props {
   id: string
 }
 
-const Title: FC = ({ id }: Props) => {
+const Title: FC<Props> = ({ id }: Props) => {
   return (
     <div
       id={id}
