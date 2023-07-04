@@ -14,11 +14,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <GlobalContextProvider>
-      <body>
-        <div className="container" style={{ padding: "50px 0 100px 0" }}>
-          {children}
-        </div>
-      </body>
+        <body>
+          <div className="container" style={{ padding: "50px 0 100px 0" }}>
+            {children}
+          </div>
+        </body>
       </GlobalContextProvider>
     </html>
   )

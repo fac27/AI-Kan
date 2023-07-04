@@ -7,26 +7,23 @@ import Logout from "./Logout"
 import { useEffect } from "react"
 import { useGlobalContext } from "../Context/store"
 
-
 export default function Project() {
   // const [projectInput, setProjectInput] = useState("")
   // const [result, setResult] = useState()
 
-  const {taskId, setTaskId, task, setTask } = useGlobalContext()
+  const { taskId, setTaskId, task, setTask } = useGlobalContext()
 
   useEffect(() => {
     setTaskId(1)
-    setTask('hoover my room')
+    setTask("hoover my room")
   }, [setTaskId, setTask])
-
 
   return (
     <>
-    <div>
-      <p>Task Id: {taskId}</p>
-      <p>Task: {task}</p>
-    </div>
-
+      <div>
+        <p>Task Id: {taskId}</p>
+        <p>Task: {task}</p>
+      </div>
 
       <Title />
       <div className="m-4 mt-10 flex space-x-4 w-500">
