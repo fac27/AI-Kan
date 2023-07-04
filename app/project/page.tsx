@@ -8,8 +8,8 @@ import { useEffect } from "react"
 import { useGlobalContext } from "../Context/store"
 
 export default function Project() {
-  // const [projectInput, setProjectInput] = useState("")
-  // const [result, setResult] = useState()
+  //const [projectInput, setProjectInput] = useState("")
+  //const [result, setResult] = useState()
 
   const { taskId, setTaskId, task, setTask } = useGlobalContext()
 
