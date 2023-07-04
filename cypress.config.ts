@@ -11,9 +11,6 @@ export default defineConfig({
   component: {
     setupNodeEvents(on, config) {},
     specPattern: "src/**/*.{spec,test}.{js,ts,tsx}",
-  },
-
-  component: {
     devServer: {
       framework: "next",
       bundler: "webpack",
