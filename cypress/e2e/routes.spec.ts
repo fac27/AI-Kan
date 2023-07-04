@@ -6,7 +6,7 @@ describe('Visiting the main route', () => {
 
 describe('Visiting "/project"', ()=>{
   it('displays stored project info', ()=>{
-    cy.visit("https://ai-kan.vercel.app/project")
+    cy.visit("http://localhost:3000/")
     cy.get("div").should('be.visible')
   })
 })

@@ -5,6 +5,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {},
     supportFile: false,
     specPattern: "cypress/e2e/**/*.{spec,test}.{js,ts,tsx}",
+    baseUrl: "https://localhost:3000",
   },
 
   component: {
