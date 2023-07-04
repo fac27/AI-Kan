@@ -5,8 +5,8 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import APITitle from "./APITitle"
-import { useState } from "react"
+//import APITitle from "./APITitle"
+//import { useState } from "react"
 
 // type Params = {
 //   project: string
@@ -56,12 +56,12 @@ import { useState } from "react"
 // }
 
 export default function Project() {
-  const [projectInput, setProjectInput] = useState("")
-  const [result, setResult] = useState()
+  //const [projectInput, setProjectInput] = useState("")
+  //const [result, setResult] = useState()
 
   return (
     <>
-      {/* <Title />
+      <Title />
       <div className="m-4 mt-10 flex space-x-4 w-500">
         {exampleData[0].tasks.map(task => (
           <Task
@@ -88,13 +88,7 @@ export default function Project() {
             ))}
           </div>
         ))}
-      </div> */}
-      <APITitle
-        projectInput={projectInput}
-        setProjectInput={setProjectInput}
-        result={result}
-        setResult={setResult}
-      />
+      </div>
       <Logout />
     </>
   )
