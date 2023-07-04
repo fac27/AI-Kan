@@ -29,7 +29,7 @@ export default function Project({ props }) {
             />
           ))}
         </div>
-        <div className={"m-4 mt-10 flex space-x-4" + card}>
+        <div className="m-4 mt-10 flex space-x-4">
           {exampleData[0].tasks.map((task, index) => (
             <div id={`Issues${index}`} key={index} className={card}>
               {task.issues.map((issue, index) => (
@@ -44,11 +44,18 @@ export default function Project({ props }) {
           ))}
           {exampleData[0].tasks.map((_, index) => (
             <>
-              <Xarrow start={"ProjTitle"} end={`Task${index}`} />
+              <Xarrow
+                start={"ProjTitle"}
+                end={`Task${index}`}
+                startAnchor={"bottom"}
+                endAnchor={"top"}
+              />
               <Xarrow
                 key={index}
                 start={`Task${index}`}
                 end={`Issues${index}`}
+                startAnchor={"bottom"}
+                endAnchor={"top"}
               />
             </>
           ))}

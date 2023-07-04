@@ -10,7 +10,7 @@ interface IssueProps {
 const Issue: FC<IssueProps> = ({ title, description, done }) => {
   return (
     <div>
-      <div className="">
+      <div className={card}>
         <input type="checkbox" checked={done}></input>
         <input type="text" value={title} className="border border-black" />
         <textarea
