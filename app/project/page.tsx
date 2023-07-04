@@ -9,19 +9,37 @@ import { useGlobalContext } from "../Context/store"
 
 //define reducer
 
-const reducer = (state, action) => {
+function projectReducer(state, action) {
   switch (action.type) {
     case "CHANGE_TASK": {
       return {
         ...state,
-        task: action.payload,
-      }
+        projects: state.projects.map((project) => {
+          if (project.id === action.payload.projectId) {
+            return {
+              ...project,
+              tasks: project.tasks.map((task) => {
+                if (task.id === action.payload.taskId) {
+                  return {
+                    ...task,
+                    title: action.payload.title,
+                    description: action.payload.description,
+                  };
+                }
+                return task;
+              }),
+            };
+          }
+          return project;
+        }),
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
 }
+
 
 
 export default function Project() {
@@ -30,66 +48,69 @@ export default function Project() {
 
   ///implement reducer
   
+  const { projectId, setProjectId, task, setTask } = useGlobalContext()
+
+  const [state, dispatch] = useReducer(projectReducer, {
+    projects: exampleData,
+  });
 
   function handleChangeTask(event) {
-    const newTask = event.target.value
+    const newTask = event.target.value;
     dispatch({
       type: "CHANGE_TASK",
-      payload: newTask,
-    })
+      payload: {
+        projectId: projectId,
+        taskId: task.id,
+        title: newTask,
+        description: task.description,
+      },
+    });
   }
-  const { title, setTitle, description, setDescription } = useGlobalContext()
 
   ///implement context
   
-  useEffect(() => {
-    setTitle(exampleData[0].tasks[0].title)
-    setDescription(exampleData[0].tasks[0].description)
-  }, [setTitle, setDescription])
+  // useEffect(() => {
+  //   setProjectId(0);
+  //   setTask(state.projects[0].tasks[0]);
+  // }, [setProjectId, setTask, state.projects]);
 
-  const [state, dispatch] = useReducer(reducer, { title, description })
 
   return (
     <>
-      {/* <div>
-        <p>Task Id: {taskId}</p>
-        <input
-          type="text"
-          value={state.task}
-          onChange={handleChangeTask}
-        ></input>
-        <p>{state.task}</p>
-      </div> */}
-
-      <Title />
-      <div className="m-4 mt-10 flex space-x-4 w-500">
-        {exampleData[0].tasks.map(task => (
-          <Task
-            key={task.id}
-            title={state.title}
-            description={state.description}
-            done={task.done}
-          />
-        ))}
-      </div>
-      <div className="m-4 mt-10 flex space-x-4">
-        {exampleData[0].tasks.map((task, index) => (
-          <div
-            key={index}
-            className="flex flex-col overflow-hidden border border-black"
-          >
-            {task.issues.map((issue, index) => (
-              <Issue
-                key={index}
-                title={issue.title}
-                description={issue.description}
-                done={issue.done}
+      {state.projects.map((project) => (
+        <div key={project.id}>
+          <h2>{project.name}</h2>
+          <div className="m-4 mt-10 flex space-x-4 w-500">
+            {project.tasks.map((task) => (
+              <Task
+                key={task.id}
+                title={task.title}
+                description={task.description}
+                done={task.done}
+                handleChangeTask={handleChangeTask} 
               />
             ))}
           </div>
-        ))}
-      </div>
+          <div className="m-4 mt-10 flex space-x-4">
+            {project.tasks.map((task) => (
+              <div
+                key={task.id}
+                className="flex flex-col overflow-hidden border border-black"
+              >
+                {task.issues.map((issue) => (
+                  <Issue
+                    key={issue.id}
+                    title={issue.title}
+                    description={issue.description}
+                    done={issue.done}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
       <Logout />
     </>
-  )
+  );
 }
