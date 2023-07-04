@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import { useGlobalContext } from "../Context/store"
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
 import { useRef } from "react"
+import { card } from "../Styles/TailwindClasses"
 
 export default function Project({ props }) {
   //const [projectInput, setProjectInput] = useState("")
@@ -28,13 +29,9 @@ export default function Project({ props }) {
             />
           ))}
         </div>
-        <div className="m-4 mt-10 flex space-x-4">
+        <div className={"m-4 mt-10 flex space-x-4" + card}>
           {exampleData[0].tasks.map((task, index) => (
-            <div
-              id={`Issues${index}`}
-              key={index}
-              className="flex flex-col overflow-hidden border border-black"
-            >
+            <div id={`Issues${index}`} key={index} className={card}>
               {task.issues.map((issue, index) => (
                 <Issue
                   key={index}
