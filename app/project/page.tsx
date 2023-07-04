@@ -38,20 +38,20 @@ export default function Project() {
       payload: newTask,
     })
   }
+  const { title, setTitle, description, setDescription } = useGlobalContext()
 
   ///implement context
-  const { taskId, setTaskId, task, setTask } = useGlobalContext()
-
+  
   useEffect(() => {
-    setTaskId(1)
-    setTask("hoover my room")
-  }, [setTaskId, setTask])
+    setTitle(exampleData[0].tasks[0].title)
+    setDescription(exampleData[0].tasks[0].description)
+  }, [setTitle, setDescription])
 
-  const [state, dispatch] = useReducer(reducer, { task })
+  const [state, dispatch] = useReducer(reducer, { title, description })
 
   return (
     <>
-      <div>
+      {/* <div>
         <p>Task Id: {taskId}</p>
         <input
           type="text"
@@ -59,15 +59,15 @@ export default function Project() {
           onChange={handleChangeTask}
         ></input>
         <p>{state.task}</p>
-      </div>
+      </div> */}
 
       <Title />
       <div className="m-4 mt-10 flex space-x-4 w-500">
         {exampleData[0].tasks.map(task => (
           <Task
             key={task.id}
-            title={task.title}
-            description={task.description}
+            title={state.title}
+            description={state.description}
             done={task.done}
           />
         ))}

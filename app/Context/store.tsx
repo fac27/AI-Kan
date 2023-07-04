@@ -10,10 +10,10 @@ import {
 } from "react"
 
 interface ContextProps {
-  taskId: number
-  setTaskId: Dispatch<SetStateAction<number>>
-  task: string
-  setTask: Dispatch<SetStateAction<string>>
+  title: string
+  setTitle: Dispatch<SetStateAction<string>>
+  description: string
+  setDescription: Dispatch<SetStateAction<string>>
 }
 
 interface GlobalContextProviderProps {
@@ -21,20 +21,20 @@ interface GlobalContextProviderProps {
 }
 
 const GlobalContext = createContext<ContextProps>({
-  taskId: 0,
-  setTaskId: (): number => 0,
-  task: "",
-  setTask: (): string => "",
+  title: '',
+  setTitle: (): string => '',
+  description: "",
+  setDescription: (): string => "",
 })
 
 export const GlobalContextProvider = ({
   children,
 }: GlobalContextProviderProps) => {
-  const [taskId, setTaskId] = useState(0)
-  const [task, setTask] = useState("")
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState("")
 
   return (
-    <GlobalContext.Provider value={{ taskId, setTaskId, task, setTask }}>
+    <GlobalContext.Provider value={{ title, setTitle, description, setDescription }}>
       {children}
     </GlobalContext.Provider>
   )
