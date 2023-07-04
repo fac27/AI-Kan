@@ -1,9 +1,19 @@
-First, run the development server:
+## Collaborating
+In order to collaborate to this project, or code review, follow these steps:
 
-```bash
+**Clone the repo**
+```terminal
+git clone https://github.com/fac27/AI-Kan
+```
+
+**Install all dependencies**
+```terminal
+npm install
+```
+
+You can run the localserver in order to view the latest development version:
+```terminal
 npm run dev
-# or
-yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
