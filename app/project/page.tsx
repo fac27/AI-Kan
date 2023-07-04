@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     case "CHANGE_TASK": {
       return {
         ...state,
-        task: action.payload
+        task: action.payload,
       }
     }
     default: {
@@ -29,32 +29,37 @@ export default function Project() {
   // const [result, setResult] = useState()
 
   ///implement reducer
-  const [state, dispatch] = useReducer(reducer, {task})
+  
 
   function handleChangeTask(event) {
     const newTask = event.target.value
     dispatch({
       type: "CHANGE_TASK",
-      payload: newTask
+      payload: newTask,
     })
   }
 
   ///implement context
-  const {taskId, setTaskId, task, setTask } = useGlobalContext()
+  const { taskId, setTaskId, task, setTask } = useGlobalContext()
 
   useEffect(() => {
     setTaskId(1)
-    setTask('hoover my room')
+    setTask("hoover my room")
   }, [setTaskId, setTask])
+
+  const [state, dispatch] = useReducer(reducer, { task })
 
   return (
     <>
-    <div>
-      <p>Task Id: {taskId}</p>
-      <input type="text" value={state.task} onChange={handleChangeTask}></input>
-      <p>{state.task}</p>
-    </div>
-
+      <div>
+        <p>Task Id: {taskId}</p>
+        <input
+          type="text"
+          value={state.task}
+          onChange={handleChangeTask}
+        ></input>
+        <p>{state.task}</p>
+      </div>
 
       <Title />
       <div className="m-4 mt-10 flex space-x-4 w-500">
