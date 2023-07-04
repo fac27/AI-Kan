@@ -6,14 +6,13 @@ import Issue from "./Issue"
 import Logout from "./Logout"
 import { useEffect } from "react"
 import { useGlobalContext } from "../Context/store"
-import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
-import { useRef } from "react"
+import Xarrow, { Xwrapper } from "react-xarrows"
 import { card } from "../Styles/TailwindClasses"
 
 export default function Project() {
   //const [projectInput, setProjectInput] = useState("")
   //const [result, setResult] = useState()
-  const { taskId, setTaskId, task, setTask } = useGlobalContext()
+  const { setTaskId, setTask } = useGlobalContext()
 
   useEffect(() => {
     setTaskId(1)
