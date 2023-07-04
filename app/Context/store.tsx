@@ -1,11 +1,18 @@
 "use client"
 
-import { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+  ReactNode,
+} from "react"
 
 interface ContextProps {
-  taskId: number,
-  setTaskId: Dispatch<SetStateAction<number>>,
-  task: string,
+  taskId: number
+  setTaskId: Dispatch<SetStateAction<number>>
+  task: string
   setTask: Dispatch<SetStateAction<string>>
 }
 
@@ -16,13 +23,15 @@ interface GlobalContextProviderProps {
 const GlobalContext = createContext<ContextProps>({
   taskId: 0,
   setTaskId: (): number => 0,
-  task: '',
-  setTask: (): string => ''
+  task: "",
+  setTask: (): string => "",
 })
 
-export const GlobalContextProvider = ({ children}: GlobalContextProviderProps) => {
+export const GlobalContextProvider = ({
+  children,
+}: GlobalContextProviderProps) => {
   const [taskId, setTaskId] = useState(0)
-  const [task, setTask] = useState('')
+  const [task, setTask] = useState("")
 
   return (
     <GlobalContext.Provider value={{ taskId, setTaskId, task, setTask }}>
@@ -32,5 +41,3 @@ export const GlobalContextProvider = ({ children}: GlobalContextProviderProps) =
 }
 
 export const useGlobalContext = () => useContext(GlobalContext)
-
-
