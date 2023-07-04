@@ -10,9 +10,15 @@ import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
 import { useRef } from "react"
 import { card } from "../Styles/TailwindClasses"
 
-export default function Project({ props }) {
+export default function Project() {
   //const [projectInput, setProjectInput] = useState("")
   //const [result, setResult] = useState()
+  const { taskId, setTaskId, task, setTask } = useGlobalContext()
+
+  useEffect(() => {
+    setTaskId(1)
+    setTask("hoover my room")
+  }, [setTaskId, setTask])
 
   return (
     <>
