@@ -10,7 +10,9 @@
     "write": "prettier --write \"**/app/**/*\"",
     "prepare": "husky install",
     "cypress:open": "cypress open",
-    "test": "npx cypress run"
+    "test": "npx cypress run",
+    "cy:run": "start-test 3000"
+
   },
   "dependencies": {
     "@supabase/auth-helpers-nextjs": "^0.7.2",
@@ -20,8 +22,8 @@
     "auto-git-update": "^1.1.1",
     "autoprefixer": "^10.4.14",
     "next": "^13.4.7",
-    "postcss": "^8.4.24",
     "openai": "^3.3.0",
+    "postcss": "^8.4.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.2"
@@ -42,6 +44,7 @@
     "eslint-config-next": "13.4.7",
     "husky": "^8.0.3",
     "prettier": "2.8.8",
+    "start-server-and-test": "^2.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }

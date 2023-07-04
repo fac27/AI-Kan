@@ -1,66 +1,30 @@
-// import { GetStaticPaths, GetStaticProps } from "next"
 "use client"
 import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-//import APITitle from "./APITitle"
-//import { useState } from "react"
-
-// type Params = {
-//   project: string
-// }
-
-// export const getStaticPaths: GetStaticPaths<Params> = () => {
-//   const paths = exampleData.map(project => ({
-//     params: {
-//       project: project.name.toLowerCase().replace(/\s/g, "-"),
-//     },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: false,
-//   }
-// }
-
-// type Props = {
-//   tasks: Task[]
-// }
-
-// type Task = {
-//   id: number
-//   title: string
-//   description: string
-//   timeEstimate: string
-//   issues: Issue[]
-//   done: boolean
-// }
-
-// type Issue = {
-//   id: number
-//   taskId: number
-//   description: string
-//   timeEstimate: string
-//   done: boolean
-// }
-
-// export const getStaticProps: GetStaticProps<Props, Params> = ({ params }) => {
-//   const tasks = exampleData[0].tasks
-//   return {
-//     props: {
-//       tasks,
-//     },
-//   }
-// }
+import { useEffect } from "react"
+import { useGlobalContext } from "../Context/store"
 
 export default function Project() {
   //const [projectInput, setProjectInput] = useState("")
   //const [result, setResult] = useState()
 
+  const { taskId, setTaskId, task, setTask } = useGlobalContext()
+
+  useEffect(() => {
+    setTaskId(1)
+    setTask("hoover my room")
+  }, [setTaskId, setTask])
+
   return (
     <>
+      <div>
+        <p>Task Id: {taskId}</p>
+        <p>Task: {task}</p>
+      </div>
+
       <Title />
       <div className="m-4 mt-10 flex space-x-4 w-500">
         {exampleData[0].tasks.map(task => (
