@@ -78,7 +78,6 @@ const exampleData = [
         ],
       },
       {
-        id: 4,
         title: "Testing and Debugging",
         description:
           "Run tests and debug to ensure that the game runs as expected",
