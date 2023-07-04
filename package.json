@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint \"**/app/**/*\"",
     "write": "prettier --write \"**/app/**/*\"",
     "prepare": "husky install",
     "cypress:open": "cypress open",
