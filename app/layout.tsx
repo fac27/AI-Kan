@@ -1,4 +1,5 @@
 import "./globals.css"
+import { GlobalContextProvider } from "./Context/store"
 
 export const metadata = {
   title: "User Management",
@@ -12,11 +13,13 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div className="container" style={{ padding: "50px 0 100px 0" }}>
-          {children}
-        </div>
-      </body>
+      <GlobalContextProvider>
+        <body>
+          <div className="container" style={{ padding: "50px 0 100px 0" }}>
+            {children}
+          </div>
+        </body>
+      </GlobalContextProvider>
     </html>
   )
 }

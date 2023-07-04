@@ -1,21 +1,19 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from "cypress"
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {},
-    supportFile: "node_modules/@cypress/react/support",
+    supportFile: false,
     specPattern: "cypress/e2e/**/*.{spec,test}.{js,ts,tsx}",
+    baseUrl: "https://localhost:3000",
   },
 
   component: {
     setupNodeEvents(on, config) {},
     specPattern: "src/**/*.{spec,test}.{js,ts,tsx}",
-  },
-
-  component: {
     devServer: {
       framework: "next",
       bundler: "webpack",
     },
   },
-});
+})

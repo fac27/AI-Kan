@@ -1,17 +1,17 @@
-// import { GetStaticPaths, GetStaticProps } from "next"
 "use client"
 import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useState } from "react"
+import { useEffect } from "react"
+import { useGlobalContext } from "../Context/store"
 import Xarrow from "react-xarrows"
 import { useRef } from "react"
 
-export default function Project({}) {
-  const [projectInput, setProjectInput] = useState("")
-  const [result, setResult] = useState()
+export default function Project({ props }) {
+  //const [projectInput, setProjectInput] = useState("")
+  //const [result, setResult] = useState()
 
   const taskRef = useRef(null)
   const issueRef = useRef(null)
