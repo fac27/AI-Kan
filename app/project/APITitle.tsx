@@ -1,4 +1,3 @@
-// import { COMPILER_NAMES } from "next/dist/shared/lib/constants"
 import { FC } from "react"
 
 interface Props {
