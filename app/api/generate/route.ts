@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         { role: "user", content: alternativePrompt(project) },
       ],
       max_tokens: 2000,
-      temperature: 0.1,
+      temperature: 1,
     })
     console.log(chatCompletion.data.choices[0].message)
     return new Response(
