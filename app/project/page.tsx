@@ -114,7 +114,7 @@ export default function Project() {
           </div>
         </div>
       ))}
-      {exampleData[0].tasks.map((_, index) => (
+      {width && exampleData[0].tasks.map((_, index) => (
         <>
           <Xarrow
             start={"ProjTitle"}
