@@ -1,40 +1,68 @@
 "use client"
 
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-  ReactNode,
-} from "react"
+import { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from 'react'
 
-interface ContextProps {
-  taskId: number
-  setTaskId: Dispatch<SetStateAction<number>>
-  task: string
-  setTask: Dispatch<SetStateAction<string>>
-}
 
 interface GlobalContextProviderProps {
   children: ReactNode
 }
 
+interface Task {
+  id: number
+  title: string
+  description: string
+  timeEstimate: string
+  issues: Issue[]
+  done: boolean
+}
+
+interface Issue {
+  id: number
+  taskId: number
+  title: string
+  description: string
+  timeEstimate: string
+  done: boolean
+}
+
+interface ContextProps {
+  projectId: number
+  setProjectId: Dispatch<SetStateAction<number>>
+  task: Task
+  setTask: Dispatch<SetStateAction<Task>>
+}
+
+const initialTask = {
+  id: 0,
+  title: "",
+  description: "",
+  timeEstimate: "",
+  issues: [
+    {
+      id: 0,
+      taskId: 0,
+      title: "",
+      description: "",
+      timeEstimate: "",
+      done: false,
+    },
+  ],
+  done: false,
+}
+
 const GlobalContext = createContext<ContextProps>({
-  taskId: 0,
-  setTaskId: (): number => 0,
-  task: "",
-  setTask: (): string => "",
+  projectId: 0,
+  setProjectId: (): number => 0,
+  task: initialTask,
+  setTask: (): Task => initialTask,
 })
 
-export const GlobalContextProvider = ({
-  children,
-}: GlobalContextProviderProps) => {
-  const [taskId, setTaskId] = useState(0)
-  const [task, setTask] = useState("")
+export const GlobalContextProvider = ({ children}: GlobalContextProviderProps) => {
+  const [projectId, setProjectId] = useState(0)
+  const [task, setTask] = useState<Task>(initialTask)
 
   return (
-    <GlobalContext.Provider value={{ taskId, setTaskId, task, setTask }}>
+    <GlobalContext.Provider value={{ projectId, setProjectId, task, setTask }}>
       {children}
     </GlobalContext.Provider>
   )
