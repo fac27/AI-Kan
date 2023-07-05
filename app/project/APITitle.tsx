@@ -39,7 +39,6 @@ const APITitle: FC = ({
       setResult(data.result)
       setProjectInput("")
     } catch (error) {
-      // Consider implementing your own error handling logic here
       console.error(error)
       alert(error.message)
     }
@@ -55,7 +54,7 @@ const APITitle: FC = ({
           value={projectInput}
           onChange={e => setProjectInput(e.target.value)}
         />
-        <input type="submit" value="Generate tasks" />
+        <button type="submit">Generate tasks</button>
       </form>
       <div>{result}</div>
     </>

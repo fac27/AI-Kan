@@ -41,8 +41,8 @@ function projectReducer(state, action) {
 }
 
 export default function Project() {
-  // const [projectInput, setProjectInput] = useState("")
-  // const [result, setResult] = useState()
+  //const [projectInput, setProjectInput] = useState("")
+  //const [result, setResult] = useState()
 
   ///implement reducer
 
@@ -67,11 +67,6 @@ export default function Project() {
   }
 
   ///implement context
-
-  // useEffect(() => {
-  //   setProjectId(0);
-  //   setTask(state.projects[0].tasks[0]);
-  // }, [setProjectId, setTask, state.projects]);
 
   return (
     <>
