@@ -12,13 +12,24 @@ interface TaskProps {
 const Task: FC<TaskProps> = ({ id, task }) => {
   const dispatch = useProjectDispatch()
 
-  function handleEditTask(event) {
+  function handleEditTitle(event) {
     const newTitle = event.target.value
     dispatch({
-      type: "EDIT_TASK",
+      type: "EDIT_TITLE",
       payload: {
         ...task,
         title: newTitle,
+      },
+    })
+  }
+
+  function handleEditDescription(event) {
+    const newDescription = event.target.value
+    dispatch({
+      type: "EDIT_DESCRIPTION",
+      payload: {
+        ...task,
+        description: newDescription,
       },
     })
   }
@@ -29,13 +40,14 @@ const Task: FC<TaskProps> = ({ id, task }) => {
       <input
         type="text"
         value={task.title}
-        onChange={handleEditTask}
+        onChange={handleEditTitle}
         className="border border-black"
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
+        onChange={handleEditDescription}
         className="border border-black"
       ></textarea>
       <div className="flex justify-between">

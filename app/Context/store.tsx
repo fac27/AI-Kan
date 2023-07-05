@@ -29,9 +29,8 @@ export function useProjectDispatch() {
 }
 
 function projectReducer(state, action) {
-  console.log(state)
   switch (action.type) {
-    case "EDIT_TASK": {
+    case "EDIT_TITLE": {
       return state.map(project => {
         if (project.id === 0) {
           return {
@@ -41,6 +40,25 @@ function projectReducer(state, action) {
                 return {
                   ...task,
                   title: action.payload.title,
+                }
+              }
+              return task
+            }),
+          }
+        }
+        return state
+      })
+    }
+    case "EDIT_DESCRIPTION": {
+      return state.map(project => {
+        if (project.id === 0) {
+          return {
+            ...project,
+            tasks: project.tasks.map(task => {
+              if (task.id === action.payload.id) {
+                return {
+                  ...task,
+                  description: action.payload.description,
                 }
               }
               return task
