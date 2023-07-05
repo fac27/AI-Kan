@@ -75,7 +75,7 @@ export default function Project() {
 
   return (
     <>
-      <Title></Title>
+      <Title />
       {state.projects.map(project => (
         <div key={project.id}>
           <h2>{project.name}</h2>
