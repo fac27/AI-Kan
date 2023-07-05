@@ -12,8 +12,10 @@ const Title: FC<Props> = ({ id }: Props) => {
       className={`mt-10 flex flex-col items-center justify-center ${card} ${project}`}
     >
       <label htmlFor="promptInput">I want to make a...</label>
-      <input type="text" id="promptInput" placeholder="Snake game in React"/>
-      <button type="submit">Submit</button>
+      <div className="flex justify-between mt-2.5">
+        <input type="text" id="promptInput" placeholder="Snake game in React" className="p-1.5"/>
+        <button type="submit" className="border border-black bg-gray-50 p-1.5 rounded ml-5">Submit</button>
+      </div>
     </div>
   )
 }

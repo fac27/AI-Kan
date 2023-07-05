@@ -7,6 +7,7 @@ interface TaskProps {
   description: string
   done: boolean
   handleChangeTask: (event: React.ChangeEvent<HTMLInputElement>) => void
+  targetRef: React.RefObject<HTMLDivElement>
 }
 
 const Task: FC<TaskProps> = ({
@@ -15,9 +16,10 @@ const Task: FC<TaskProps> = ({
   description,
   done,
   handleChangeTask,
+  targetRef
 }) => {
   return (
-    <div id={id} className={`${card} ${task}`}>
+    <div id={id} ref={targetRef} className={`${card} ${task} flex flex-col`}>
       <input type="checkbox" checked={done}></input>
       <input
         type="text"

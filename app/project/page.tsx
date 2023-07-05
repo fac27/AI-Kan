@@ -4,10 +4,10 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useReducer } from "react"
+import { useReducer, useRef, useEffect, useState } from "react"
 import { useGlobalContext } from "../Context/store"
 import Xarrow, { Xwrapper } from "react-xarrows"
-import { card } from "../Styles/TailwindClasses"
+import { card, issue } from "../Styles/TailwindClasses"
 
 //define reducer
 
@@ -48,6 +48,16 @@ export default function Project() {
 
   ///implement reducer
 
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (targetRef.current) {
+      const { width } = targetRef.current.getBoundingClientRect();
+      setWidth(width);
+    }
+  }, []);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { projectId, setProjectId, task, setTask } = useGlobalContext()
 
@@ -75,7 +85,7 @@ export default function Project() {
       <Title id={"ProjTitle"} />
       {state.projects.map(project => (
         <div key={project.id}>
-          <div className="m-4 mt-10 flex space-x-4 w-500">
+          <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
             {project.tasks.map((task, index) => (
               <Task
                 key={task.id}
@@ -84,12 +94,13 @@ export default function Project() {
                 done={task.done}
                 handleChangeTask={handleChangeTask}
                 id={`Task${index}`}
+                targetRef={targetRef}
               />
             ))}
           </div>
-          <div className="m-4 mt-10 flex space-x-4">
+          <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
             {project.tasks.map((task, index) => (
-              <div key={task.id} className={card} id={`Issues${index}`}>
+            <div style={{ width: `${width}px` }} key={task.id} className={`${card} ${issue}`} id={`Issues${index}`}>
                 {task.issues.map(issue => (
                   <Issue
                     key={issue.id}
@@ -110,6 +121,8 @@ export default function Project() {
             end={`Task${index}`}
             startAnchor={"bottom"}
             endAnchor={"top"}
+            color={"black"}
+            strokeWidth={1}
           />
           <Xarrow
             key={index}
@@ -117,6 +130,8 @@ export default function Project() {
             end={`Issues${index}`}
             startAnchor={"bottom"}
             endAnchor={"top"}
+            color={"black"}
+            strokeWidth={1}
           />
         </>
       ))}
