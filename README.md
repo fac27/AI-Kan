@@ -37,5 +37,8 @@ Tests can also be run with the following script:
 npm run cypress:run
 ```
 
+## Link to wireframe
+Our wireframe can be seen [here](https://www.figma.com/proto/o1OQ9oLzJCbRHwyZII6xb1/Ai-kan?type=design&node-id=135-2415&t=sg7K4CE6TyumpcqC-0&scaling=contain&page-id=0%3A1&starting-point-node-id=1%3A9&show-proto-sidebar=1)
+
 ## Guidance on naming conventions
 Guidance on the naming conventions applied in this code base can be found [here](https://github.com/fac27/AI-Kan/blob/main/documentation/conventions.md)
