@@ -6,13 +6,24 @@ interface TaskProps {
   title: string
   description: string
   done: boolean
+  handleChangeTask: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Task: FC<TaskProps> = ({ id, title, description, done }) => {
+const Task: FC<TaskProps> = ({
+  title,
+  description,
+  done,
+  handleChangeTask,
+}) => {
   return (
     <div id={id} className={card}>
       <input type="checkbox" checked={done}></input>
-      <input type="text" value={title} className="border border-black" />
+      <input
+        type="text"
+        value={title}
+        onChange={handleChangeTask}
+        className="border border-black"
+      />
       <textarea
         rows={4}
         cols={20}
