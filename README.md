@@ -1,5 +1,17 @@
 # AI-Kan
 
+An Ai-Powered project management tool for solo developers.
+
+## What doesn't work
+
+Although the magic login is working, "/project" is not a protected route.
+
+We are working in parallel on the api call to openai and returning better and better quality data, however this is not hooked up to the main application yet.
+
+You can edit Tasks, but not Issues, and all other interactions (accordions etc.) are not yet working.
+
+Edits do not persist between refreshes.
+
 ## Collaborating
 In order to collaborate to this project, or code review, follow these steps:
 
