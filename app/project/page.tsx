@@ -71,12 +71,10 @@ export default function Project() {
   ///implement context
 
   return (
-    <>
-      <Xwrapper>
-      <Title id={"ProjectTitle"}/>
+    <Xwrapper>
+      <Title id={"ProjTitle"} />
       {state.projects.map(project => (
         <div key={project.id}>
-          <h2>{project.name}</h2>
           <div className="m-4 mt-10 flex space-x-4 w-500">
             {project.tasks.map((task, index) => (
               <Task
@@ -90,12 +88,8 @@ export default function Project() {
             ))}
           </div>
           <div className="m-4 mt-10 flex space-x-4">
-            {project.tasks.map(task => (
-              <div
-                key={task.id}
-                className={card}
-                id={`Issues${index}`}
-              >
+            {project.tasks.map((task, index) => (
+              <div key={task.id} className={card} id={`Issues${index}`}>
                 {task.issues.map(issue => (
                   <Issue
                     key={issue.id}
@@ -127,6 +121,6 @@ export default function Project() {
         </>
       ))}
       <Logout />
-    </>
+    </Xwrapper>
   )
 }

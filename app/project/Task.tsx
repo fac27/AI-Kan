@@ -10,6 +10,7 @@ interface TaskProps {
 }
 
 const Task: FC<TaskProps> = ({
+  id,
   title,
   description,
   done,
