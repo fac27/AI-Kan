@@ -8,7 +8,7 @@ Although the magic login is working, "/project" is not a protected route.
 
 We are working in parallel on the api call to openai and returning better and better quality data, however this is not hooked up to the main application yet.
 
-You can edit Tasks, but not Issues, and all other interactions (accordions etc.) are not yet working.
+Although this is a planned functionality, you can not yet edit Tasks or Issues, and all other interactions (checkboxes, accordions etc.) are not yet working.
 
 Edits do not persist between refreshes.
 
