@@ -99,105 +99,106 @@ const exampleData = [
       },
     ],
   },
-  {
-    name: "Todo list app",
-    tasks: [
-      {
-        title: "Setup development environment",
-        description:
-          "Install and setup necessary software to begin development",
-        done: false,
-        issues: [],
-      },
-      {
-        title: "Create todo list component",
-        description: "Implement the main todo list component",
-        done: false,
-        issues: [
-          {
-            title: "Design todo list layout",
-            description:
-              "Design the layout of the todo list using CSS grid or similar",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-          {
-            title: "Implement todo list",
-            description: "Create the todo list component",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-        ],
-      },
-      {
-        title: "Create todo item component",
-        description:
-          "Implement the todo item component that will be used in the todo list",
-        done: false,
-        issues: [
-          {
-            title: "Design todo item",
-            description:
-              "Create a design for the todo item and its functionality",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-          {
-            title: "Implement todo item",
-            description: "Create the todo item component",
-            timeEstimate: "4 hours",
-            done: false,
-          },
-        ],
-      },
-      {
-        title: "Implement data persistence",
-        description: "Handle the data persistence of the todo list items",
-        done: false,
-        issues: [
-          {
-            title: "Integrate database",
-            description: "Integrate a database to store the todo list items",
-            timeEstimate: "3 hours",
-            done: false,
-          },
-          {
-            title: "Write CRUD operations",
-            description:
-              "Write the code to Create, Read, Update, and Delete todo list items",
-            timeEstimate: "3 hours",
-            done: false,
-          },
-          {
-            title: "Integrate with todo list component",
-            description: "Integrate the database with the todo list component",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-        ],
-      },
-      {
-        title: "Testing and Debugging",
-        description:
-          "Run tests and debug to ensure that the app runs as expected",
-        done: false,
-        issues: [
-          {
-            title: "Write tests",
-            description: "Write tests to verify the functionality of the app",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-          {
-            title: "Debug app",
-            description: "Fix any issues that arise during testing",
-            timeEstimate: "2 hours",
-            done: false,
-          },
-        ],
-      },
-    ],
-  },
 ]
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const example2 = {
+  name: "Todo list app",
+  tasks: [
+    {
+      title: "Setup development environment",
+      description: "Install and setup necessary software to begin development",
+      done: false,
+      issues: [],
+    },
+    {
+      title: "Create todo list component",
+      description: "Implement the main todo list component",
+      done: false,
+      issues: [
+        {
+          title: "Design todo list layout",
+          description:
+            "Design the layout of the todo list using CSS grid or similar",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+        {
+          title: "Implement todo list",
+          description: "Create the todo list component",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+      ],
+    },
+    {
+      title: "Create todo item component",
+      description:
+        "Implement the todo item component that will be used in the todo list",
+      done: false,
+      issues: [
+        {
+          title: "Design todo item",
+          description:
+            "Create a design for the todo item and its functionality",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+        {
+          title: "Implement todo item",
+          description: "Create the todo item component",
+          timeEstimate: "4 hours",
+          done: false,
+        },
+      ],
+    },
+    {
+      title: "Implement data persistence",
+      description: "Handle the data persistence of the todo list items",
+      done: false,
+      issues: [
+        {
+          title: "Integrate database",
+          description: "Integrate a database to store the todo list items",
+          timeEstimate: "3 hours",
+          done: false,
+        },
+        {
+          title: "Write CRUD operations",
+          description:
+            "Write the code to Create, Read, Update, and Delete todo list items",
+          timeEstimate: "3 hours",
+          done: false,
+        },
+        {
+          title: "Integrate with todo list component",
+          description: "Integrate the database with the todo list component",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+      ],
+    },
+    {
+      title: "Testing and Debugging",
+      description:
+        "Run tests and debug to ensure that the app runs as expected",
+      done: false,
+      issues: [
+        {
+          title: "Write tests",
+          description: "Write tests to verify the functionality of the app",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+        {
+          title: "Debug app",
+          description: "Fix any issues that arise during testing",
+          timeEstimate: "2 hours",
+          done: false,
+        },
+      ],
+    },
+  ],
+}
 
 export default exampleData
