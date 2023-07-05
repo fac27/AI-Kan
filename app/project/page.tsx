@@ -49,7 +49,7 @@ export default function Project() {
   ///implement reducer
 
   const targetRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState<number | null>(null);
+  const [width, setWidth] = useState<number | null>(null); //Will remove useState soon!
 
   useEffect(() => {
     if (targetRef.current) {
@@ -98,9 +98,12 @@ export default function Project() {
               />
             ))}
           </div>
-          <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-            {project.tasks.map((task, index) => (
-            <div style={{ width: `${width}px` }} key={task.id} className={`${card} ${issue}`} id={`Issues${index}`}>
+          {width && <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
+            {project.tasks.map((task, index) => {
+            const hasIssues = task.issues.length > 0;
+            const conditionalVisibility = hasIssues ? `${card} ${issue}` : `${card} ${issue} invisible`;
+            return (
+            <div style={{ width: `${width}px` }} key={task.id} className={`${card} ${issue} ${conditionalVisibility} `} id={`Issues${index}`}>
                 {task.issues.map(issue => (
                   <Issue
                     key={issue.id}
@@ -110,11 +113,11 @@ export default function Project() {
                   />
                 ))}
               </div>
-            ))}
-          </div>
+            )})}
+          </div> }
         </div>
       ))}
-      {width && exampleData[0].tasks.map((_, index) => (
+      {width && exampleData[0].tasks.map((task, index) => (
         <>
           <Xarrow
             start={"ProjTitle"}
@@ -124,18 +127,20 @@ export default function Project() {
             color={"black"}
             strokeWidth={1}
           />
-          <Xarrow
-            key={index}
-            start={`Task${index}`}
-            end={`Issues${index}`}
-            startAnchor={"bottom"}
-            endAnchor={"top"}
-            color={"black"}
-            strokeWidth={1}
-          />
+          {task.issues.length > 0 && (
+            <Xarrow
+              key={index}
+              start={`Task${index}`}
+              end={`Issues${index}`}
+              startAnchor={"bottom"}
+              endAnchor={"top"}
+              color={"black"}
+              strokeWidth={1}
+            />
+          )}
         </>
       ))}
-      <Logout />
+      {width && <Logout />}
     </Xwrapper>
   )
 }
