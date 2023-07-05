@@ -3,7 +3,9 @@ import { FC } from "react"
 interface Props {
   projectInput: string
   setProjectInput: React.Dispatch<React.SetStateAction<string>>
-  result: string
+  result: {
+    content: string
+  }
   setResult: React.Dispatch<React.SetStateAction<string>>
 }
 

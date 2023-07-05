@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai"
-import generatePrompt from "./generatePrompt"
 import alternativePrompt from "./alternativePrompt"
 
 const configuration = new Configuration({
