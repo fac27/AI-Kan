@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { card } from "../Styles/TailwindClasses"
 
 interface IssueProps {
   title: string
@@ -9,7 +10,7 @@ interface IssueProps {
 const Issue: FC<IssueProps> = ({ title, description, done }) => {
   return (
     <div>
-      <div className="m-4 p-4 w-25 break-normal border border-black">
+      <div className={card}>
         <input type="checkbox" checked={done}></input>
         <input type="text" value={title} className="border border-black" />
         <textarea

@@ -6,6 +6,8 @@ import Issue from "./Issue"
 import Logout from "./Logout"
 import { useReducer } from "react"
 import { useGlobalContext } from "../Context/store"
+import Xarrow, { Xwrapper } from "react-xarrows"
+import { card } from "../Styles/TailwindClasses"
 
 //define reducer
 
@@ -69,28 +71,25 @@ export default function Project() {
   ///implement context
 
   return (
-    <>
-      <Title />
+    <Xwrapper>
+      <Title id={"ProjTitle"} />
       {state.projects.map(project => (
         <div key={project.id}>
-          <h2>{project.name}</h2>
           <div className="m-4 mt-10 flex space-x-4 w-500">
-            {project.tasks.map(task => (
+            {project.tasks.map((task, index) => (
               <Task
                 key={task.id}
                 title={task.title}
                 description={task.description}
                 done={task.done}
                 handleChangeTask={handleChangeTask}
+                id={`Task${index}`}
               />
             ))}
           </div>
           <div className="m-4 mt-10 flex space-x-4">
-            {project.tasks.map(task => (
-              <div
-                key={task.id}
-                className="flex flex-col overflow-hidden border border-black"
-              >
+            {project.tasks.map((task, index) => (
+              <div key={task.id} className={card} id={`Issues${index}`}>
                 {task.issues.map(issue => (
                   <Issue
                     key={issue.id}
@@ -104,7 +103,24 @@ export default function Project() {
           </div>
         </div>
       ))}
+      {exampleData[0].tasks.map((_, index) => (
+        <>
+          <Xarrow
+            start={"ProjTitle"}
+            end={`Task${index}`}
+            startAnchor={"bottom"}
+            endAnchor={"top"}
+          />
+          <Xarrow
+            key={index}
+            start={`Task${index}`}
+            end={`Issues${index}`}
+            startAnchor={"bottom"}
+            endAnchor={"top"}
+          />
+        </>
+      ))}
       <Logout />
-    </>
+    </Xwrapper>
   )
 }

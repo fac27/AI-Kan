@@ -1,8 +1,16 @@
 import { FC } from "react"
+import { card } from "../Styles/TailwindClasses"
 
-const Title: FC = () => {
+interface Props {
+  id: string
+}
+
+const Title: FC<Props> = ({ id }: Props) => {
   return (
-    <div className="m-4 mt-0 border border-black">
+    <div
+      id={id}
+      className={"mt-10 flex flex-col items-center justify-center " + card}
+    >
       <label htmlFor="promptInput">I want to make a...</label>
       <input type="text" id="promptInput" placeholder="Snake game in React" />
       <button type="submit">Submit</button>

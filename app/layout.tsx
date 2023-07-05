@@ -15,9 +15,9 @@ export default async function RootLayout({
     <html lang="en">
       <GlobalContextProvider>
         <body>
-          <div className="container" style={{ padding: "50px 0 100px 0" }}>
+          <main className="flex flex-col items-center justify-center gap-4">
             {children}
-          </div>
+          </main>
         </body>
       </GlobalContextProvider>
     </html>

@@ -1,6 +1,8 @@
 import { FC } from "react"
+import { card } from "../Styles/TailwindClasses"
 
 interface TaskProps {
+  id: string
   title: string
   description: string
   done: boolean
@@ -8,13 +10,14 @@ interface TaskProps {
 }
 
 const Task: FC<TaskProps> = ({
+  id,
   title,
   description,
   done,
   handleChangeTask,
 }) => {
   return (
-    <div className="p-4 w-25 break-normal border border-black">
+    <div id={id} className={card}>
       <input type="checkbox" checked={done}></input>
       <input
         type="text"

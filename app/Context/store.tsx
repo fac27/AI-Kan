@@ -1,7 +1,13 @@
 "use client"
 
-import { createContext, useContext, Dispatch, SetStateAction, useState, ReactNode } from 'react'
-
+import {
+  createContext,
+  useContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+  ReactNode,
+} from "react"
 
 interface GlobalContextProviderProps {
   children: ReactNode
@@ -57,7 +63,9 @@ const GlobalContext = createContext<ContextProps>({
   setTask: (): Task => initialTask,
 })
 
-export const GlobalContextProvider = ({ children}: GlobalContextProviderProps) => {
+export const GlobalContextProvider = ({
+  children,
+}: GlobalContextProviderProps) => {
   const [projectId, setProjectId] = useState(0)
   const [task, setTask] = useState<Task>(initialTask)
 
