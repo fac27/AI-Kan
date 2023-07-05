@@ -56,7 +56,7 @@ const APITitle: FC = ({
         />
         <button type="submit">Generate tasks</button>
       </form>
-      <div>{result}</div>
+      <div>{result.content}</div>
     </>
   )
 }

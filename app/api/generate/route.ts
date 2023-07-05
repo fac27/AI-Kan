@@ -1,8 +1,10 @@
 import { Configuration, OpenAIApi } from "openai"
 import generatePrompt from "./generatePrompt"
+import alternativePrompt from "./alternativePrompt"
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
+  // basePath: "https://api.openai.com/v1/chat/completions"
 })
 const openai = new OpenAIApi(configuration)
 
@@ -17,15 +19,22 @@ export async function POST(req: Request) {
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(project),
+    // const completion = await openai.createCompletion({
+    //   model: "gpt-3.5-turbo",
+    //   prompt: generatePrompt(project),
+    //   max_tokens: 2000,
+    //   temperature: 0.6,
+    // })
+    const chatCompletion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: 'system', content: 'You are a helpful assistant.' }, {"role": "user", "content": alternativePrompt(project)}],
       max_tokens: 2000,
-      temperature: 0.6,
+      temperature: 0.1,
     })
-    console.log(completion.data)
+    console.log(chatCompletion.data.choices[0].message)
+    // console.log(completion.data)
     return new Response(
-      JSON.stringify({ result: completion.data.choices[0].text })
+      JSON.stringify({ result: chatCompletion.data.choices[0].message })
     )
   } catch (error) {
     // Consider adjusting the error handling logic for your use case
