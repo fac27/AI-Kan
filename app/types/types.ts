@@ -2,7 +2,6 @@ export interface Task {
   id: number
   title: string
   description: string
-  timeEstimate: string
   issues: Issue[]
   done: boolean
 }

@@ -18,6 +18,8 @@ const exampleData = [
         done: false,
         issues: [
           {
+            id: 0,
+            taskId: 1,
             title: "Design board layout",
             description:
               "Design the layout of the game board using CSS grid or similar",
@@ -25,6 +27,8 @@ const exampleData = [
             done: false,
           },
           {
+            id: 1,
+            taskId: 1,
             title: "Implement board",
             description: "Create the game board component",
             timeEstimate: "2 hours",
@@ -39,12 +43,16 @@ const exampleData = [
         done: false,
         issues: [
           {
+            id: 0,
+            taskId: 2,
             title: "Design snake",
             description: "Create a design for the snake and its movement",
             timeEstimate: "2 hours",
             done: false,
           },
           {
+            id: 1,
+            taskId: 2,
             title: "Implement snake",
             description: "Create the snake component",
             timeEstimate: "4 hours",
@@ -60,6 +68,8 @@ const exampleData = [
         done: false,
         issues: [
           {
+            id: 0,
+            taskId: 3,
             title: "Implement snake movement",
             description:
               "Write the code to handle snake movement in response to player input",
@@ -67,6 +77,8 @@ const exampleData = [
             done: false,
           },
           {
+            id: 1,
+            taskId: 3,
             title: "Implement score keeping",
             description:
               "Write the code to keep track of and display the player's score",
@@ -74,6 +86,8 @@ const exampleData = [
             done: false,
           },
           {
+            id: 2,
+            taskId: 3,
             title: "Implement collision detection",
             description:
               "Write the code to detect collisions between the snake and the game board or the snake and itself",
@@ -90,12 +104,16 @@ const exampleData = [
         done: false,
         issues: [
           {
+            id: 0,
+            taskId: 4,
             title: "Write tests",
             description: "Write tests to verify the functionality of the game",
             timeEstimate: "2 hours",
             done: false,
           },
           {
+            id: 1,
+            taskId: 4,
             title: "Debug game",
             description: "Fix any issues that arise during testing",
             timeEstimate: "2 hours",
@@ -106,6 +124,8 @@ const exampleData = [
     ],
   },
 ]
+
+export default exampleData
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const example2 = {
@@ -206,5 +226,3 @@ const example2 = {
     },
   ],
 }
-
-export default exampleData

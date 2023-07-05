@@ -11,7 +11,6 @@ const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const [project, dispatch] = useReducer(projectReducer, exampleData)
-  console.log(project)
   return (
     <ProjectContext.Provider value={project}>
       <ProjectDispatchContext.Provider value={dispatch}>
