@@ -12,6 +12,13 @@ Although this is a planned functionality, you can not yet edit Tasks or Issues, 
 
 Edits do not persist between refreshes.
 
+## What does work
+
+Magic link login
+Information rendered to page from example data
+Chat GPT API calls (although not yet connected to project page - can be found in /testApi)
+Context and reducer applied
+
 ## Collaborating
 In order to collaborate to this project, or code review, follow these steps:
 
