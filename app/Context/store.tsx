@@ -28,44 +28,38 @@ export function useProjectDispatch() {
   return useContext(ProjectDispatchContext)
 }
 
-function projectReducer(state: Project[], action: ActionTypes) {
+function projectReducer(state: Project[], action: ActionTypes): Project[] {
   switch (action.type) {
     case "EDIT_TITLE": {
       return state.map(project => {
-        if (project.id === 0) {
-          return {
-            ...project,
-            tasks: project.tasks.map((task: Task) => {
-              if (task.id === action.payload.id) {
-                return {
-                  ...task,
-                  title: action.payload.title,
-                }
+        return {
+          ...project,
+          tasks: project.tasks.map((task: Task) => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                title: action.payload.title,
               }
-              return task
-            }),
-          }
+            }
+            return task
+          }),
         }
-        return state
       })
     }
     case "EDIT_DESCRIPTION": {
       return state.map(project => {
-        if (project.id === 0) {
-          return {
-            ...project,
-            tasks: project.tasks.map(task => {
-              if (task.id === action.payload.id) {
-                return {
-                  ...task,
-                  description: action.payload.description,
-                }
+        return {
+          ...project,
+          tasks: project.tasks.map(task => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                description: action.payload.description,
               }
-              return task
-            }),
-          }
+            }
+            return task
+          }),
         }
-        return state
       })
     }
     default: {
