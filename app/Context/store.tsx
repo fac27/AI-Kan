@@ -1,12 +1,13 @@
 "use client"
 
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useReducer, Dispatch } from "react"
 
 import exampleData from "../../data/exampleData"
+import { ActionTypes, Project } from "../types/types"
 
-const ProjectContext = createContext(null)
+const ProjectContext = createContext <Dispatch<Project> | null>(null)
 
-const ProjectDispatchContext = createContext(null)
+const ProjectDispatchContext = createContext<Dispatch<ActionTypes> | null>(null)
 
 export function ProjectProvider({ children }) {
   const [project, dispatch] = useReducer(projectReducer, exampleData)
@@ -28,7 +29,7 @@ export function useProjectDispatch() {
   return useContext(ProjectDispatchContext)
 }
 
-function projectReducer(state, action) {
+function projectReducer(state: object[], action: ActionTypes) {
   switch (action.type) {
     case "EDIT_TITLE": {
       return state.map(project => {

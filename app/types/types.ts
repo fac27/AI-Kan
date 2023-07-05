@@ -20,9 +20,9 @@ export interface Issue {
   done: boolean
 }
 
-export interface ContextProps {
-  projectId: number
-  setProjectId: Dispatch<SetStateAction<number>>
-  task: Task
-  setTask: Dispatch<SetStateAction<Task>>
+export type Project = object[]
+
+export type ActionTypes = {
+  type: string
+  payload: Task
 }
