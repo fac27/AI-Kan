@@ -1,5 +1,6 @@
 const exampleData = [
   {
+    id: 0,
     name: "Snake game",
     tasks: [
       {

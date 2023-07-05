@@ -1,34 +1,41 @@
 import { FC } from "react"
 import { card } from "../Styles/TailwindClasses"
+import { Task } from "../types/types"
+import { useProjectDispatch } from "../Context/store"
 
 interface TaskProps {
   id: string
-  title: string
-  description: string
-  done: boolean
-  handleChangeTask: (event: React.ChangeEvent<HTMLInputElement>) => void
+  task: Task
 }
 
-const Task: FC<TaskProps> = ({
-  id,
-  title,
-  description,
-  done,
-  handleChangeTask,
-}) => {
+//the id prop is for Xarrows to track Tasks
+const Task: FC<TaskProps> = ({ id, task }) => {
+  const dispatch = useProjectDispatch()
+  
+  function handleEditTask(event) {
+    const newTitle = event.target.value
+    dispatch({
+      type: "EDIT_TASK",
+      payload: {
+        ...task,
+        title: newTitle,
+      },
+    })
+  }
+  
   return (
     <div id={id} className={card}>
-      <input type="checkbox" checked={done}></input>
+      <input type="checkbox" checked={task.done}></input>
       <input
         type="text"
-        value={title}
-        onChange={handleChangeTask}
+        value={task.title}
+        onChange={handleEditTask}
         className="border border-black"
       />
       <textarea
         rows={4}
         cols={20}
-        value={description}
+        value={task.description}
         className="border border-black"
       ></textarea>
       <div className="flex justify-between">
