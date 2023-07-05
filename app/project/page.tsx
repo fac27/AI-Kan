@@ -4,15 +4,16 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useReducer, useRef, useEffect, useState } from "react"
-import { useGlobalContext } from "../Context/store"
+import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
-import { card } from "../Styles/TailwindClasses"
-import { useProject } from "../Context/store"
 import { card, issue } from "../Styles/TailwindClasses"
+import { useProject } from "../Context/store"
 
 export default function Project() {
+  const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null) //Will remove useState soon!
+
+  const project = useProject()
 
   useEffect(() => {
     if (targetRef.current) {
@@ -24,7 +25,7 @@ export default function Project() {
   return (
     <Xwrapper>
       <Title id={"ProjTitle"} />
-      {project.map(project => (
+      {project?.map(project => (
         <div key={project.id}>
           <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
             {project.tasks.map((task, index) => (

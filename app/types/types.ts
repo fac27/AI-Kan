@@ -1,7 +1,3 @@
-export interface GlobalContextProviderProps {
-  children: ReactNode
-}
-
 export interface Task {
   id: number
   title: string
@@ -20,7 +16,17 @@ export interface Issue {
   done: boolean
 }
 
-export type Project = object[]
+export interface Project {
+  id: number
+  name: string
+  tasks: Task[]
+}
+
+type Action =
+  | { type: "EDIT_TITLE"; payload: Task }
+  | { type: "EDIT_DESCRIPTION"; payload: Task }
+
+export type DispatchType = (value: Action) => void
 
 export type ActionTypes = {
   type: string

@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card, task } from "../Styles/TailwindClasses"
+import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
 
@@ -14,33 +14,41 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
 
   function handleEditTitle(event) {
     const newTitle = event.target.value
-    dispatch({
-      type: "EDIT_TITLE",
-      payload: {
-        ...task,
-        title: newTitle,
-      },
-    })
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_TITLE",
+        payload: {
+          ...task,
+          title: newTitle,
+        },
+      })
+    }
   }
 
   function handleEditDescription(event) {
     const newDescription = event.target.value
-    dispatch({
-      type: "EDIT_DESCRIPTION",
-      payload: {
-        ...task,
-        description: newDescription,
-      },
-    })
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_DESCRIPTION",
+        payload: {
+          ...task,
+          description: newDescription,
+        },
+      })
+    }
   }
   return (
-    <div id={id} ref={targetRef} className={`${card} ${task} flex flex-col`}>
-      <input type="checkbox" checked={done}></input>
+    <div
+      id={id}
+      ref={targetRef}
+      className={`${card} ${taskstyle} flex flex-col`}
+    >
+      <input type="checkbox" checked={task.done}></input>
       <input
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className="border border-black"
+        className=""
       />
       <textarea
         rows={4}

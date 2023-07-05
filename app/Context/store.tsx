@@ -1,17 +1,17 @@
 "use client"
 
-import { createContext, useContext, useReducer, Dispatch } from "react"
+import { ReactNode, createContext, useContext, useReducer } from "react"
 
 import exampleData from "../../data/exampleData"
-import { ActionTypes, Project } from "../types/types"
+import { ActionTypes, DispatchType, Project, Task } from "../types/types"
 
-const ProjectContext = createContext <Dispatch<Project> | null>(null)
+const ProjectContext = createContext<Project[] | null>(null)
 
-const ProjectDispatchContext = createContext<Dispatch<ActionTypes> | null>(null)
+const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
-export function ProjectProvider({ children }) {
+export function ProjectProvider({ children }: { children: ReactNode }) {
   const [project, dispatch] = useReducer(projectReducer, exampleData)
-
+  console.log(project)
   return (
     <ProjectContext.Provider value={project}>
       <ProjectDispatchContext.Provider value={dispatch}>
@@ -29,14 +29,14 @@ export function useProjectDispatch() {
   return useContext(ProjectDispatchContext)
 }
 
-function projectReducer(state: object[], action: ActionTypes) {
+function projectReducer(state: Project[], action: ActionTypes) {
   switch (action.type) {
     case "EDIT_TITLE": {
       return state.map(project => {
         if (project.id === 0) {
           return {
             ...project,
-            tasks: project.tasks.map(task => {
+            tasks: project.tasks.map((task: Task) => {
               if (task.id === action.payload.id) {
                 return {
                   ...task,
