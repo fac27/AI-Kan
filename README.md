@@ -4,13 +4,16 @@ An Ai-Powered project management tool for solo developers.
 
 ## What doesn't work
 
-Although the magic login is working, "/project" is not a protected route.
+- Although the magic login is working, "/project" is not a protected route.
+- We are working in parallel on the api call to openai and returning better and better quality data, however this is not hooked up to the main application yet.
+- Although this is a planned functionality, you can not yet edit Tasks or Issues, and all other interactions (checkboxes, accordions etc.) are not yet working.
+- Edits do not persist between refreshes.
 
-We are working in parallel on the api call to openai and returning better and better quality data, however this is not hooked up to the main application yet.
+## What does work
 
-Although this is a planned functionality, you can not yet edit Tasks or Issues, and all other interactions (checkboxes, accordions etc.) are not yet working.
-
-Edits do not persist between refreshes.
+- Magic link login
+- Information rendered to page from example data
+- Context and reducer applied
 
 ## Collaborating
 In order to collaborate to this project, or code review, follow these steps:
