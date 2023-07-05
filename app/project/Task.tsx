@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card } from "../Styles/TailwindClasses"
+import { card, task} from "../Styles/TailwindClasses"
 
 interface TaskProps {
   id: string
@@ -17,19 +17,18 @@ const Task: FC<TaskProps> = ({
   handleChangeTask,
 }) => {
   return (
-    <div id={id} className={card}>
+    <div id={id} className={`${card} ${task}`}>
       <input type="checkbox" checked={done}></input>
       <input
         type="text"
         value={title}
         onChange={handleChangeTask}
-        className="border border-black"
       />
       <textarea
         rows={4}
         cols={20}
         value={description}
-        className="border border-black"
+        className="resize-none"
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>
