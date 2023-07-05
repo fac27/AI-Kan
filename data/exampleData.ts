@@ -4,12 +4,14 @@ const exampleData = [
     name: "Snake game",
     tasks: [
       {
+        id: 0,
         title: "Setup development environment",
         description: "Install relevant dependencies",
         done: false,
         issues: [],
       },
       {
+        id: 1,
         title: "Create game board",
         description:
           "Implement the main game board where the game will be played",
@@ -31,6 +33,7 @@ const exampleData = [
         ],
       },
       {
+        id: 2,
         title: "Create snake",
         description: "Implement the snake that the player will control",
         done: false,
@@ -50,6 +53,7 @@ const exampleData = [
         ],
       },
       {
+        id: 3,
         title: "Implement game logic",
         description:
           "Handle the main game mechanics like snake movement, score keeping, and collision detection",
@@ -79,6 +83,7 @@ const exampleData = [
         ],
       },
       {
+        id: 4,
         title: "Testing and Debugging",
         description:
           "Run tests and debug to ensure that the game runs as expected",

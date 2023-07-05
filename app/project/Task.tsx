@@ -11,7 +11,7 @@ interface TaskProps {
 //the id prop is for Xarrows to track Tasks
 const Task: FC<TaskProps> = ({ id, task }) => {
   const dispatch = useProjectDispatch()
-  
+
   function handleEditTask(event) {
     const newTitle = event.target.value
     dispatch({
@@ -22,7 +22,7 @@ const Task: FC<TaskProps> = ({ id, task }) => {
       },
     })
   }
-  
+
   return (
     <div id={id} className={card}>
       <input type="checkbox" checked={task.done}></input>

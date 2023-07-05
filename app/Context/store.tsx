@@ -1,19 +1,6 @@
 "use client"
 
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  ReactNode,
-  useReducer,
-} from "react"
-
-import {
-  Task,
-  Issue,
-  GlobalContextProviderProps,
-  ContextProps,
-} from "../types/types"
+import { createContext, useContext, useReducer } from "react"
 
 import exampleData from "../../data/exampleData"
 
@@ -42,7 +29,7 @@ export function useProjectDispatch() {
 }
 
 function projectReducer(state, action) {
-  console.log(action.payload)
+  console.log(state)
   switch (action.type) {
     case "EDIT_TASK": {
       return state.map(project => {
@@ -60,7 +47,7 @@ function projectReducer(state, action) {
             }),
           }
         }
-        return project
+        return state
       })
     }
     default: {
