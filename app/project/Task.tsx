@@ -1,15 +1,15 @@
 import { FC } from "react"
-import { card } from "../Styles/TailwindClasses"
+import { card, task } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
 
 interface TaskProps {
   id: string
   task: Task
+  targetRef: React.RefObject<HTMLDivElement>
 }
 
-//the id prop is for Xarrows to track Tasks
-const Task: FC<TaskProps> = ({ id, task }) => {
+const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
 
   function handleEditTitle(event) {
@@ -33,10 +33,9 @@ const Task: FC<TaskProps> = ({ id, task }) => {
       },
     })
   }
-
   return (
-    <div id={id} className={card}>
-      <input type="checkbox" checked={task.done}></input>
+    <div id={id} ref={targetRef} className={`${card} ${task} flex flex-col`}>
+      <input type="checkbox" checked={done}></input>
       <input
         type="text"
         value={task.title}
@@ -48,7 +47,7 @@ const Task: FC<TaskProps> = ({ id, task }) => {
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className="border border-black"
+        className="resize-none"
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>

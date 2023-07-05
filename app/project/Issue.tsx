@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card } from "../Styles/TailwindClasses"
+import { card, issue } from "../Styles/TailwindClasses"
 
 interface IssueProps {
   title: string
@@ -10,14 +10,14 @@ interface IssueProps {
 const Issue: FC<IssueProps> = ({ title, description, done }) => {
   return (
     <div>
-      <div className={card}>
+      <div className={`${card} ${issue}`}>
         <input type="checkbox" checked={done}></input>
-        <input type="text" value={title} className="border border-black" />
+        <input type="text" value={title} />
         <textarea
           rows={4}
           cols={20}
           value={description}
-          className="border border-black"
+          className="resize-none"
         ></textarea>
         <div className="flex justify-between">
           <button type="button">⌄</button>
