@@ -48,15 +48,14 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className=""
-        className="mb-2 p-2 rounded"
+        className="mb-2 p-2 rounded border border-black"
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className="mb-2 p-2 resize-none rounded"
+        className="mb-2 p-2 resize-none rounded border border-black"
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>

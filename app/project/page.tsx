@@ -48,7 +48,7 @@ export default function Project() {
                   <div
                     style={{ width: `${width}px` }}
                     key={task.id}
-                    className={`${card} ${issue} ${conditionalVisibility} `}
+                    className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
                     id={`Issues${index}`}
                   >
                     {task.issues.map(issue => (
