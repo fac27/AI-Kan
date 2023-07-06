@@ -7,3 +7,4 @@ next.config.js
 tsconfig.json
 .husky/**/*
 *.md
+.next*
