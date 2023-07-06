@@ -51,6 +51,15 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
+  function handleDeleteTask() {
+    if (dispatch) {
+      dispatch({
+        type: "DELETE_TASK",
+        payload: task,
+      })
+    }
+  }
+
   return (
     <div
       id={id}
@@ -63,6 +72,16 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         className={`mb-2 self-start TestTaskCheckbox${task.id}`}
         onChange={handleTaskCheckbox}
       ></input>
+      <div className="mb-2 flex items-center justify-between">
+        <input
+          type="checkbox"
+          checked={task.done}
+          onChange={handleTaskCheckbox}
+        ></input>
+        <button type="button" onClick={handleDeleteTask}>
+          ✖
+        </button>
+      </div>
       <input
         type="text"
         value={task.title}
@@ -76,9 +95,11 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         onChange={handleEditDescription}
         className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${task.id}`}
       ></textarea>
-      <div className="flex justify-between">
-        <button type="button">⌄</button>
-        <button type="button">+</button>
+      <div className="mt-2 flex items-center justify-between">
+        <button type="button" className="-translate-y-1">
+          ⌄
+        </button>
+        <button type="button">＋</button>
       </div>
     </div>
   )
