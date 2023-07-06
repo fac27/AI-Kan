@@ -1,79 +1,69 @@
 "use client"
 
-import {
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  useState,
-  ReactNode,
-} from "react"
+import { ReactNode, createContext, useContext, useReducer } from "react"
 
-interface GlobalContextProviderProps {
-  children: ReactNode
-}
+import exampleData from "../../data/exampleData"
+import { ActionTypes, DispatchType, Project, Task } from "../types/types"
 
-interface Task {
-  id: number
-  title: string
-  description: string
-  timeEstimate: string
-  issues: Issue[]
-  done: boolean
-}
+const ProjectContext = createContext<Project[] | null>(null)
 
-interface Issue {
-  id: number
-  taskId: number
-  title: string
-  description: string
-  timeEstimate: string
-  done: boolean
-}
+const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
-interface ContextProps {
-  projectId: number
-  setProjectId: Dispatch<SetStateAction<number>>
-  task: Task
-  setTask: Dispatch<SetStateAction<Task>>
-}
-
-const initialTask = {
-  id: 0,
-  title: "",
-  description: "",
-  timeEstimate: "",
-  issues: [
-    {
-      id: 0,
-      taskId: 0,
-      title: "",
-      description: "",
-      timeEstimate: "",
-      done: false,
-    },
-  ],
-  done: false,
-}
-
-const GlobalContext = createContext<ContextProps>({
-  projectId: 0,
-  setProjectId: (): number => 0,
-  task: initialTask,
-  setTask: (): Task => initialTask,
-})
-
-export const GlobalContextProvider = ({
-  children,
-}: GlobalContextProviderProps) => {
-  const [projectId, setProjectId] = useState(0)
-  const [task, setTask] = useState<Task>(initialTask)
-
+export function ProjectProvider({ children }: { children: ReactNode }) {
+  const [project, dispatch] = useReducer(projectReducer, exampleData)
   return (
-    <GlobalContext.Provider value={{ projectId, setProjectId, task, setTask }}>
-      {children}
-    </GlobalContext.Provider>
+    <ProjectContext.Provider value={project}>
+      <ProjectDispatchContext.Provider value={dispatch}>
+        {children}
+      </ProjectDispatchContext.Provider>
+    </ProjectContext.Provider>
   )
 }
 
-export const useGlobalContext = () => useContext(GlobalContext)
+export function useProject() {
+  return useContext(ProjectContext)
+}
+
+export function useProjectDispatch() {
+  return useContext(ProjectDispatchContext)
+}
+
+function projectReducer(state: Project[], action: ActionTypes): Project[] {
+  switch (action.type) {
+    case "EDIT_TITLE": {
+      return state.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks.map((task: Task) => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                title: action.payload.title,
+              }
+            }
+            return task
+          }),
+        }
+      })
+    }
+    case "EDIT_DESCRIPTION": {
+      return state.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks.map(task => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                description: action.payload.description,
+              }
+            }
+            return task
+          }),
+        }
+      })
+    }
+    default: {
+      return state
+    }
+  }
+}

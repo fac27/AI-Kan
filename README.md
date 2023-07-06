@@ -13,7 +13,6 @@ An Ai-Powered project management tool for solo developers.
 
 - Magic link login
 - Information rendered to page from example data
-- Chat GPT API calls (although not yet connected to project page - can be found in /testApi)
 - Context and reducer applied
 
 ## Collaborating

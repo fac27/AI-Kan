@@ -1,5 +1,5 @@
 import "./globals.css"
-import { GlobalContextProvider } from "./Context/store"
+import { ProjectProvider } from "./Context/store"
 
 export const metadata = {
   title: "User Management",
@@ -13,13 +13,13 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <GlobalContextProvider>
+      <ProjectProvider>
         <body>
           <main className="flex flex-col items-center justify-center gap-4">
             {children}
           </main>
         </body>
-      </GlobalContextProvider>
+      </ProjectProvider>
     </html>
   )
 }
