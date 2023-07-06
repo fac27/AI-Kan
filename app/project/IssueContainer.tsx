@@ -11,11 +11,5 @@ export default function ComponentWithDynamicWidth() {
     }
   }, [])
 
-  return (
-    <>
-      {width && (
-        <div style={{ width: `${width}px` }}></div>
-      )}
-    </>
-  )
+  return <>{width && <div style={{ width: `${width}px` }}></div>}</>
 }

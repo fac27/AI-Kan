@@ -45,14 +45,14 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         type="text"
         value={issue.title}
         onChange={handleEditTitle}
-        className="mb-2 p-2 rounded border border-black"
+        className={`mb-2 p-2 rounded border border-black TestIssueTitle${issue.id}`}
       />
       <textarea
         rows={4}
         cols={20}
         value={issue.description}
         onChange={handleEditDescription}
-        className="mb-2 p-2 resize-none rounded border border-black"
+        className={`mb-2 p-2 resize-none rounded border border-black TestIssueDescription${issue.id}`}
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>
