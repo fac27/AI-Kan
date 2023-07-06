@@ -66,6 +66,12 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       ref={targetRef}
       className={`${card} ${taskstyle} flex flex-col`}
     >
+      <input
+        type="checkbox"
+        checked={task.done}
+        className={`TestTaskCheckbox${task.id}`}
+        onChange={handleTaskCheckbox}
+      ></input>
       <div className="mb-2 flex items-center justify-between">
         <input
           type="checkbox"

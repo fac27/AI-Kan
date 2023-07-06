@@ -64,6 +64,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           type="checkbox"
           checked={issue.done}
           onChange={handleIssueCheckbox}
+          className={`TestIssueCheckbox${issue.taskId}-${issue.id}`}
         ></input>
         <button type="button" onClick={handleDeleteIssue}>
           ✖
