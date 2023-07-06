@@ -85,7 +85,9 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
           tasks: project.tasks.map(task => {
             const issuePayload = action.payload as Issue
             if (task.id === issuePayload.taskId) {
-              const areIssuesDone = task.issues.map(issue => issue.done).every(issue => issue)
+              const areIssuesDone = task.issues
+                .map(issue => issue.done)
+                .every(issue => issue)
               return {
                 ...task,
                 issues: task.issues.map(issue => {
@@ -111,7 +113,7 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
                   console.log(areIssuesDone)
                   return issue
                 }),
-                done: areIssuesDone
+                done: areIssuesDone,
               }
             }
             return task
