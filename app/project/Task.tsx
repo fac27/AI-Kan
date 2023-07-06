@@ -69,7 +69,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       <input
         type="checkbox"
         checked={task.done}
-        className={`mb-2 self-start TestTaskCheckbox${task.id}`}
+        className={`TestTaskCheckbox${task.id}`}
         onChange={handleTaskCheckbox}
       ></input>
       <div className="mb-2 flex items-center justify-between">
