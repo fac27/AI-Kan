@@ -16,7 +16,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     const newTitle = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_TITLE",
+        type: "EDIT_TASK_TITLE",
         payload: {
           ...task,
           title: newTitle,
@@ -29,7 +29,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     const newDescription = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_DESCRIPTION",
+        type: "EDIT_TASK_DESCRIPTION",
         payload: {
           ...task,
           description: newDescription,

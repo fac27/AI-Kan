@@ -1,22 +1,49 @@
 import { FC } from "react"
-import { card, issue } from "../Styles/TailwindClasses"
+import { card, issuestyle } from "../Styles/TailwindClasses"
+import { useProjectDispatch } from "../Context/store"
+import { Issue } from "../types/types"
 
 interface IssueProps {
-  title: string
-  description: string
-  done: boolean
+  issue: Issue
 }
 
-const Issue: FC<IssueProps> = ({ title, description, done }) => {
+const Issue: FC<IssueProps> = ({ issue }) => {
+  const dispatch = useProjectDispatch()
+  function handleEditTitle(event) {
+    const newTitle = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_TITLE",
+        payload: {
+          ...issue,
+          title: newTitle,
+        },
+      })
+    }
+  }
+
+  function handleEditDescription(event) {
+    const newDescription = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_DESCRIPTION",
+        payload: {
+          ...issue,
+          description: newDescription,
+        },
+      })
+    }
+  }
   return (
     <div>
-      <div className={`${card} ${issue}`}>
-        <input type="checkbox" checked={done}></input>
-        <input type="text" value={title} />
+      <div className={`${card} ${issuestyle}`}>
+        <input type="checkbox" checked={issue.done}></input>
+        <input type="text" value={issue.title} onChange={handleEditTitle} />
         <textarea
           rows={4}
           cols={20}
-          value={description}
+          value={issue.description}
+          onChange={handleEditDescription}
           className="resize-none"
         ></textarea>
         <div className="flex justify-between">
