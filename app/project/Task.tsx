@@ -20,17 +20,18 @@ const Task: FC<TaskProps> = ({
 }) => {
   return (
     <div id={id} ref={targetRef} className={`${card} ${task} flex flex-col`}>
-      <input type="checkbox" checked={done}></input>
+      <input type="checkbox" checked={done} className="mb-2 self-start"></input>
       <input
         type="text"
         value={title}
         onChange={handleChangeTask}
+        className="mb-2 p-2 rounded"
       />
       <textarea
         rows={4}
         cols={20}
         value={description}
-        className="resize-none"
+        className="mb-2 p-2 resize-none rounded"
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>

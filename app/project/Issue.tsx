@@ -12,12 +12,12 @@ const Issue: FC<IssueProps> = ({ title, description, done }) => {
     <div>
       <div className={`${card} ${issue}`}>
         <input type="checkbox" checked={done}></input>
-        <input type="text" value={title} />
+        <input type="text" value={title} className="mb-2 p-2 rounded" />
         <textarea
           rows={4}
           cols={20}
           value={description}
-          className="resize-none"
+          className="mb-2 p-2 resize-none rounded"
         ></textarea>
         <div className="flex justify-between">
           <button type="button">⌄</button>
