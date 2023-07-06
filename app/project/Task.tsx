@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
