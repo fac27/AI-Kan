@@ -1,4 +1,5 @@
 import { FC } from "react"
+import sanitise from "../../utils/sanitise"
 
 interface Props {
   projectInput: string
@@ -34,8 +35,8 @@ const APITitle: FC<Props> = ({
           new Error(`Request failed with status ${response.status}`)
         )
       }
-
-      setResult(data.result.content)
+      const sanitisedData = sanitise(data.result.content)
+      setResult(sanitisedData)
     } catch (error) {
       console.error(error)
       alert(error.message)
