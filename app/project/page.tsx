@@ -11,7 +11,7 @@ import { useProject } from "../Context/store"
 
 export default function Project() {
   const targetRef = useRef<HTMLDivElement>(null)
-  const [width, setWidth] = useState<number | null>(null) //Will remove useState soon!
+  const [width, setWidth] = useState<number | null>(null)
 
   const project = useProject()
 
