@@ -34,13 +34,25 @@ const Issue: FC<IssueProps> = ({ issue }) => {
       })
     }
   }
+
+  function handleDeleteIssue() {
+    if (dispatch) {
+      dispatch({
+        type: "DELETE_ISSUE",
+        payload: issue
+      });
+    }
+  }
+
   return (
     <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
-      <input
-        type="checkbox"
-        checked={issue.done}
-        className="mb-2 self-start"
-      ></input>
+      <div className="mb-2 flex items-center justify-between">
+        <input
+            type="checkbox"
+            checked={issue.done}
+        ></input>
+        <button type="button" onClick={handleDeleteIssue}>✖</button>
+      </div>
       <input
         type="text"
         value={issue.title}
@@ -54,9 +66,9 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         onChange={handleEditDescription}
         className="mb-2 p-2 resize-none rounded border border-black"
       ></textarea>
-      <div className="flex justify-between">
-        <button type="button">⌄</button>
-        <button type="button">+</button>
+      <div className="mt-2 flex items-center justify-between">
+        <button type="button" className="-translate-y-1">⌄</button>
+        <button type="button">＋</button>
       </div>
     </div>
   )
