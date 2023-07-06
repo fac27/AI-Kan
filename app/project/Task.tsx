@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
@@ -58,12 +58,9 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       className={`${card} ${taskstyle} flex flex-col`}
     >
       <input
-       
         type="checkbox"
-       
         checked={task.done}
         className={`mb-2 self-start`}
-      
         onChange={handleTaskCheckbox}
       ></input>
       <input

@@ -51,14 +51,11 @@ const Issue: FC<IssueProps> = ({ issue }) => {
   return (
     <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
       <input
-       
-          type="checkbox"
-       
-          checked={issue.done}
+        type="checkbox"
+        checked={issue.done}
         className="mb-2 self-start"
-      
-          onChange={handleIssueCheckbox}
-        ></input>
+        onChange={handleIssueCheckbox}
+      ></input>
       <input
         type="text"
         value={issue.title}
