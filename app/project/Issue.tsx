@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card, issueStyle } from "../Styles/TailwindClasses"
+import { card, issuestyle } from "../Styles/TailwindClasses"
 import { useProjectDispatch } from "../Context/store"
 import { Issue } from "../types/types"
 
@@ -9,6 +9,31 @@ interface IssueProps {
 
 const Issue: FC<IssueProps> = ({ issue }) => {
   const dispatch = useProjectDispatch()
+  function handleEditTitle(event) {
+    const newTitle = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_TITLE",
+        payload: {
+          ...issue,
+          title: newTitle,
+        },
+      })
+    }
+  }
+
+  function handleEditDescription(event) {
+    const newDescription = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_DESCRIPTION",
+        payload: {
+          ...issue,
+          description: newDescription,
+        },
+      })
+    }
+  }
 
   function handleIssueCheckbox(event) {
     const isChecked = event.target.checked
@@ -24,24 +49,32 @@ const Issue: FC<IssueProps> = ({ issue }) => {
   }
 
   return (
-    <div>
-      <div className={`${card} ${issueStyle}`}>
-        <input
+    <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
+      <input
+       
           type="checkbox"
+       
           checked={issue.done}
+        className="mb-2 self-start"
+      
           onChange={handleIssueCheckbox}
         ></input>
-        <input type="text" value={issue.title} />
-        <textarea
-          rows={4}
-          cols={20}
-          value={issue.description}
-          className="resize-none"
-        ></textarea>
-        <div className="flex justify-between">
-          <button type="button">⌄</button>
-          <button type="button">+</button>
-        </div>
+      <input
+        type="text"
+        value={issue.title}
+        onChange={handleEditTitle}
+        className={`mb-2 p-2 rounded border border-black TestIssueTitle${issue.id}`}
+      />
+      <textarea
+        rows={4}
+        cols={20}
+        value={issue.description}
+        onChange={handleEditDescription}
+        className={`mb-2 p-2 resize-none rounded border border-black TestIssueDescription${issue.id}`}
+      ></textarea>
+      <div className="flex justify-between">
+        <button type="button">⌄</button>
+        <button type="button">+</button>
       </div>
     </div>
   )

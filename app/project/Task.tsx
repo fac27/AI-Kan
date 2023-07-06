@@ -16,7 +16,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     const newTitle = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_TITLE",
+        type: "EDIT_TASK_TITLE",
         payload: {
           ...task,
           title: newTitle,
@@ -29,7 +29,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     const newDescription = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_DESCRIPTION",
+        type: "EDIT_TASK_DESCRIPTION",
         payload: {
           ...task,
           description: newDescription,
@@ -58,22 +58,26 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       className={`${card} ${taskstyle} flex flex-col`}
     >
       <input
+       
         type="checkbox"
+       
         checked={task.done}
+        className={`mb-2 self-start`}
+      
         onChange={handleTaskCheckbox}
       ></input>
       <input
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className=""
+        className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id}`}
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className="resize-none"
+        className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${task.id}`}
       ></textarea>
       <div className="flex justify-between">
         <button type="button">⌄</button>

@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card, project } from "../Styles/TailwindClasses"
+import { card, projectstyle } from "../Styles/TailwindClasses"
 
 interface Props {
   id: string
@@ -9,7 +9,7 @@ const Title: FC<Props> = ({ id }: Props) => {
   return (
     <div
       id={id}
-      className={`mt-10 flex flex-col items-center justify-center ${card} ${project}`}
+      className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
     >
       <label htmlFor="promptInput">I want to make a...</label>
       <div className="flex justify-between mt-2.5">
@@ -17,7 +17,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           type="text"
           id="promptInput"
           placeholder="Snake game in React"
-          className="p-1.5"
+          className="p-1.5 rounded border border-black"
         />
         <button
           type="submit"

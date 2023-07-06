@@ -22,8 +22,10 @@ export interface Project {
 }
 
 type Action =
-  | { type: "EDIT_TITLE"; payload: Task }
-  | { type: "EDIT_DESCRIPTION"; payload: Task }
+  | { type: "EDIT_TASK_TITLE"; payload: Task }
+  | { type: "EDIT_TASK_DESCRIPTION"; payload: Task }
+  | { type: "EDIT_ISSUE_TITLE"; payload: Issue }
+  | { type: "EDIT_ISSUE_DESCRIPTION"; payload: Issue }
   | { type: "EDIT_TASK_CHECKBOX"; payload: Task }
   | { type: "EDIT_ISSUE_CHECKBOX"; payload: Issue }
 
