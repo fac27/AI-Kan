@@ -7,13 +7,19 @@ import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
 import { card, issuestyle } from "../Styles/TailwindClasses"
-import { useProject } from "../Context/store"
+import { useProject, useProjectDispatch } from "../Context/store"
+import { Project } from "../types/types"
 
 export default function Project() {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
 
+  const [projectInput, setProjectInput] = useState("")
+  const [result, setResult] = useState("")
+
   const project = useProject()
+
+  const dispatch = useProjectDispatch()
 
   useEffect(() => {
     if (targetRef.current) {
@@ -22,45 +28,60 @@ export default function Project() {
     }
   }, [])
 
+  /*   useEffect(() => {
+    if (dispatch) {
+      const payLoad = JSON.parse(result) as Project
+      dispatch({
+        type: "NEW_PROJECT",
+        payload: { payLoad },
+      })
+    }
+  }, [result, dispatch]) */
+
   return (
     <Xwrapper>
-      <Title id={"ProjTitle"} />
-      {project?.map(project => (
-        <div key={project.id}>
-          <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-            {project.tasks.map((task, index) => (
-              <Task
-                key={task.id}
-                task={task}
-                id={`Task${index}`}
-                targetRef={targetRef}
-              />
-            ))}
-          </div>
-          {width && (
-            <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-              {project.tasks.map((task, index) => {
-                const hasIssues = task.issues.length > 0
-                const conditionalVisibility = hasIssues
-                  ? `${card} ${issuestyle}`
-                  : `${card} ${issuestyle} invisible`
-                return (
-                  <div
-                    style={{ width: `${width}px` }}
-                    key={task.id}
-                    className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
-                    id={`Issues${index}`}
-                  >
-                    {task.issues.map(issue => (
-                      <Issue key={issue.id} issue={issue} />
-                    ))}
-                  </div>
-                )
-              })}
-            </div>
-          )}
+      <Title
+        id={"ProjTitle"}
+        projectInput={projectInput}
+        setProjectInput={setProjectInput}
+        setResult={setResult}
+      />
+
+      <div key={project?.id}>
+        <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
+          {project?.tasks.map((task, index) => (
+            <Task
+              key={task.id}
+              task={task}
+              id={`Task${index}`}
+              targetRef={targetRef}
+            />
+          ))}
         </div>
-      ))}
+        {width && (
+          <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
+            {project?.tasks.map((task, index) => {
+              const hasIssues = task.issues.length > 0
+              const conditionalVisibility = hasIssues
+                ? `${card} ${issuestyle}`
+                : `${card} ${issuestyle} invisible`
+              return (
+                <div
+                  style={{ width: `${width}px` }}
+                  key={task.id}
+                  className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
+                  id={`Issues${index}`}
+                >
+                  {task.issues.map(issue => (
+                    <Issue key={issue.id} issue={issue} />
+                  ))}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
+
       {width &&
         exampleData[0].tasks.map((task, index) => (
           <>
