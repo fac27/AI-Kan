@@ -34,12 +34,27 @@ const Issue: FC<IssueProps> = ({ issue }) => {
       })
     }
   }
+
+  function handleIssueCheckbox(event) {
+    const isChecked = event.target.checked
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_CHECKBOX",
+        payload: {
+          ...issue,
+          done: isChecked,
+        },
+      })
+    }
+  }
+
   return (
     <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
       <input
         type="checkbox"
         checked={issue.done}
         className="mb-2 self-start"
+        onChange={handleIssueCheckbox}
       ></input>
       <input
         type="text"

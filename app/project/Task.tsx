@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
@@ -37,6 +37,20 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       })
     }
   }
+
+  function handleTaskCheckbox(event) {
+    const isChecked = event.target.checked
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_TASK_CHECKBOX",
+        payload: {
+          ...task,
+          done: isChecked,
+        },
+      })
+    }
+  }
+
   return (
     <div
       id={id}
@@ -47,6 +61,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="checkbox"
         checked={task.done}
         className={`mb-2 self-start`}
+        onChange={handleTaskCheckbox}
       ></input>
       <input
         type="text"
