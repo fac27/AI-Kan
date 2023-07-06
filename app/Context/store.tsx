@@ -121,6 +121,12 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
               return {
                 ...task,
                 done: action.payload.done,
+                issues: task.issues.map(issue => {
+                  return {
+                    ...issue,
+                    done: action.payload.done,
+                  }
+                }),
               }
             }
             return task
