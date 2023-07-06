@@ -3,14 +3,7 @@
 import { ReactNode, createContext, useContext, useReducer } from "react"
 
 import exampleData from "../../data/exampleData"
-import {
-  ActionTypes,
-  Action,
-  DispatchType,
-  Project,
-  Task,
-  Issue,
-} from "../types/types"
+import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
 
 const ProjectContext = createContext<Project[] | null>(null)
 
@@ -83,6 +76,31 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
                     return {
                       ...issue,
                       title: issuePayload.title,
+                    }
+                  }
+                  return issue
+                }),
+              }
+            }
+            return task
+          }),
+        }
+      })
+    }
+    case "EDIT_ISSUE_DESCRIPTION": {
+      return state.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks.map((task: Task) => {
+            const issuePayload = action.payload as Issue
+            if (task.id === issuePayload.taskId) {
+              return {
+                ...task,
+                issues: task.issues.map((issue: Issue) => {
+                  if (issue.id === issuePayload.id) {
+                    return {
+                      ...issue,
+                      description: issuePayload.description,
                     }
                   }
                   return issue
