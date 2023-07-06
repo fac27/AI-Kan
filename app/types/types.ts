@@ -26,6 +26,8 @@ type Action =
   | { type: "EDIT_TASK_DESCRIPTION"; payload: Task }
   | { type: "EDIT_ISSUE_TITLE"; payload: Issue }
   | { type: "EDIT_ISSUE_DESCRIPTION"; payload: Issue }
+  | { type: "EDIT_TASK_CHECKBOX"; payload: Task }
+  | { type: "EDIT_ISSUE_CHECKBOX"; payload: Issue }
   | { type: "DELETE_TASK"; payload: Task;}
   | { type: "DELETE_ISSUE"; payload: Issue;}
 
@@ -34,5 +36,5 @@ export type DispatchType = (value: Action) => void
 
 export type ActionTypes = {
   type: string
-  payload: Issue | Task
+  payload: Task | Issue
 }

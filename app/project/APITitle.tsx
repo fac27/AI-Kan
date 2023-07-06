@@ -1,5 +1,5 @@
-// import { COMPILER_NAMES } from "next/dist/shared/lib/constants"
 import { FC } from "react"
+import sanitise from "../../utils/sanitise"
 
 interface Props {
   projectInput: string
@@ -8,7 +8,7 @@ interface Props {
   setResult: React.Dispatch<React.SetStateAction<string>>
 }
 
-const APITitle: FC = ({
+const APITitle: FC<Props> = ({
   projectInput,
   setProjectInput,
   result,
@@ -35,9 +35,8 @@ const APITitle: FC = ({
           new Error(`Request failed with status ${response.status}`)
         )
       }
-
-      setResult(data.result)
-      setProjectInput("")
+      const sanitisedData = sanitise(data.result.content)
+      setResult(sanitisedData)
     } catch (error) {
       console.error(error)
       alert(error.message)

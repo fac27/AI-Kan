@@ -112,6 +112,59 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
         }
       })
     }
+    case "EDIT_TASK_CHECKBOX": {
+      return state.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks.map(task => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                done: action.payload.done,
+                issues: task.issues.map(issue => {
+                  return {
+                    ...issue,
+                    done: action.payload.done,
+                  }
+                }),
+              }
+            }
+            return task
+          }),
+        }
+      })
+    }
+    case "EDIT_ISSUE_CHECKBOX": {
+      return state.map(project => {
+        return {
+          ...project,
+          tasks: project.tasks.map(task => {
+            const issuePayload = action.payload as Issue
+            if (task.id === issuePayload.taskId) {
+              const updatedIssues = task.issues.map(issue => {
+                if (
+                  issue.taskId === issuePayload.taskId &&
+                  issue.id === issuePayload.id
+                ) {
+                  return {
+                    ...issue,
+                    done: issuePayload.done,
+                  }
+                }
+                return issue
+              })
+              const areAllIssuesDone = updatedIssues.every(issue => issue.done)
+              return {
+                ...task,
+                issues: updatedIssues,
+                done: areAllIssuesDone,
+              }
+            }
+            return task
+          }),
+        }
+      })
+    }
     case "DELETE_TASK": {
       return state.map((project: Project) => {
         return {

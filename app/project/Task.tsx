@@ -38,6 +38,20 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
+  function handleTaskCheckbox(event) {
+    const isChecked = event.target.checked
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_TASK_CHECKBOX",
+        payload: {
+          ...task,
+          done: isChecked,
+        },
+      })
+    }
+  }
+
+
   function handleDeleteTask() {
     if (dispatch) {
       dispatch({
@@ -57,6 +71,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         <input
             type="checkbox"
             checked={task.done}
+            onChange={handleTaskCheckbox}
         ></input>
         <button type="button" onClick={handleDeleteTask}>✖</button>
       </div>
@@ -64,14 +79,14 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className="mb-2 p-2 rounded border border-black"
+        className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id}`}
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className="mb-2 p-2 resize-none rounded border border-black"
+        className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${task.id}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
         <button type="button" className="-translate-y-1">⌄</button>
