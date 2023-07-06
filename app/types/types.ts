@@ -22,12 +22,14 @@ export interface Project {
 }
 
 type Action =
-  | { type: "EDIT_TITLE"; payload: Task }
-  | { type: "EDIT_DESCRIPTION"; payload: Task }
+  | { type: "EDIT_TASK_TITLE"; payload: Task }
+  | { type: "EDIT_TASK_DESCRIPTION"; payload: Task }
+  | { type: "EDIT_ISSUE_TITLE"; payload: Issue }
+  | { type: "EDIT_ISSUE_DESCRIPTION"; payload: Issue }
 
 export type DispatchType = (value: Action) => void
 
 export type ActionTypes = {
   type: string
-  payload: Task
+  payload: Issue | Task
 }

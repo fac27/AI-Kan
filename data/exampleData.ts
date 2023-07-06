@@ -43,7 +43,7 @@ const exampleData = [
         done: false,
         issues: [
           {
-            id: 0,
+            id: 2,
             taskId: 2,
             title: "Design snake",
             description: "Create a design for the snake and its movement",
@@ -51,7 +51,7 @@ const exampleData = [
             done: false,
           },
           {
-            id: 1,
+            id: 3,
             taskId: 2,
             title: "Implement snake",
             description: "Create the snake component",
@@ -68,7 +68,7 @@ const exampleData = [
         done: false,
         issues: [
           {
-            id: 0,
+            id: 4,
             taskId: 3,
             title: "Implement snake movement",
             description:
@@ -77,7 +77,7 @@ const exampleData = [
             done: false,
           },
           {
-            id: 1,
+            id: 5,
             taskId: 3,
             title: "Implement score keeping",
             description:
@@ -86,7 +86,7 @@ const exampleData = [
             done: false,
           },
           {
-            id: 2,
+            id: 6,
             taskId: 3,
             title: "Implement collision detection",
             description:
@@ -104,7 +104,7 @@ const exampleData = [
         done: false,
         issues: [
           {
-            id: 0,
+            id: 7,
             taskId: 4,
             title: "Write tests",
             description: "Write tests to verify the functionality of the game",
@@ -112,7 +112,7 @@ const exampleData = [
             done: false,
           },
           {
-            id: 1,
+            id: 8,
             taskId: 4,
             title: "Debug game",
             description: "Fix any issues that arise during testing",

@@ -1,28 +1,64 @@
 import { FC } from "react"
-import { card, issue } from "../Styles/TailwindClasses"
+import { card, issuestyle } from "../Styles/TailwindClasses"
+import { useProjectDispatch } from "../Context/store"
+import { Issue } from "../types/types"
 
 interface IssueProps {
-  title: string
-  description: string
-  done: boolean
+  issue: Issue
 }
 
-const Issue: FC<IssueProps> = ({ title, description, done }) => {
+const Issue: FC<IssueProps> = ({ issue }) => {
+  const dispatch = useProjectDispatch()
+  function handleEditTitle(event) {
+    const newTitle = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_TITLE",
+        payload: {
+          ...issue,
+          title: newTitle,
+        },
+      })
+    }
+  }
+
+  function handleEditDescription(event) {
+    const newDescription = event.target.value
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_ISSUE_DESCRIPTION",
+        payload: {
+          ...issue,
+          description: newDescription,
+        },
+      })
+    }
+  }
   return (
-      <div className={`${card} ${issue} flex flex-col mb-4 border-none`}>
-        <input type="checkbox" checked={done} className="mb-2 self-start"></input>
-        <input type="text" value={title} className="mb-2 p-2 rounded border border-black" />
-        <textarea
-          rows={4}
-          cols={20}
-          value={description}
-          className="mb-2 p-2 resize-none rounded border border-black"
-        ></textarea>
-        <div className="flex justify-between">
-          <button type="button">⌄</button>
-          <button type="button">+</button>
-        </div>
+    <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
+      <input
+        type="checkbox"
+        checked={issue.done}
+        className="mb-2 self-start"
+      ></input>
+      <input
+        type="text"
+        value={issue.title}
+        onChange={handleEditTitle}
+        className="mb-2 p-2 rounded border border-black"
+      />
+      <textarea
+        rows={4}
+        cols={20}
+        value={issue.description}
+        onChange={handleEditDescription}
+        className="mb-2 p-2 resize-none rounded border border-black"
+      ></textarea>
+      <div className="flex justify-between">
+        <button type="button">⌄</button>
+        <button type="button">+</button>
       </div>
+    </div>
   )
 }
 
