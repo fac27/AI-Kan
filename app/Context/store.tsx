@@ -85,17 +85,33 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
           tasks: project.tasks.map(task => {
             const issuePayload = action.payload as Issue
             if (task.id === issuePayload.taskId) {
+              const areIssuesDone = task.issues.map(issue => issue.done).every(issue => issue)
               return {
                 ...task,
                 issues: task.issues.map(issue => {
-                  if (issue.taskId === issuePayload.taskId && issue.id === issuePayload.id) {
+                  if (
+                    issue.taskId === issuePayload.taskId &&
+                    issue.id === issuePayload.id
+                  ) {
                     return {
                       ...issue,
                       done: issuePayload.done,
                     }
                   }
+                  // const areIssuesDone = task.issues
+                  //   .map(issue => issue.done)
+                  //   .every(issueDone => issueDone)
+                  // if (areIssuesDone) {
+                  //   return {
+                  //     ...task,
+                  //     done: true,
+                  //   }
+                  // }
+                  // console.log(task.id, task.done)
+                  console.log(areIssuesDone)
                   return issue
                 }),
+                done: areIssuesDone
               }
             }
             return task
