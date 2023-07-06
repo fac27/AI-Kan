@@ -5,4 +5,4 @@ export const project = "bg-orange-50"
 
 export const taskstyle = "bg-teal-50"
 
-export const issue = "bg-pink-50"
+export const issueStyle = "bg-pink-50"

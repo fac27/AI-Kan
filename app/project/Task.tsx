@@ -37,13 +37,31 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       })
     }
   }
+
+  function handleTaskCheckbox(event) {
+    const isChecked = event.target.checked
+    if (dispatch) {
+      dispatch({
+        type: "EDIT_TASK_CHECKBOX",
+        payload: {
+          ...task,
+          done: isChecked,
+        },
+      })
+    }
+  }
+
   return (
     <div
       id={id}
       ref={targetRef}
       className={`${card} ${taskstyle} flex flex-col`}
     >
-      <input type="checkbox" checked={task.done}></input>
+      <input
+        type="checkbox"
+        checked={task.done}
+        onChange={handleTaskCheckbox}
+      ></input>
       <input
         type="text"
         value={task.title}
