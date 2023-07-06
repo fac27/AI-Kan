@@ -60,7 +60,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       <input
         type="checkbox"
         checked={task.done}
-        className={`mb-2 self-start`}
+        className={`mb-2 self-start TestTaskCheckbox${task.id}`}
         onChange={handleTaskCheckbox}
       ></input>
       <input

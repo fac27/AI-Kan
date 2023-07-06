@@ -53,7 +53,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
       <input
         type="checkbox"
         checked={issue.done}
-        className="mb-2 self-start"
+        className={`mb-2 self-start TestIssueCheckbox${issue.taskId}-${issue.id}`}
         onChange={handleIssueCheckbox}
       ></input>
       <input
