@@ -169,9 +169,11 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
       return state.map((project: Project) => {
         return {
           ...project,
-          tasks: project.tasks.filter((task: Task) => task.id !== action.payload.id),
-        };
-      });
+          tasks: project.tasks.filter(
+            (task: Task) => task.id !== action.payload.id
+          ),
+        }
+      })
     }
     case "DELETE_ISSUE": {
       return state.map((project: Project) => {
@@ -180,11 +182,13 @@ function projectReducer(state: Project[], action: ActionTypes): Project[] {
           tasks: project.tasks.map((task: Task) => {
             return {
               ...task,
-              issues: task.issues.filter((issue: Issue) => issue.id !== action.payload.id),
-            };
+              issues: task.issues.filter(
+                (issue: Issue) => issue.id !== action.payload.id
+              ),
+            }
           }),
-        };
-      });
+        }
+      })
     }
     default: {
       return state
