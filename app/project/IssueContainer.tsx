@@ -13,13 +13,8 @@ export default function ComponentWithDynamicWidth() {
 
   return (
     <>
-      <div ref={targetRef}>
-        This is the component whose width we want to read
-      </div>
       {width && (
-        <div style={{ width: `${width}px` }}>
-          This component will have the same width
-        </div>
+        <div style={{ width: `${width}px` }}></div>
       )}
     </>
   )

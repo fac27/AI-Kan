@@ -35,21 +35,28 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
   return (
-    <div>
-      <div className={`${card} ${issuestyle}`}>
-        <input type="checkbox" checked={issue.done}></input>
-        <input type="text" value={issue.title} onChange={handleEditTitle} />
-        <textarea
-          rows={4}
-          cols={20}
-          value={issue.description}
-          onChange={handleEditDescription}
-          className="resize-none"
-        ></textarea>
-        <div className="flex justify-between">
-          <button type="button">⌄</button>
-          <button type="button">+</button>
-        </div>
+    <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
+      <input
+        type="checkbox"
+        checked={issue.done}
+        className="mb-2 self-start"
+      ></input>
+      <input
+        type="text"
+        value={issue.title}
+        onChange={handleEditTitle}
+        className="mb-2 p-2 rounded border border-black"
+      />
+      <textarea
+        rows={4}
+        cols={20}
+        value={issue.description}
+        onChange={handleEditDescription}
+        className="mb-2 p-2 resize-none rounded border border-black"
+      ></textarea>
+      <div className="flex justify-between">
+        <button type="button">⌄</button>
+        <button type="button">+</button>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           type="text"
           id="promptInput"
           placeholder="Snake game in React"
-          className="p-1.5"
+          className="p-1.5 rounded border border-black"
         />
         <button
           type="submit"
