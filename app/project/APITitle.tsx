@@ -3,13 +3,11 @@ import { FC } from "react"
 interface Props {
   projectInput: string
   setProjectInput: React.Dispatch<React.SetStateAction<string>>
-  result: {
-    content: string
-  }
+  result: string
   setResult: React.Dispatch<React.SetStateAction<string>>
 }
 
-const APITitle: FC = ({
+const APITitle: FC<Props> = ({
   projectInput,
   setProjectInput,
   result,
@@ -37,8 +35,7 @@ const APITitle: FC = ({
         )
       }
 
-      setResult(data.result)
-      setProjectInput("")
+      setResult(data.result.content)
     } catch (error) {
       console.error(error)
       alert(error.message)
@@ -57,7 +54,7 @@ const APITitle: FC = ({
         />
         <button type="submit">Generate tasks</button>
       </form>
-      <div>{result.content}</div>
+      <div>{result}</div>
     </>
   )
 }
