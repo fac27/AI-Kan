@@ -1,22 +1,15 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import { Project } from "../types/types"
 
 interface Props {
-  projectInput: string
-  setProjectInput: React.Dispatch<React.SetStateAction<string>>
-  setResult: React.Dispatch<React.SetStateAction<string>>
   id: string
 }
 
-const Title: FC<Props> = ({
-  id,
-  projectInput,
-  setProjectInput,
-  setResult,
-}: Props) => {
+const Title: FC<Props> = ({ id }: Props) => {
+  const [projectInput, setProjectInput] = useState("")
   const dispatch = useProjectDispatch()
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {

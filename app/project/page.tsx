@@ -7,15 +7,12 @@ import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
 import { card, issuestyle } from "../Styles/TailwindClasses"
-import { useProject, useProjectDispatch } from "../Context/store"
+import { useProject } from "../Context/store"
 import { Project } from "../types/types"
 
 export default function Project() {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
-
-  const [projectInput, setProjectInput] = useState("")
-  const [result, setResult] = useState("")
 
   const project = useProject()
 
@@ -28,12 +25,7 @@ export default function Project() {
 
   return (
     <Xwrapper>
-      <Title
-        id={"ProjTitle"}
-        projectInput={projectInput}
-        setProjectInput={setProjectInput}
-        setResult={setResult}
-      />
+      <Title id={"ProjTitle"} />
 
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">

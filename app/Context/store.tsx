@@ -2,7 +2,6 @@
 
 import { ReactNode, createContext, useContext, useReducer } from "react"
 
-import exampleData from "../../data/exampleData"
 import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
 
 const ProjectContext = createContext<Project | null>(null)
@@ -10,7 +9,11 @@ const ProjectContext = createContext<Project | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
-  const [project, dispatch] = useReducer(projectReducer, exampleData[0])
+  const [project, dispatch] = useReducer(projectReducer, {
+    id: 0,
+    name: "",
+    tasks: [],
+  })
   return (
     <ProjectContext.Provider value={project}>
       <ProjectDispatchContext.Provider value={dispatch}>
