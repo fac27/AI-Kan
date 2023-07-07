@@ -23,7 +23,7 @@ export default function Project() {
   }, [project])
 
   return (
-    <Xwrapper  key={project?.xarrowChangeCounter}>
+    <Xwrapper key={project?.xarrowChangeCounter}>
       <Title id={"ProjTitle"} />
 
       <div key={project?.id}>
