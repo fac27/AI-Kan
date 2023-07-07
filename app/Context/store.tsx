@@ -159,7 +159,6 @@ function projectReducer(project: Project, action: ActionTypes): Project {
         (task: Task) => task.id !== action.payload.id
       )
       const newXarrowChangeCounter = project.xarrowChangeCounter + 1
-      console.log(newXarrowChangeCounter)
       return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter }
     }
 
@@ -173,7 +172,6 @@ function projectReducer(project: Project, action: ActionTypes): Project {
         }
       })
       const newXarrowChangeCounter = project.xarrowChangeCounter + 1
-      console.log(newXarrowChangeCounter)
       return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter }
     }
 
