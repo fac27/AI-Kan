@@ -81,7 +81,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       </form>
       <button
         onClick={handleExample}
-        className="border border-black bg-gray-50 p-1.5 rounded ml-5"
+        className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
       >
         Example
       </button>
