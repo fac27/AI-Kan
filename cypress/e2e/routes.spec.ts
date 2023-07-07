@@ -11,26 +11,31 @@ describe('Visiting "/project"', () => {
   })
   it("Allows User to edit Task titles", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestTaskTitle1").type("Hello")
     cy.get(".TestTaskTitle1").should("contain.value", "Hello")
   })
   it("Allows User to edit Task descriptions", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestTaskDescription1").type("Hello")
     cy.get(".TestTaskDescription1").should("contain.value", "Hello")
   })
   it("Allows User to edit Issue titles", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestIssueTitle1").type("Hello")
     cy.get(".TestIssueTitle1").should("contain.value", "Hello")
   })
   it("Allows User to edit Issue descriptions", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestIssueDescription1").type("Hello")
     cy.get(".TestIssueDescription1").should("contain.value", "Hello")
   })
   it("Allows User to check Task as done/not done", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestTaskCheckbox1")
       .should("be.not.checked")
       .check()
@@ -39,6 +44,7 @@ describe('Visiting "/project"', () => {
   })
   it("Allows User to check Issue as done/not done", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestIssueCheckbox2-2")
       .should("be.not.checked")
       .check()
@@ -48,6 +54,7 @@ describe('Visiting "/project"', () => {
   })
   it("Allows User to delete Task", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestTaskId2").should("exist")
     cy.get(".TestIssueId2-2").should("exist")
     cy.get(".TestTaskDelete2").click()
@@ -56,6 +63,7 @@ describe('Visiting "/project"', () => {
   })
   it("Allows User to delete Issue", () => {
     cy.visit("http://localhost:3000/project")
+    cy.get(".TEST-example-btn").click()
     cy.get(".TestIssueId3-4").should("exist")
     cy.get(".TestIssueDelete3-4").click()
     cy.get(".TestIssueId3-4").should("not.exist")
