@@ -1,7 +1,6 @@
 import { Task } from "../app/types/types"
 
 export default function sanitise(response: string) {
-  console.log(response)
   const jsonData = JSON.parse(response)
 
   if (typeof jsonData !== "object" || !jsonData.tasks) return "not valid object"
