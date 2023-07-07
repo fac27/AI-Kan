@@ -1,23 +1,25 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
-import { Project } from "../types/types"
+import exampleData from "../../data/exampleData"
 
 interface Props {
-  projectInput: string
-  setProjectInput: React.Dispatch<React.SetStateAction<string>>
-  setResult: React.Dispatch<React.SetStateAction<string>>
   id: string
 }
 
-const Title: FC<Props> = ({
-  id,
-  projectInput,
-  setProjectInput,
-  setResult,
-}: Props) => {
+const Title: FC<Props> = ({ id }: Props) => {
+  const [projectInput, setProjectInput] = useState("")
   const dispatch = useProjectDispatch()
+
+  const handleExample = () => {
+    if (dispatch) {
+      dispatch({
+        type: "NEW_PROJECT",
+        payload: exampleData[0],
+      })
+    }
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -42,7 +44,6 @@ const Title: FC<Props> = ({
       }
       const sanitisedData = await sanitise(data.result.content)
       if (dispatch) {
-        console.log(sanitisedData)
         dispatch({
           type: "NEW_PROJECT",
           payload: sanitisedData,
@@ -78,6 +79,12 @@ const Title: FC<Props> = ({
           </button>
         </div>
       </form>
+      <button
+        onClick={handleExample}
+        className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
+      >
+        Example
+      </button>
     </div>
   )
 }
