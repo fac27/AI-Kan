@@ -73,7 +73,11 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           className={`TestTaskCheckbox${task.id}`}
           onChange={handleTaskCheckbox}
         ></input>
-        <button type="button" className={`TestTaskDelete${task.id}`} onClick={handleDeleteTask}>
+        <button
+          type="button"
+          className={`TestTaskDelete${task.id}`}
+          onClick={handleDeleteTask}
+        >
           ✖
         </button>
       </div>
