@@ -5,6 +5,7 @@ export default function sanitise(response: string) {
 
   if (typeof jsonData !== "object" || !jsonData.tasks) return "not valid object"
   let issueid = 0
+  jsonData.id = 0
   jsonData.tasks.forEach((task: Task, index: number) => {
     // Adding task id
     task.id = index
@@ -17,6 +18,5 @@ export default function sanitise(response: string) {
       })
     }
   })
-
-  return JSON.stringify(jsonData)
+  return jsonData
 }
