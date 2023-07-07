@@ -122,6 +122,7 @@ const exampleData = [
         ],
       },
     ],
+    xarrowChangeCounter: 0
   },
 ]
 

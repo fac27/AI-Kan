@@ -1,5 +1,4 @@
 "use client"
-import exampleData from "../../data/exampleData"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
@@ -24,7 +23,7 @@ export default function Project() {
   }, [project])
 
   return (
-    <Xwrapper>
+    <Xwrapper key={project?.xarrowChangeCounter}>
       <Title id={"ProjTitle"} />
 
       <div key={project?.id}>
@@ -63,7 +62,7 @@ export default function Project() {
       </div>
 
       {width &&
-        exampleData[0].tasks.map((task, index) => (
+        project?.tasks.map((task, index) => (
           <>
             <Xarrow
               start={"ProjTitle"}
