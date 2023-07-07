@@ -46,4 +46,18 @@ describe('Visiting "/project"', () => {
     cy.get(".TestIssueCheckbox2-3").check().should("be.checked")
     cy.get(".TestTaskCheckbox2").should("be.checked")
   })
+  it("Allows User to delete Task", () => {
+    cy.visit("http://localhost:3000/project")
+    cy.get(".TestTaskId2").should("exist")
+    cy.get(".TestIssueId2-2").should("exist")
+    cy.get(".TestTaskDelete2").click()
+    cy.get(".TestTaskId2").should("not.exist")
+    cy.get(".TestIssueId2-2").should("not.exist")
+  })
+  it("Allows User to delete Issue", () => {
+    cy.visit("http://localhost:3000/project")
+    cy.get(".TestIssueId3-4").should("exist")
+    cy.get(".TestIssueDelete3-4").click()
+    cy.get(".TestIssueId3-4").should("not.exist")
+  })
 })

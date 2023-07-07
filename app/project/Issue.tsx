@@ -58,7 +58,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
   }
 
   return (
-    <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none`}>
+    <div className={`${card} ${issuestyle} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}>
       <div className="mb-2 flex items-center justify-between">
         <input
           type="checkbox"
@@ -66,7 +66,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           onChange={handleIssueCheckbox}
           className={`TestIssueCheckbox${issue.taskId}-${issue.id}`}
         ></input>
-        <button type="button" onClick={handleDeleteIssue}>
+        <button type="button" className={`TestIssueDelete${issue.taskId}-${issue.id}`} onClick={handleDeleteIssue}>
           ✖
         </button>
       </div>

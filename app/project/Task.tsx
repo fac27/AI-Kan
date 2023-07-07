@@ -64,7 +64,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     <div
       id={id}
       ref={targetRef}
-      className={`${card} ${taskstyle} flex flex-col`}
+      className={`${card} ${taskstyle} flex flex-col TestTaskId${task.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input
@@ -73,7 +73,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           className={`TestTaskCheckbox${task.id}`}
           onChange={handleTaskCheckbox}
         ></input>
-        <button type="button" onClick={handleDeleteTask}>
+        <button type="button" className={`TestTaskDelete${task.id}`} onClick={handleDeleteTask}>
           ✖
         </button>
       </div>
