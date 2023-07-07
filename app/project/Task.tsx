@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProject, useProjectDispatch } from "../Context/store"
@@ -64,13 +64,15 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
 
   const toggleExpanded = () => {
     setExpanded(prev => !prev)
-    if (dispatch) {
+  }
+
+  useEffect(() => {
+    dispatch &&
       dispatch({
         type: "CHANGE_XARROWS",
         payload: "",
       })
-    }
-  }
+  }, [expanded, dispatch])
 
   return (
     <div
@@ -97,6 +99,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
+        name="tasktitle"
         className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id} `}
       />
       <textarea
@@ -104,9 +107,10 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
+        name="taskdescription"
         className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${
           task.id
-        } ${expanded ? "" : "hidden"}`}
+        } ${expanded ? "block" : "hidden"}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
         <button

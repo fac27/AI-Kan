@@ -79,12 +79,14 @@ const Issue: FC<IssueProps> = ({ issue }) => {
       <input
         type="text"
         value={issue.title}
+        name="issuetitle"
         onChange={handleEditTitle}
         className={`mb-2 p-2 rounded border border-black TestIssueTitle${issue.id}`}
       />
       <textarea
         rows={4}
         cols={20}
+        name="issuedescription"
         value={issue.description}
         onChange={handleEditDescription}
         className={`mb-2 p-2 resize-none rounded border border-black TestIssueDescription${issue.id}`}
