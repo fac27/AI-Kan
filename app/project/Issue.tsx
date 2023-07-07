@@ -93,7 +93,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         <button type="button" className="-translate-y-1">
           ⌄
         </button>
-        <button type="button">＋</button>
       </div>
     </div>
   )

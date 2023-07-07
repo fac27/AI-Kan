@@ -30,7 +30,7 @@ export default function Project() {
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {project?.tasks.map((task, index) => (
             <Task
-              key={task.id}
+              key={`Task${index}`}
               task={task}
               id={`Task${index}`}
               targetRef={targetRef}
@@ -47,7 +47,7 @@ export default function Project() {
               return (
                 <div
                   style={{ width: `${width}px` }}
-                  key={task.id}
+                  key={`issuecard${task.id}`}
                   className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
                   id={`Issues${index}`}
                 >
