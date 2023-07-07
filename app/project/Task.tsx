@@ -1,7 +1,7 @@
 import { FC, useState } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
-import { useProjectDispatch } from "../Context/store"
+import { useProject, useProjectDispatch } from "../Context/store"
 
 interface TaskProps {
   id: string
@@ -64,6 +64,12 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
 
   const toggleExpanded = () => {
     setExpanded(prev => !prev)
+    if (dispatch) {
+      dispatch({
+        type: "CHANGE_XARROWS",
+        payload: "",
+      })
+    }
   }
 
   return (

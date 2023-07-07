@@ -32,10 +32,11 @@ type Action =
   | { type: "DELETE_TASK"; payload: Task }
   | { type: "DELETE_ISSUE"; payload: Issue }
   | { type: "NEW_PROJECT"; payload: Project }
+  | { type: "CHANGE_XARROWS"; payload: string }
 
 export type DispatchType = (value: Action) => void
 
 export type ActionTypes = {
   type: string
-  payload: Task | Issue | Project
+  payload: Task | Issue | Project | string
 }

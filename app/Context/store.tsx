@@ -36,8 +36,8 @@ function projectReducer(project: Project, action: ActionTypes): Project {
   switch (action.type) {
     case "EDIT_TASK_TITLE": {
       const tasks = project.tasks.map((task: Task) => {
-        if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task
+        const actionPayload = action.payload as Task
+        if (task.id === actionPayload.id) {
           return {
             ...task,
             title: actionPayload.title,
@@ -50,8 +50,8 @@ function projectReducer(project: Project, action: ActionTypes): Project {
 
     case "EDIT_TASK_DESCRIPTION": {
       const tasks = project.tasks.map(task => {
-        if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task
+        const actionPayload = action.payload as Task
+        if (task.id === actionPayload.id) {
           return {
             ...task,
             description: actionPayload.description,
@@ -108,8 +108,8 @@ function projectReducer(project: Project, action: ActionTypes): Project {
 
     case "EDIT_TASK_CHECKBOX": {
       const tasks = project.tasks.map(task => {
-        if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task | Issue
+        const actionPayload = action.payload as Task | Issue
+        if (task.id === actionPayload.id) {
           return {
             ...task,
             done: actionPayload.done,
@@ -155,19 +155,21 @@ function projectReducer(project: Project, action: ActionTypes): Project {
     }
 
     case "DELETE_TASK": {
+      const actionPayload = action.payload as Task
       const tasks = project.tasks.filter(
-        (task: Task) => task.id !== action.payload.id
+        (task: Task) => task.id !== actionPayload.id
       )
       const newXarrowChangeCounter = project.xarrowChangeCounter + 1
       return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter }
     }
 
     case "DELETE_ISSUE": {
+      const actionPayload = action.payload as Issue
       const tasks = project.tasks.map((task: Task) => {
         return {
           ...task,
           issues: task.issues.filter(
-            (issue: Issue) => issue.id !== action.payload.id
+            (issue: Issue) => issue.id !== actionPayload.id
           ),
         }
       })
@@ -178,6 +180,10 @@ function projectReducer(project: Project, action: ActionTypes): Project {
     case "NEW_PROJECT": {
       const actionPayload = action.payload as Project
       return actionPayload
+    }
+    case "CHANGE_XARROWS": {
+      const newXarrowChangeCounter = project.xarrowChangeCounter + 1
+      return { ...project, xarrowChangeCounter: newXarrowChangeCounter }
     }
 
     default: {
