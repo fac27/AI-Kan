@@ -19,24 +19,12 @@ export default function Project() {
 
   const project = useProject()
 
-  const dispatch = useProjectDispatch()
-
   useEffect(() => {
     if (targetRef.current) {
       const { width } = targetRef.current.getBoundingClientRect()
       setWidth(width)
     }
   }, [])
-
-  /*   useEffect(() => {
-    if (dispatch) {
-      const payLoad = JSON.parse(result) as Project
-      dispatch({
-        type: "NEW_PROJECT",
-        payload: { payLoad },
-      })
-    }
-  }, [result, dispatch]) */
 
   return (
     <Xwrapper>

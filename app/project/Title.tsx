@@ -1,6 +1,8 @@
 import { FC } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
+import { useProjectDispatch } from "../Context/store"
+import { Project } from "../types/types"
 
 interface Props {
   projectInput: string
@@ -15,6 +17,8 @@ const Title: FC<Props> = ({
   setProjectInput,
   setResult,
 }: Props) => {
+  const dispatch = useProjectDispatch()
+
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
@@ -36,8 +40,14 @@ const Title: FC<Props> = ({
           new Error(`Request failed with status ${response.status}`)
         )
       }
-      const sanitisedData = sanitise(data.result.content)
-      setResult(sanitisedData)
+      const sanitised = await sanitise(data.result.content)
+      const sanitisedData = sanitised.sanitised
+      if (dispatch) {
+        dispatch({
+          type: "NEW_PROJECT",
+          payload: sanitisedData,
+        })
+      }
     } catch (error) {
       console.error(error)
       alert(error.message)
