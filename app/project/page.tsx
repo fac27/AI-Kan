@@ -21,7 +21,7 @@ export default function Project() {
       const { width } = targetRef.current.getBoundingClientRect()
       setWidth(width)
     }
-  }, [])
+  }, [project])
 
   return (
     <Xwrapper>

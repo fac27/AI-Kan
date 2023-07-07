@@ -2,7 +2,6 @@ import { FC, useState } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
-import { Project } from "../types/types"
 
 interface Props {
   id: string
@@ -35,7 +34,6 @@ const Title: FC<Props> = ({ id }: Props) => {
       }
       const sanitisedData = await sanitise(data.result.content)
       if (dispatch) {
-        console.log(sanitisedData)
         dispatch({
           type: "NEW_PROJECT",
           payload: sanitisedData,
