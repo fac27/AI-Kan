@@ -2,6 +2,7 @@ import { FC, useState } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
+import exampleData from "../../data/exampleData"
 
 interface Props {
   id: string
@@ -10,6 +11,15 @@ interface Props {
 const Title: FC<Props> = ({ id }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const dispatch = useProjectDispatch()
+
+  const handleExample = () => {
+    if (dispatch) {
+      dispatch({
+        type: "NEW_PROJECT",
+        payload: exampleData[0],
+      })
+    }
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -69,6 +79,12 @@ const Title: FC<Props> = ({ id }: Props) => {
           </button>
         </div>
       </form>
+      <button
+        onClick={handleExample}
+        className="border border-black bg-gray-50 p-1.5 rounded ml-5"
+      >
+        Example
+      </button>
     </div>
   )
 }
