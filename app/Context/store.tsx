@@ -10,7 +10,10 @@ const ProjectContext = createContext<Project | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
-  const [project, dispatch] = useReducer(projectReducer, exampleData[0])
+  const localProject = JSON.parse(
+    localStorage.getItem("MyAIKanProject") as string
+  )
+  const [project, dispatch] = useReducer(projectReducer, localProject || exampleData[0])
   return (
     <ProjectContext.Provider value={project}>
       <ProjectDispatchContext.Provider value={dispatch}>

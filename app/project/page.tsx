@@ -26,6 +26,10 @@ export default function Project() {
     }
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem("MyAIKanProject", JSON.stringify(project))
+  }, [project])
+
   return (
     <Xwrapper>
       <Title
