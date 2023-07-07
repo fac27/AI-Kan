@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { card, taskstyle } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
@@ -11,6 +11,8 @@ interface TaskProps {
 
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
+
+  const [expanded, setExpanded] = useState(false)
 
   function handleEditTitle(event) {
     const newTitle = event.target.value
@@ -60,6 +62,10 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
+  const toggleExpanded = () => {
+    setExpanded(prev => !prev)
+  }
+
   return (
     <div
       id={id}
@@ -85,17 +91,23 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id}`}
+        className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id} `}
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${task.id}`}
+        className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${
+          task.id
+        } ${expanded ? "" : "hidden"}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
-        <button type="button" className="-translate-y-1">
+        <button
+          onClick={toggleExpanded}
+          type="button"
+          className="-translate-y-1"
+        >
           ⌄
         </button>
         <button type="button">＋</button>
