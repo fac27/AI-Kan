@@ -19,6 +19,7 @@ export interface Project {
   id: number
   name: string
   tasks: Task[]
+  xarrowChangeCounter: number
 }
 
 type Action =

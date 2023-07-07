@@ -13,6 +13,7 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     id: 0,
     name: "",
     tasks: [],
+    xarrowChangeCounter: 0
   })
   return (
     <ProjectContext.Provider value={project}>
@@ -157,7 +158,9 @@ function projectReducer(project: Project, action: ActionTypes): Project {
       const tasks = project.tasks.filter(
         (task: Task) => task.id !== action.payload.id
       )
-      return { ...project, tasks }
+      const newXarrowChangeCounter = project.xarrowChangeCounter + 1;
+      console.log(newXarrowChangeCounter)
+      return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter}
     }
 
     case "DELETE_ISSUE": {
@@ -169,7 +172,9 @@ function projectReducer(project: Project, action: ActionTypes): Project {
           ),
         }
       })
-      return { ...project, tasks }
+      const newXarrowChangeCounter = project.xarrowChangeCounter + 1;
+      console.log(newXarrowChangeCounter)
+      return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter}
     }
 
     case "NEW_PROJECT": {
