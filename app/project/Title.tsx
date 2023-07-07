@@ -40,9 +40,9 @@ const Title: FC<Props> = ({
           new Error(`Request failed with status ${response.status}`)
         )
       }
-      const sanitised = await sanitise(data.result.content)
-      const sanitisedData = sanitised.sanitised
+      const sanitisedData = await sanitise(data.result.content)
       if (dispatch) {
+        console.log(sanitisedData)
         dispatch({
           type: "NEW_PROJECT",
           payload: sanitisedData,
