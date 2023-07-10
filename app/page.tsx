@@ -6,13 +6,14 @@ import { redirect } from "next/navigation"
 
 const Home: React.FC = async () => {
   const supabase = createRouteHandlerClient({ cookies })
-  // Check if we have a session
+
   const {
     data: { session },
   } = await supabase.auth.getSession()
 
   if (!session) return <AuthForm />
-    return redirect("/project") 
+  
+  return redirect("/project")
 }
 
 export default Home
