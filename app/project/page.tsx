@@ -11,10 +11,6 @@ export default async function AuthProject() {
     data: { session },
   } = await supabase.auth.getSession()
 
-  if (session) {
-    console.log(session)
+  if (!session) return redirect("/")
     return <Project />
-  } else {
-    return redirect("/")
-  }
 }
