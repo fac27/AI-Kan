@@ -6,14 +6,27 @@ import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
 import { card, issuestyle } from "../Styles/TailwindClasses"
-import { useProject } from "../Context/store"
+import { useProject, useProjectDispatch } from "../Context/store"
 import { Project } from "../types/types"
+import {supabase} from "../auth/client"
 
 export default function Project() {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
+  const dispatch = useProjectDispatch()
 
   const project = useProject()
+
+  const fetchData = async () => {
+   const {data } = await supabase.from("projects").select('project_object')
+
+   if(data && data.length > 0){
+    const savedProject = data[0].project_object
+    dispatch && dispatch({type: "NEW_PROJECT", payload: savedProject})
+   }
+  }
+
+  if(project?.name === "") fetchData()
 
   useEffect(() => {
     if (targetRef.current) {
