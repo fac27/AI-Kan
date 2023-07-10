@@ -85,7 +85,7 @@ export default function Project() {
             )}
           </>
         ))}
-      {width && <Logout />}
+      <Logout />
     </Xwrapper>
   )
 }
