@@ -6,15 +6,11 @@ import { redirect } from "next/navigation"
 export default async function AuthProject() {
   const supabase = createRouteHandlerClient({ cookies })
 
-  // Check if we have a session
   const {
     data: { session },
   } = await supabase.auth.getSession()
 
-  if (session) {
-    console.log(session)
-    return <Project />
-  } else {
-    return redirect("/")
-  }
+  if (!session) return redirect("/")
+  
+  return <Project />
 }
