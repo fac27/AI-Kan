@@ -3,7 +3,8 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
-export async function AuthProject() {
+
+export default async function AuthProject() {
   const supabase = createRouteHandlerClient({ cookies })
 
   // Check if we have a session
@@ -12,12 +13,11 @@ export async function AuthProject() {
   } = await supabase.auth.getSession()
 
   if (session) {
+    console.log(session)
     return <Project />
   } else {
-    return (
-      redirect('/')
-    )
+    return redirect("/")
   }
 }
 
-export default AuthProject
+
