@@ -3,6 +3,7 @@ import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import exampleData from "../../data/exampleData"
+import Loading from "./Loading"
 
 interface Props {
   id: string
@@ -11,6 +12,7 @@ interface Props {
 const Title: FC<Props> = ({ id }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const dispatch = useProjectDispatch()
+  const [loading, setLoading] = useState(false)
 
   const handleExample = () => {
     if (dispatch) {
@@ -24,6 +26,8 @@ const Title: FC<Props> = ({ id }: Props) => {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
+      setLoading(true)
+
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -53,6 +57,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       console.error(error)
       alert(error.message)
     }
+    finally { setLoading(false) }
   }
 
   return (
@@ -77,6 +82,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           >
             Submit
           </button>
+          {loading && <Loading/>}
         </div>
       </form>
       <button
