@@ -64,6 +64,12 @@ const Title: FC<Props> = ({ id }: Props) => {
     }
     const data = await response.json()
     const sanitisedData = await sanitise(data.result.content)
+    if (sanitisedData === "not valid object") {
+      setError(`OpenAI returned invalid JSON \n Try re-sending request.`)
+      setTimeout(() => setError(""), time + 1500)
+      setLoading(false)
+      return
+    }
     setLoading(false)
     if (dispatch) {
       dispatch({
