@@ -1,41 +1,35 @@
-import { Configuration, OpenAIApi } from "openai"
-import alternativePrompt from "./alternativePrompt"
+import { OpenAIStream, OpenAIStreamPayload } from "../../../utils/openAIStream";
+import alternativePrompt from "./alternativePrompt";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-const openai = new OpenAIApi(configuration)
+if (!process.env.OPENAI_API_KEY) {
+  throw new Error("Missing env var from OpenAI");
+}
 
-export async function POST(req: Request) {
-  if (!configuration.apiKey) {
-    return
-  }
-  const body = await req.json()
-  const project = body.project || ""
-  if (project.trim().length === 0) {
-    const options = { status: 400, statusText: "Project name cannot be empty" }
-    const response = new Response(null, options)
-    return response
+export const config = {
+  runtime: "edge",
+};
+
+export async function POST(req: Request): Promise<Response> {
+  const { prompt } = (await req.json()) as {
+    prompt?: string;
+  };
+
+  if (!prompt) {
+    return new Response("No prompt in the request", { status: 400 });
   }
 
-  try {
-    const chatCompletion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        { role: "user", content: alternativePrompt(project) },
-      ],
-      max_tokens: 3000,
-      temperature: 1,
-    })
-    return new Response(
-      JSON.stringify({ result: chatCompletion.data.choices[0].message })
-    )
-  } catch (error) {
-    if (error.response) {
-      console.error(error.response.status, error.response.data)
-    } else {
-      console.error(`Error with OpenAI API request: ${error.message}`)
-    }
-  }
+  const payload: OpenAIStreamPayload = {
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: alternativePrompt(prompt) }],
+    temperature: 0.7,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    max_tokens: 1000,
+    stream: true,
+    n: 1,
+  };
+
+  const stream = await OpenAIStream(payload);
+  return new Response(stream);
 }
