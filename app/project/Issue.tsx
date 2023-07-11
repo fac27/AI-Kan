@@ -1,5 +1,5 @@
-import { FC, useState } from "react"
-import { card } from "../Styles/TailwindClasses"
+import { FC } from "react"
+import { card, issuestyle, issuedonestyle } from "../Styles/TailwindClasses"
 import { useProjectDispatch } from "../Context/store"
 import { Issue } from "../types/types"
 
@@ -61,7 +61,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
 
   return (
     <div
-      className={`${card} ${issue.done ? "bg-pink-50":"bg-black"} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
+      className={`${card} ${!issue.done ? "bg-pink-50" : "text-slate-100"} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input

@@ -3,6 +3,8 @@ export const card =
 
 export const projectstyle = "bg-orange-50"
 
-// export const taskstyle = "bg-teal-50"
+export const taskstyle = "bg-teal-50"
 
 export const issuestyle = "bg-pink-50"
+
+export const issuedonestyle = "bg-black"

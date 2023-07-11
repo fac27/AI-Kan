@@ -13,7 +13,9 @@ export async function POST(req: Request) {
   const body = await req.json()
   const project = body.project || ""
   if (project.trim().length === 0) {
-    return
+    const options = { status: 400, statusText: "Project name cannot be empty" }
+    const response = new Response(null, options)
+    return response
   }
 
   try {
@@ -30,7 +32,6 @@ export async function POST(req: Request) {
       JSON.stringify({ result: chatCompletion.data.choices[0].message })
     )
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data)
     } else {

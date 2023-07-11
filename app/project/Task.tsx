@@ -64,7 +64,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     <div
       id={id}
       ref={targetRef}
-      className={`${card} ${task.done ? "bg-teal-50" : "bg-black"} flex flex-col TestTaskId${task.id}`}
+      className={`${card} ${!task.done ? "bg-teal-50" : "text-slate-100"} flex flex-col TestTaskId${task.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input
