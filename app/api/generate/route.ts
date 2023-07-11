@@ -1,7 +1,5 @@
 import { Configuration, OpenAIApi } from "openai"
 import alternativePrompt from "./alternativePrompt"
-import { redirect } from "next/dist/server/api-utils"
-import { NextResponse } from "next/server"
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -17,7 +15,6 @@ export async function POST(req: Request) {
   if (project.trim().length === 0) {
     const options = { status: 400, statusText: "Project name cannot be empty" }
     const response = new Response(null, options)
-    JSON.stringify(response)
     return response
   }
 

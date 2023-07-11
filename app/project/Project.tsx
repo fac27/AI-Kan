@@ -65,6 +65,7 @@ export default function Project() {
         project?.tasks.map((task, index) => (
           <>
             <Xarrow
+              key={index + "TaskArrow"}
               start={"ProjTitle"}
               end={`Task${index}`}
               startAnchor={"bottom"}
@@ -74,7 +75,7 @@ export default function Project() {
             />
             {task.issues.length > 0 && (
               <Xarrow
-                key={index}
+                key={index + "IssueArrow"}
                 start={`Task${index}`}
                 end={`Issues${index}`}
                 startAnchor={"bottom"}

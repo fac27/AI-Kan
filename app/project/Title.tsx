@@ -3,6 +3,7 @@ import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import exampleData from "../../data/exampleData"
+import { redirect } from "next/dist/server/api-utils"
 
 interface Props {
   id: string
@@ -10,6 +11,8 @@ interface Props {
 
 const Title: FC<Props> = ({ id }: Props) => {
   const [projectInput, setProjectInput] = useState("")
+  const [error, setError] = useState("")
+
   const dispatch = useProjectDispatch()
 
   const handleExample = () => {
@@ -23,41 +26,43 @@ const Title: FC<Props> = ({ id }: Props) => {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    try {
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ project: projectInput }),
-      })
 
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ project: projectInput }),
+    })
+
+    if (response.status === 400) {
+      setError(response.statusText)
+      setTimeout(() => setError(""), 2000)
+      return
+    }
+
+    if (response.status === 404) {
+      setError("404 Not Found")
+      setTimeout(() => setError(""), 2000)
+      return
+    }
+    if (response.status === 500) {
+      setError("API Key Depracated, contact developers.")
+      setTimeout(() => setError(""), 2000)
+      return
+    }
+    if (response.status !== 200) {
       const data = await response.json()
-
-      if (response.status === 404) {
-        console.error(data.error)
-      }
-      if (response.status === 400) {
-        console.log(response.status)
-        console.log("hello")
-      }
-      if (response.status !== 200) {
-        throw (
-          data.error ||
-          new Error(`Request failed with status ${response.status}`)
-        )
-      }
-
-      const sanitisedData = await sanitise(data.result.content)
-      if (dispatch) {
-        dispatch({
-          type: "NEW_PROJECT",
-          payload: sanitisedData,
-        })
-      }
-    } catch (error) {
-      console.error(error)
-      //alert(error.message)
+      setError(data.statusText)
+      setTimeout(() => setError(""), 2000)
+    }
+    const data = await response.json()
+    const sanitisedData = await sanitise(data.result.content)
+    if (dispatch) {
+      dispatch({
+        type: "NEW_PROJECT",
+        payload: sanitisedData,
+      })
     }
   }
 
@@ -66,6 +71,14 @@ const Title: FC<Props> = ({ id }: Props) => {
       id={id}
       className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
     >
+      {error && (
+        <div
+          role="alert"
+          className="border border-orange-400 rounded-b bg-orange-100 px-4 py-3 text-orange-700"
+        >
+          <p>{error}</p>
+        </div>
+      )}
       <form onSubmit={onSubmit}>
         <label htmlFor="promptInput">I want to make a...</label>
         <div className="flex justify-between mt-2.5">
