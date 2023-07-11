@@ -12,7 +12,7 @@ const Home: React.FC = async () => {
   } = await supabase.auth.getSession()
 
   if (!session) return <AuthForm />
-  
+
   return redirect("/project")
 }
 

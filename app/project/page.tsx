@@ -10,7 +10,10 @@ export default async function AuthProject() {
     data: { session },
   } = await supabase.auth.getSession()
 
-  if (!session) return redirect("/")
+  const data = await supabase.auth.getUser()
+  const userId = data.data?.user?.id
   
-  return <Project />
+  if (!session) return redirect("/")
+
+  return <Project userId={userId}/>
 }

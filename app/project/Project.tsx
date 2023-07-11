@@ -8,25 +8,30 @@ import Xarrow, { Xwrapper } from "react-xarrows"
 import { card, issuestyle } from "../Styles/TailwindClasses"
 import { useProject, useProjectDispatch } from "../Context/store"
 import { Project } from "../types/types"
-import {supabase} from "../auth/client"
+import { supabase } from "../auth/client"
 
-export default function Project() {
+export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
-  const dispatch = useProjectDispatch()
 
+  const dispatch = useProjectDispatch()
   const project = useProject()
 
   const fetchData = async () => {
-   const {data } = await supabase.from("projects").select('project_object')
+    const { data } =
+      userId &&
+      (await supabase
+        .from("projects")
+        .select("project_object")
+        .eq("user_id", userId))
 
-   if(data && data.length > 0){
-    const savedProject = data[0].project_object
-    dispatch && dispatch({type: "NEW_PROJECT", payload: savedProject})
-   }
+    if (data && data.length > 0) {
+      const savedProject = data[0].project_object
+      dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
+    }
   }
 
-  if(project?.name === "") fetchData()
+  if (project?.name === "") fetchData()
 
   useEffect(() => {
     if (targetRef.current) {
