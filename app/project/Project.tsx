@@ -5,7 +5,7 @@ import Issue from "./Issue"
 import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
-import { card, issuestyle } from "../Styles/TailwindClasses"
+import { card } from "../Styles/TailwindClasses"
 import { useProject, useProjectDispatch } from "../Context/store"
 import { Project } from "../types/types"
 import { supabase } from "../auth/client"
@@ -82,7 +82,6 @@ export default function Project({ userId }) {
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
       <Title id={"ProjTitle"} />
-
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {project?.tasks.map((task, index) => (
@@ -99,8 +98,8 @@ export default function Project({ userId }) {
             {project?.tasks.map((task, index) => {
               const hasIssues = task.issues.length > 0
               const conditionalVisibility = hasIssues
-                ? `${card} ${issuestyle}`
-                : `${card} ${issuestyle} invisible`
+                ? `${card}`
+                : `${card} invisible`
               return (
                 <div
                   style={{ width: `${width}px` }}
@@ -122,6 +121,7 @@ export default function Project({ userId }) {
         project?.tasks.map((task, index) => (
           <>
             <Xarrow
+              key={index + "TaskArrow"}
               start={"ProjTitle"}
               end={`Task${index}`}
               startAnchor={"bottom"}
@@ -131,7 +131,7 @@ export default function Project({ userId }) {
             />
             {task.issues.length > 0 && (
               <Xarrow
-                key={index}
+                key={index + "IssueArrow"}
                 start={`Task${index}`}
                 end={`Issues${index}`}
                 startAnchor={"bottom"}
