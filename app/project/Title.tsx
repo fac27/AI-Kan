@@ -12,7 +12,7 @@ interface Props {
 const Title: FC<Props> = ({ id }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const dispatch = useProjectDispatch()
-  const [loading, isLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const handleExample = () => {
     if (dispatch) {
@@ -26,7 +26,7 @@ const Title: FC<Props> = ({ id }: Props) => {
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
-      isLoading(true)
+      setLoading(true)
 
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -57,7 +57,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       console.error(error)
       alert(error.message)
     }
-    finally { isLoading(false) }
+    finally { setLoading(false) }
   }
 
   return (
