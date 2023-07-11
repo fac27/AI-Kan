@@ -25,7 +25,6 @@ export default function Project() {
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
       <Title id={"ProjTitle"} />
-
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {project?.tasks.map((task, index) => (
@@ -65,6 +64,7 @@ export default function Project() {
         project?.tasks.map((task, index) => (
           <>
             <Xarrow
+              key={index + "TaskArrow"}
               start={"ProjTitle"}
               end={`Task${index}`}
               startAnchor={"bottom"}
@@ -74,7 +74,7 @@ export default function Project() {
             />
             {task.issues.length > 0 && (
               <Xarrow
-                key={index}
+                key={index + "IssueArrow"}
                 start={`Task${index}`}
                 end={`Issues${index}`}
                 startAnchor={"bottom"}
