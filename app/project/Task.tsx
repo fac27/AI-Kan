@@ -64,9 +64,11 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     <div
       id={id}
       ref={targetRef}
-      className={`${card} ${!task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"} flex flex-col TestTaskId${task.id}`}
+      className={`${card} ${
+        !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
+      } flex flex-col TestTaskId${task.id}`}
     >
-      <div className={ `mb-2 flex items-center justify-between`}>
+      <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
           checked={task.done}
@@ -85,14 +87,18 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className={`mb-2 p-2 rounded border ${!task.done ? "border-black" : "border-gray-400"} TestTaskTitle${task.id}`}
+        className={`mb-2 p-2 rounded border ${
+          !task.done ? "border-black" : "border-gray-400"
+        } TestTaskTitle${task.id}`}
       />
       <textarea
         rows={4}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
-        className={`mb-2 p-2 resize-none rounded border ${!task.done ? "border-black" : "border-gray-400"} TestTaskDescription${task.id}`}
+        className={`mb-2 p-2 resize-none rounded border ${
+          !task.done ? "border-black" : "border-gray-400"
+        } TestTaskDescription${task.id}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
         <button type="button" className="-translate-y-1">
