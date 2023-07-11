@@ -5,7 +5,7 @@ import Issue from "./Issue"
 import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
-import { card, issuestyle } from "../Styles/TailwindClasses"
+import { card } from "../Styles/TailwindClasses"
 import { useProject } from "../Context/store"
 import { Project } from "../types/types"
 
@@ -41,8 +41,8 @@ export default function Project() {
             {project?.tasks.map((task, index) => {
               const hasIssues = task.issues.length > 0
               const conditionalVisibility = hasIssues
-                ? `${card} ${issuestyle}`
-                : `${card} ${issuestyle} invisible`
+                ? `${card}`
+                : `${card} invisible`
               return (
                 <div
                   style={{ width: `${width}px` }}
