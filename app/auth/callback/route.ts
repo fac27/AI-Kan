@@ -10,6 +10,6 @@ export async function GET(req: NextRequest) {
   if (code) {
     await supabase.auth.exchangeCodeForSession(code)
   }
-  
+
   return NextResponse.redirect(new URL("/project", req.url))
 }

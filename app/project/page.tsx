@@ -12,8 +12,8 @@ export default async function AuthProject() {
 
   const data = await supabase.auth.getUser()
   const userId = data.data?.user?.id
-  
+
   if (!session) return redirect("/")
 
-  return <Project userId={userId}/>
+  return <Project userId={userId} />
 }

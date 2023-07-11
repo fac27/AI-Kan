@@ -13,6 +13,8 @@ import { supabase } from "../auth/client"
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [newProject, setNewProject] = useState<boolean | null>(null)
 
   const dispatch = useProjectDispatch()
   const project = useProject()
@@ -28,16 +30,53 @@ export default function Project({ userId }) {
     if (data && data.length > 0) {
       const savedProject = data[0].project_object
       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
+      setNewProject(false)
+    }else{
+      setNewProject(true)
     }
   }
 
-  if (project?.name === "") fetchData()
-
+  const insertNewProject = async () => {
+    await supabase
+    .from("projects")
+    .insert({ user_id: userId, project_object: project })
+    setNewProject(false)
+    console.log("ADDED")
+  }
+  
+  if (userId && project?.name === "") fetchData()
+  if(userId && newProject) insertNewProject()
+  
   useEffect(() => {
     if (targetRef.current) {
       const { width } = targetRef.current.getBoundingClientRect()
       setWidth(width)
     }
+  }, [project])
+
+  async function autoSave() {
+    if (project?.name !== "") {
+      try {
+        await supabase
+          .from("projects")
+          .update({ user_id: userId, project_object: project })
+          .eq("user_id", userId)
+        setIsEditing(false)
+        console.log("SAVED")
+      } catch (error) {
+        console.log(error) // HANDLE THIS MORE GRACEFULLY
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (isEditing) {
+      // animation !!!?!
+    }
+    setIsEditing(true)
+    const saveTimeout = () => setTimeout(autoSave, 60 * 60)
+    saveTimeout()
+    return () => clearTimeout(saveTimeout())
   }, [project])
 
   return (
