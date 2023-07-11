@@ -38,8 +38,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
-  const [taskStyle, setTaskStyle] = useState("bg-teal-50")
-
   function handleTaskCheckbox(event) {
     const isChecked = event.target.checked
     if (dispatch) {
@@ -50,7 +48,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           done: isChecked,
         },
       })
-      if (isChecked) setTaskStyle("bg-black")
     }
   }
 
@@ -67,7 +64,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     <div
       id={id}
       ref={targetRef}
-      className={`${card} ${taskStyle} flex flex-col TestTaskId${task.id}`}
+      className={`${card} ${task.done ? "bg-teal-50" : "bg-black"} flex flex-col TestTaskId${task.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input

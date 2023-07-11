@@ -35,7 +35,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
 
-  const [issueStyle, setIssueStyle] = useState("bg-pink-50")
 
   function handleIssueCheckbox(event) {
     const isChecked = event.target.checked
@@ -48,9 +47,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           done: isChecked,
         },
       })
-
-      if (!isChecked) setIssueStyle("bg-pink-50") 
-      return setIssueStyle("bg-black")
     }
   }
 
@@ -65,7 +61,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
 
   return (
     <div
-      className={`${card} ${issueStyle} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
+      className={`${card} ${issue.done ? "bg-pink-50":"bg-black"} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input
