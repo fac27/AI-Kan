@@ -1,8 +1,8 @@
 import { Task } from "../app/types/types"
 
 export default function sanitise(response: string) {
-  const jsonData = JSON.parse(response)
-
+  let jsonData = JSON.parse(response)
+  jsonData = "hel;lo"
   if (typeof jsonData !== "object" || !jsonData.tasks) return "not valid object"
   let issueid = 0
   jsonData.id = 0
