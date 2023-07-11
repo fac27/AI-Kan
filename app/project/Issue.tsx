@@ -37,6 +37,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
 
   function handleIssueCheckbox(event) {
     const isChecked = event.target.checked
+
     if (dispatch) {
       dispatch({
         type: "EDIT_ISSUE_CHECKBOX",
@@ -59,9 +60,9 @@ const Issue: FC<IssueProps> = ({ issue }) => {
 
   return (
     <div
-      className={`${card} ${issuestyle} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
+      className={`${card} ${!issue.done ? "bg-pink-50" : "bg-pink-50 text-gray-400"} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
     >
-      <div className="mb-2 flex items-center justify-between">
+      <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
           checked={issue.done}
@@ -80,14 +81,14 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         type="text"
         value={issue.title}
         onChange={handleEditTitle}
-        className={`mb-2 p-2 rounded border border-black TestIssueTitle${issue.id}`}
+        className={`mb-2 p-2 rounded border ${!issue.done ? "border-black" : "border-gray-400"} TestIssueTitle${issue.id}`}
       />
       <textarea
         rows={4}
         cols={20}
         value={issue.description}
         onChange={handleEditDescription}
-        className={`mb-2 p-2 resize-none rounded border border-black TestIssueDescription${issue.id}`}
+        className={`mb-2 p-2 resize-none rounded border ${!issue.done ? "border-black" : "border-gray-400"} TestIssueDescription${issue.id}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
         <button type="button" className="-translate-y-1">
