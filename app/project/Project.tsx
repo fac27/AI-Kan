@@ -13,8 +13,6 @@ import { supabase } from "../auth/client"
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
-  const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [newProject, setNewProject] = useState<boolean | null>(null)
 
   const dispatch = useProjectDispatch()
   const project = useProject()
@@ -30,22 +28,10 @@ export default function Project({ userId }) {
     if (data && data.length > 0) {
       const savedProject = data[0].project_object
       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
-      setNewProject(false)
-    } else {
-      setNewProject(true)
     }
   }
 
-  const insertNewProject = async () => {
-    await supabase
-      .from("projects")
-      .insert({ user_id: userId, project_object: project })
-    setNewProject(false)
-    console.log("ADDED")
-  }
-
   if (userId && project?.name === "") fetchData()
-  if (userId && newProject) insertNewProject()
 
   useEffect(() => {
     if (targetRef.current) {
@@ -59,10 +45,8 @@ export default function Project({ userId }) {
       try {
         await supabase
           .from("projects")
-          .update({ user_id: userId, project_object: project })
+          .upsert({ user_id: userId, project_object: project }, { onConflict: 'user_id' })
           .eq("user_id", userId)
-        setIsEditing(false)
-        console.log("SAVED")
       } catch (error) {
         console.log(error) // HANDLE THIS MORE GRACEFULLY
       }
@@ -70,10 +54,6 @@ export default function Project({ userId }) {
   }
 
   useEffect(() => {
-    if (isEditing) {
-      // animation !!!?!
-    }
-    setIsEditing(true)
     const saveTimeout = () => setTimeout(autoSave, 60 * 60)
     saveTimeout()
     return () => clearTimeout(saveTimeout())
