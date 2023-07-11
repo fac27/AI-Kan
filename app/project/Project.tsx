@@ -31,22 +31,22 @@ export default function Project({ userId }) {
       const savedProject = data[0].project_object
       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
       setNewProject(false)
-    }else{
+    } else {
       setNewProject(true)
     }
   }
 
   const insertNewProject = async () => {
     await supabase
-    .from("projects")
-    .insert({ user_id: userId, project_object: project })
+      .from("projects")
+      .insert({ user_id: userId, project_object: project })
     setNewProject(false)
     console.log("ADDED")
   }
-  
+
   if (userId && project?.name === "") fetchData()
-  if(userId && newProject) insertNewProject()
-  
+  if (userId && newProject) insertNewProject()
+
   useEffect(() => {
     if (targetRef.current) {
       const { width } = targetRef.current.getBoundingClientRect()
