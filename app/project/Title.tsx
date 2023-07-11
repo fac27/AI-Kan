@@ -33,8 +33,13 @@ const Title: FC<Props> = ({ id }: Props) => {
       })
 
       const data = await response.json()
+
       if (response.status === 404) {
         console.error(data.error)
+      }
+      if (response.status === 400) {
+        console.log(response.status)
+        console.log("hello")
       }
       if (response.status !== 200) {
         throw (
@@ -42,6 +47,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           new Error(`Request failed with status ${response.status}`)
         )
       }
+
       const sanitisedData = await sanitise(data.result.content)
       if (dispatch) {
         dispatch({
@@ -51,7 +57,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       }
     } catch (error) {
       console.error(error)
-      alert(error.message)
+      //alert(error.message)
     }
   }
 
