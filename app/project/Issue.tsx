@@ -1,4 +1,4 @@
-import { FC, useState  } from "react"
+import { FC, useState } from "react"
 import { card } from "../Styles/TailwindClasses"
 import { useProjectDispatch } from "../Context/store"
 import { Issue } from "../types/types"
@@ -38,7 +38,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
   const [issueStyle, setIssueStyle] = useState("bg-pink-50")
 
   function handleIssueCheckbox(event) {
-    setIssueStyle("bg-black")
     const isChecked = event.target.checked
 
     if (dispatch) {
@@ -49,6 +48,9 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           done: isChecked,
         },
       })
+
+      if (!isChecked) setIssueStyle("bg-pink-50") 
+      return setIssueStyle("bg-black")
     }
   }
 

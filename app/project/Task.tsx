@@ -41,7 +41,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const [taskStyle, setTaskStyle] = useState("bg-teal-50")
 
   function handleTaskCheckbox(event) {
-    setTaskStyle("bg-black")
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
@@ -51,6 +50,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           done: isChecked,
         },
       })
+      if (isChecked) setTaskStyle("bg-black")
     }
   }
 
