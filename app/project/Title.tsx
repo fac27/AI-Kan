@@ -64,6 +64,7 @@ const Title: FC<Props> = ({ id }: Props) => {
     }
     const data = await response.json()
     const sanitisedData = await sanitise(data.result.content)
+    setLoading(false)
     if (dispatch) {
       dispatch({
         type: "NEW_PROJECT",
