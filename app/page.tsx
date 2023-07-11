@@ -7,8 +7,6 @@ import { redirect } from "next/navigation"
 const Home: React.FC = async () => {
   const supabase = createRouteHandlerClient({ cookies })
 
-
-
   const {
     data: { session },
   } = await supabase.auth.getSession()

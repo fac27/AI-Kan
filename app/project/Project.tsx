@@ -25,7 +25,6 @@ export default function Project() {
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
       <Title id={"ProjTitle"} />
-
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {project?.tasks.map((task, index) => (

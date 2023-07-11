@@ -3,7 +3,7 @@ import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import exampleData from "../../data/exampleData"
-import { redirect } from "next/dist/server/api-utils"
+import Error from "./Error"
 
 interface Props {
   id: string
@@ -35,26 +35,28 @@ const Title: FC<Props> = ({ id }: Props) => {
       body: JSON.stringify({ project: projectInput }),
     })
 
+    const time = 500
+
     if (response.status === 400) {
       setError(response.statusText)
-      setTimeout(() => setError(""), 2000)
+      setTimeout(() => setError(""), time)
       return
     }
 
     if (response.status === 404) {
       setError("404 Not Found")
-      setTimeout(() => setError(""), 2000)
+      setTimeout(() => setError(""), time)
       return
     }
     if (response.status === 500) {
       setError("API Key Depracated, contact developers.")
-      setTimeout(() => setError(""), 2000)
+      setTimeout(() => setError(""), time)
       return
     }
     if (response.status !== 200) {
       const data = await response.json()
       setError(data.statusText)
-      setTimeout(() => setError(""), 2000)
+      setTimeout(() => setError(""), time)
     }
     const data = await response.json()
     const sanitisedData = await sanitise(data.result.content)
@@ -67,44 +69,39 @@ const Title: FC<Props> = ({ id }: Props) => {
   }
 
   return (
-    <div
-      id={id}
-      className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
-    >
-      {error && (
-        <div
-          role="alert"
-          className="border border-orange-400 rounded-b bg-orange-100 px-4 py-3 text-orange-700"
-        >
-          <p>{error}</p>
-        </div>
-      )}
-      <form onSubmit={onSubmit}>
-        <label htmlFor="promptInput">I want to make a...</label>
-        <div className="flex justify-between mt-2.5">
-          <input
-            type="text"
-            id="promptInput"
-            placeholder="Snake game in React"
-            value={projectInput}
-            onChange={e => setProjectInput(e.target.value)}
-            className="p-1.5 rounded border border-black"
-          />
-          <button
-            type="submit"
-            className="border border-black bg-gray-50 p-1.5 rounded ml-5"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-      <button
-        onClick={handleExample}
-        className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
+    <>
+      {error && <Error error={error} />}
+      <div
+        id={id}
+        className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
       >
-        Example
-      </button>
-    </div>
+        <form onSubmit={onSubmit}>
+          <label htmlFor="promptInput">I want to make a...</label>
+          <div className="flex justify-between mt-2.5">
+            <input
+              type="text"
+              id="promptInput"
+              placeholder="Snake game in React"
+              value={projectInput}
+              onChange={e => setProjectInput(e.target.value)}
+              className="p-1.5 rounded border border-black"
+            />
+            <button
+              type="submit"
+              className="border border-black bg-gray-50 p-1.5 rounded ml-5"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+        <button
+          onClick={handleExample}
+          className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
+        >
+          Example
+        </button>
+      </div>
+    </>
   )
 }
 
