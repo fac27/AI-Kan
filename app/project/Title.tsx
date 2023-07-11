@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { card, projectstyle } from "../Styles/TailwindClasses"
+import { card, checkedstyle, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import exampleData from "../../data/exampleData"
@@ -63,7 +63,7 @@ const Title: FC<Props> = ({ id }: Props) => {
   return (
     <div
       id={id}
-      className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
+      className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle} ${checkedstyle}`}
     >
       <form onSubmit={onSubmit}>
         <label htmlFor="promptInput">I want to make a...</label>

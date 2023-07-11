@@ -1,7 +1,8 @@
 import { FC } from "react"
-import { card, issuestyle } from "../Styles/TailwindClasses"
+import { card } from "../Styles/TailwindClasses"
 import { useProjectDispatch } from "../Context/store"
 import { Issue } from "../types/types"
+import { useState } from "react"
 
 interface IssueProps {
   issue: Issue
@@ -35,8 +36,12 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
 
+  const [checkedIssueBg, setCheckedIssueBg] = useState("bg-pink-50")
+
   function handleIssueCheckbox(event) {
+    setCheckedIssueBg("bg-black")
     const isChecked = event.target.checked
+
     if (dispatch) {
       dispatch({
         type: "EDIT_ISSUE_CHECKBOX",
@@ -59,7 +64,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
 
   return (
     <div
-      className={`${card} ${issuestyle} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
+      className={`${card} ${checkedIssueBg} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input

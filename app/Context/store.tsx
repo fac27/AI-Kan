@@ -1,11 +1,9 @@
 "use client"
 
 import { ReactNode, createContext, useContext, useReducer } from "react"
-
 import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
 
 const ProjectContext = createContext<Project | null>(null)
-
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
@@ -185,3 +183,4 @@ function projectReducer(project: Project, action: ActionTypes): Project {
     }
   }
 }
+
