@@ -39,7 +39,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       body: JSON.stringify({ project: projectInput }),
     })
 
-    const time = 500
+    const time = 1000
 
     if (response.status === 400) {
       setError(response.statusText)
