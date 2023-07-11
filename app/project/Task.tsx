@@ -1,5 +1,5 @@
-import { FC } from "react"
-import { card, taskstyle } from "../Styles/TailwindClasses"
+import { FC, useState } from "react"
+import { card } from "../Styles/TailwindClasses"
 import { Task } from "../types/types"
 import { useProjectDispatch } from "../Context/store"
 
@@ -38,7 +38,10 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
+  const [taskStyle, setTaskStyle] = useState("bg-teal-50")
+
   function handleTaskCheckbox(event) {
+    setTaskStyle("bg-black")
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
@@ -64,7 +67,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     <div
       id={id}
       ref={targetRef}
-      className={`${card} ${taskstyle} flex flex-col TestTaskId${task.id}`}
+      className={`${card} ${taskStyle} flex flex-col TestTaskId${task.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input

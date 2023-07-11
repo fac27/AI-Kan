@@ -56,8 +56,9 @@ const Title: FC<Props> = ({ id }: Props) => {
     } catch (error) {
       console.error(error)
       alert(error.message)
+    } finally {
+      setLoading(false)
     }
-    finally { setLoading(false) }
   }
 
   return (
@@ -82,7 +83,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           >
             Submit
           </button>
-          {loading && <Loading/>}
+          {loading && <Loading />}
         </div>
       </form>
       <button

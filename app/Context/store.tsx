@@ -183,4 +183,3 @@ function projectReducer(project: Project, action: ActionTypes): Project {
     }
   }
 }
-
