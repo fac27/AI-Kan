@@ -1,8 +1,9 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { Task } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
+import Saving from "./Saving"
 
 interface TaskProps {
   id: string
@@ -12,9 +13,11 @@ interface TaskProps {
 
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
+  const [isSaving, setIsSaving] = useState<boolean>(false)
 
   function handleEditTitle(event) {
     const newTitle = event.target.value
+    setIsSaving(true)
     if (dispatch) {
       dispatch({
         type: "EDIT_TASK_TITLE",
@@ -24,10 +27,12 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         },
       })
     }
+    return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
   function handleEditDescription(event) {
     const newDescription = event.target.value
+    setIsSaving(true)
     if (dispatch) {
       dispatch({
         type: "EDIT_TASK_DESCRIPTION",
@@ -37,9 +42,11 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         },
       })
     }
+    return setTimeout(() => setIsSaving(false), 60 * 60)
   }
 
   function handleTaskCheckbox(event) {
+    setIsSaving(true)
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
@@ -50,6 +57,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         },
       })
     }
+    return setTimeout(() => setIsSaving(false), 60 * 10)
   }
 
   function handleDeleteTask() {
@@ -77,6 +85,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           className={`TestTaskCheckbox${task.id} cursor-pointer`}
           onChange={handleTaskCheckbox}
         ></input>
+        {isSaving && <Saving />}
         <button
           type="button"
           className={`TestTaskDelete${task.id}`}
