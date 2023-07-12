@@ -53,7 +53,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       return
     }
     if (response.status === 500) {
-      setError("API Key Depracated, contact developers.")
+      setError("API Key Deprecated, contact developers.")
       setTimeout(() => setError(""), time)
       return
     }

@@ -1,20 +1,40 @@
 "use client"
+import { useEffect, useState, useRef } from "react"
+import Xarrow, { Xwrapper } from "react-xarrows"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useEffect, useState, useRef } from "react"
-import Xarrow, { Xwrapper } from "react-xarrows"
-import { card, issuestyle } from "../../Styles/TailwindClasses"
-import { useProject } from "../../Context/store"
+import { useProject, useProjectDispatch } from "../../Context/store"
 import { Project } from "../../types/types"
+import { supabase } from "../../auth/client"
+import { card, issuestyle } from "../../Styles/TailwindClasses"
 import Fireworks from "./Fireworks"
 
-export default function Project() {
+export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
 
+  const dispatch = useProjectDispatch()
   const project = useProject()
+
+  const fetchData = async () => {
+     const { data } =
+       userId &&
+       (await supabase
+         .from("projects")
+         .select("project_object")
+         .eq("user_id", userId))
+ 
+     if (data && data.length > 0) {
+       const savedProject = data[0].project_object
+       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
+     }
+   }
+  
+  if (userId && project?.name === "") {
+    fetchData()
+  }
 
   useEffect(() => {
     if (targetRef.current) {
@@ -23,6 +43,22 @@ export default function Project() {
     }
   }, [project])
 
+  useEffect(() => {
+    const autoSave = () => setTimeout(async () => {
+      if (project?.name !== "") {
+          await supabase
+            .from("projects")
+            .upsert(
+              { user_id: userId, project_object: project },
+              { onConflict: "user_id" }
+            )
+      }
+    }, 60 * 60)
+    
+    autoSave()
+
+    return () => clearTimeout(autoSave())
+  }, [project, userId])
   const isProjComplete = () => {
     if (project?.tasks.length === 0) return false
     return project?.tasks.every(task => task.done)
