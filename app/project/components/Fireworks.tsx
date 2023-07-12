@@ -1,11 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef } from "react"
 import ReactCanvasConfetti from "react-canvas-confetti"
+import * as confetti from "canvas-confetti"
 
-function randomInRange(min, max) {
+interface ConfettiInstance {
+  (options: confetti.Options): void
+}
+
+function randomInRange(min: number, max: number) {
   return Math.random() * (max - min) + min
 }
 
-const canvasStyles = {
+const canvasStyles: React.CSSProperties = {
   position: "fixed",
   pointerEvents: "none",
   width: "100%",
@@ -14,7 +19,7 @@ const canvasStyles = {
   left: 0,
 }
 
-function getAnimationSettings(originXA, originXB) {
+function getAnimationSettings(originXA: number, originXB: number) {
   return {
     startVelocity: 30,
     spread: 360,
@@ -29,9 +34,9 @@ function getAnimationSettings(originXA, originXB) {
 }
 
 export default function Fireworks() {
-  const refAnimationInstance = useRef(null)
+  const refAnimationInstance = useRef<ConfettiInstance | null>(null)
 
-  const getInstance = useCallback(instance => {
+  const getInstance = useCallback((instance: ConfettiInstance | null) => {
     refAnimationInstance.current = instance
   }, [])
 

@@ -1,26 +1,29 @@
 import { useCallback, useEffect, useRef } from "react"
-
+import confetti from "canvas-confetti"
 import ReactCanvasConfetti from "react-canvas-confetti"
 
-interface Props {
-  type: string
+interface ConfettiInstance {
+  (options: confetti.Options): void
 }
 
-export default function Confetti({ type }: Props) {
-  const refAnimationInstance = useRef(null)
+export default function Confetti() {
+  const refAnimationInstance = useRef<ConfettiInstance | null>(null)
 
-  const getInstance = useCallback(instance => {
+  const getInstance = useCallback((instance: confetti.CreateTypes) => {
     refAnimationInstance.current = instance
   }, [])
 
-  const makeShot = useCallback((particleRatio, opts) => {
-    refAnimationInstance.current &&
-      refAnimationInstance.current({
-        ...opts,
-        origin: { y: 0.7 },
-        particleCount: Math.floor(50 * particleRatio),
-      })
-  }, [])
+  const makeShot = useCallback(
+    (particleRatio: number, opts: confetti.Options) => {
+      refAnimationInstance.current &&
+        refAnimationInstance.current({
+          ...opts,
+          origin: { y: 0.7 },
+          particleCount: Math.floor(50 * particleRatio),
+        })
+    },
+    []
+  )
 
   const fire = useCallback(() => {
     makeShot(0.25, {

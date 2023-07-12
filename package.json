@@ -18,6 +18,7 @@
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/supabase-js": "^2.26.0",
+    "@types/canvas-confetti": "^1.6.0",
     "auto-git-update": "^1.1.1",
     "autoprefixer": "^10.4.14",
     "next": "^13.4.7",
