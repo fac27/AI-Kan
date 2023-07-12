@@ -2,7 +2,7 @@
 import { Auth } from "@supabase/auth-ui-react"
 import { ThemeSupa } from "@supabase/auth-ui-shared"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
-import { Database } from "./database.types"
+import { Database } from "../database.types"
 
 export default function AuthForm() {
   const supabase = createClientComponentClient<Database>()
@@ -16,6 +16,9 @@ export default function AuthForm() {
         extend: true,
         // Your custom classes
         style: {
+          label: {
+            color: "black",
+          },
           container: {
             width: "30vw",
             height: "25vh",
