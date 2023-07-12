@@ -7,13 +7,15 @@ import Error from "./Error"
 
 interface Props {
   id: string
+  loading: boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
-  const divRef = useRef(null)
+  const divRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useProjectDispatch()
 
@@ -74,7 +76,7 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
     const decoder = new TextDecoder()
     let done = false
 
-    const streamedData = []
+    const streamedData:string[] = []
 
     while (!done) {
       const { value, done: doneReading } = await reader.read()
