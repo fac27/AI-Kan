@@ -5,6 +5,7 @@ import Title from "./Title"
 import Task from "./Task"
 import IssueType from "./Issue"
 import Logout from "./Logout"
+import Saving from "./Saving"
 import { useProject, useProjectDispatch } from "../../Context/store"
 import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
@@ -14,6 +15,7 @@ function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState<boolean>(false)
 
   const dispatch = useProjectDispatch()
   const project = useProject()
@@ -44,6 +46,7 @@ function Project({ userId }) {
   }, [project])
 
   useEffect(() => {
+    setIsSaving(true)
     const autoSave = () =>
       setTimeout(async () => {
         if (project?.name !== "") {
@@ -54,6 +57,7 @@ function Project({ userId }) {
               { onConflict: "user_id" }
             )
         }
+        setIsSaving(false)
       }, 60 * 60)
 
     autoSave()
@@ -68,6 +72,7 @@ function Project({ userId }) {
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
       {isProjComplete() && <Fireworks />}
+      {isSaving && <Saving />}
       <Title id={"ProjTitle"} loading={loading} setLoading={setLoading} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
