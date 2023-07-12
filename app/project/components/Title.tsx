@@ -2,31 +2,21 @@ import { FC, useState, useRef, useEffect } from "react"
 import { card, projectstyle } from "../../Styles/TailwindClasses"
 import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
-import exampleData from "../../../data/exampleData"
 import Error from "./Error"
 
 interface Props {
   id: string
   loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement>(null)
 
   const dispatch = useProjectDispatch()
-
-  const handleExample = () => {
-    if (dispatch) {
-      dispatch({
-        type: "NEW_PROJECT",
-        payload: exampleData[0],
-      })
-    }
-  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -76,7 +66,7 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
     const decoder = new TextDecoder()
     let done = false
 
-    const streamedData:string[] = []
+    const streamedData: string[] = []
 
     while (!done) {
       const { value, done: doneReading } = await reader.read()
@@ -139,12 +129,6 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
             </button>
           </div>
         </form>
-        <button
-          onClick={handleExample}
-          className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
-        >
-          Example
-        </button>
       </div>
       {loading && (
         <div
