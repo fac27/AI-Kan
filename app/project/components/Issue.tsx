@@ -96,12 +96,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           !issue.done ? "border-black" : "border-gray-400"
         } TestIssueDescription${issue.id}`}
       ></textarea>
-      <div className="mt-2 flex items-center justify-between">
-        <button type="button" className="-translate-y-1">
-          ⌄
-        </button>
-        <button type="button">＋</button>
-      </div>
     </div>
   )
 }

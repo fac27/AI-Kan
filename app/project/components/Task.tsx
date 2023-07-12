@@ -102,12 +102,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           !task.done ? "border-black" : "border-gray-400"
         } TestTaskDescription${task.id}`}
       ></textarea>
-      <div className="mt-2 flex items-center justify-between">
-        <button type="button" className="-translate-y-1">
-          ⌄
-        </button>
-        <button type="button">＋</button>
-      </div>
     </div>
   )
 }
