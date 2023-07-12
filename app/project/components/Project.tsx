@@ -5,10 +5,11 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { card } from "../../Styles/TailwindClasses"
 import { useProject, useProjectDispatch } from "../../Context/store"
 import { Project } from "../../types/types"
 import { supabase } from "../../auth/client"
+import { card, issuestyle } from "../../Styles/TailwindClasses"
+import Fireworks from "./Fireworks"
 
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
@@ -58,9 +59,14 @@ export default function Project({ userId }) {
 
     return () => clearTimeout(autoSave())
   }, [project, userId])
+  const isProjComplete = () => {
+    if (project?.tasks.length === 0) return false
+    return project?.tasks.every(task => task.done)
+  }
 
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
+      {isProjComplete() && <Fireworks />}
       <Title id={"ProjTitle"} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
@@ -78,8 +84,8 @@ export default function Project({ userId }) {
             {project?.tasks.map((task, index) => {
               const hasIssues = task.issues.length > 0
               const conditionalVisibility = hasIssues
-                ? `${card}`
-                : `${card} invisible`
+                ? `${card} ${issuestyle}`
+                : `${card} ${issuestyle} invisible`
               return (
                 <div
                   style={{ width: `${width}px` }}

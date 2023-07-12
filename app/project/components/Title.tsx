@@ -4,7 +4,7 @@ import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
 import exampleData from "../../../data/exampleData"
 import Loading from "./Loading"
-import Error from "./Error"
+import Error from "./../components/Error"
 
 interface Props {
   id: string
