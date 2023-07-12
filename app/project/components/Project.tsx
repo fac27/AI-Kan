@@ -5,9 +5,10 @@ import Issue from "./Issue"
 import Logout from "./Logout"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
-import { card, issuestyle } from "../Styles/TailwindClasses"
-import { useProject } from "../Context/store"
-import { Project } from "../types/types"
+import { card, issuestyle } from "../../Styles/TailwindClasses"
+import { useProject } from "../../Context/store"
+import { Project } from "../../types/types"
+import Fireworks from "./Fireworks"
 
 export default function Project() {
   const targetRef = useRef<HTMLDivElement>(null)
@@ -22,8 +23,14 @@ export default function Project() {
     }
   }, [project])
 
+  const isProjComplete = () => {
+    if (project?.tasks.length === 0) return false
+    return project?.tasks.every(task => task.done)
+  }
+
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
+      {isProjComplete() && <Fireworks />}
       <Title id={"ProjTitle"} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">

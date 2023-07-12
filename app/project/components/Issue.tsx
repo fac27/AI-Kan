@@ -1,24 +1,21 @@
 import { FC } from "react"
-import { card, taskstyle } from "../Styles/TailwindClasses"
-import { Task } from "../types/types"
-import { useProjectDispatch } from "../Context/store"
+import { card, issuestyle } from "../../Styles/TailwindClasses"
+import { useProjectDispatch } from "../../Context/store"
+import { Issue } from "../../types/types"
 
-interface TaskProps {
-  id: string
-  task: Task
-  targetRef: React.RefObject<HTMLDivElement>
+interface IssueProps {
+  issue: Issue
 }
 
-const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
+const Issue: FC<IssueProps> = ({ issue }) => {
   const dispatch = useProjectDispatch()
-
   function handleEditTitle(event) {
     const newTitle = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_TASK_TITLE",
+        type: "EDIT_ISSUE_TITLE",
         payload: {
-          ...task,
+          ...issue,
           title: newTitle,
         },
       })
@@ -29,70 +26,68 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     const newDescription = event.target.value
     if (dispatch) {
       dispatch({
-        type: "EDIT_TASK_DESCRIPTION",
+        type: "EDIT_ISSUE_DESCRIPTION",
         payload: {
-          ...task,
+          ...issue,
           description: newDescription,
         },
       })
     }
   }
 
-  function handleTaskCheckbox(event) {
+  function handleIssueCheckbox(event) {
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
-        type: "EDIT_TASK_CHECKBOX",
+        type: "EDIT_ISSUE_CHECKBOX",
         payload: {
-          ...task,
+          ...issue,
           done: isChecked,
         },
       })
     }
   }
 
-  function handleDeleteTask() {
+  function handleDeleteIssue() {
     if (dispatch) {
       dispatch({
-        type: "DELETE_TASK",
-        payload: task,
+        type: "DELETE_ISSUE",
+        payload: issue,
       })
     }
   }
 
   return (
     <div
-      id={id}
-      ref={targetRef}
-      className={`${card} ${taskstyle} flex flex-col TestTaskId${task.id}`}
+      className={`${card} ${issuestyle} flex flex-col mb-4 border-none TestIssueId${issue.taskId}-${issue.id}`}
     >
       <div className="mb-2 flex items-center justify-between">
         <input
           type="checkbox"
-          checked={task.done}
-          className={`TestTaskCheckbox${task.id}`}
-          onChange={handleTaskCheckbox}
+          checked={issue.done}
+          onChange={handleIssueCheckbox}
+          className={`TestIssueCheckbox${issue.taskId}-${issue.id}`}
         ></input>
         <button
           type="button"
-          className={`TestTaskDelete${task.id}`}
-          onClick={handleDeleteTask}
+          className={`TestIssueDelete${issue.taskId}-${issue.id}`}
+          onClick={handleDeleteIssue}
         >
           ✖
         </button>
       </div>
       <input
         type="text"
-        value={task.title}
+        value={issue.title}
         onChange={handleEditTitle}
-        className={`mb-2 p-2 rounded border border-black TestTaskTitle${task.id}`}
+        className={`mb-2 p-2 rounded border border-black TestIssueTitle${issue.id}`}
       />
       <textarea
         rows={4}
         cols={20}
-        value={task.description}
+        value={issue.description}
         onChange={handleEditDescription}
-        className={`mb-2 p-2 resize-none rounded border border-black TestTaskDescription${task.id}`}
+        className={`mb-2 p-2 resize-none rounded border border-black TestIssueDescription${issue.id}`}
       ></textarea>
       <div className="mt-2 flex items-center justify-between">
         <button type="button" className="-translate-y-1">
@@ -104,4 +99,4 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   )
 }
 
-export default Task
+export default Issue
