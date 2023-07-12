@@ -2,13 +2,7 @@ import { FC, useState, useRef, useEffect } from "react"
 import { card, projectstyle } from "../../Styles/TailwindClasses"
 import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
-<<<<<<< HEAD
-import exampleData from "../../../data/exampleData"
-import Loading from "./Saving"
-import Error from "./../components/Error"
-=======
 import Error from "./Error"
->>>>>>> main
 
 interface Props {
   id: string
