@@ -2,7 +2,6 @@ import { FC, useState, useRef, useEffect } from "react"
 import { card, projectstyle } from "../../Styles/TailwindClasses"
 import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
-import exampleData from "../../../data/exampleData"
 import Error from "./Error"
 
 interface Props {
@@ -17,18 +16,9 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLDivElement>(null)
 
   const dispatch = useProjectDispatch()
-
-  const handleExample = () => {
-    if (dispatch) {
-      dispatch({
-        type: "NEW_PROJECT",
-        payload: exampleData[0],
-      })
-    }
-  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -39,7 +29,9 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
       setTimeout(() => setError(""), time)
       return
     }
+
     const prompt = projectInput
+    
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -82,7 +74,7 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
     const decoder = new TextDecoder()
     let done = false
 
-    const streamedData:string[] = []
+    const streamedData: string[] = []
 
     while (!done) {
       const { value, done: doneReading } = await reader.read()
@@ -95,6 +87,7 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
     const finalData = streamedData.join("")
 
     const sanitisedData = sanitise(finalData)
+    
     if (sanitisedData === "not valid object") {
       setError("OpenAI returned invalid JSON \n Try re-sending request.")
       setTimeout(() => setError(""), time + 1500)

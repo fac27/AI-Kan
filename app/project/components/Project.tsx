@@ -63,9 +63,12 @@ export default function Project({ userId }) {
     return () => clearTimeout(autoSave())
   }, [project, userId])
   const isProjComplete = () => {
-    if (project?.tasks.length === 0) return false
-    return project?.tasks.every(task => task.done)
-  }
+    if (!project || !project.tasks || project.tasks.length === 0) {
+      return false;
+    }
+    return project.tasks.every((task) => task.done);
+  };
+  
 
   function handleClearProject() {
     if(!isLoading) {

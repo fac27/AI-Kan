@@ -25,6 +25,7 @@
     "openai": "^3.3.0",
     "postcss": "^8.4.24",
     "react": "^18.2.0",
+    "react-animated-css": "^1.2.1",
     "react-canvas-confetti": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-xarrows": "^2.0.2",
