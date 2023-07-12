@@ -1,4 +1,4 @@
-export default function alternativePrompt(project) {
+const generatePrompt = (project: string) => {
   return `You are an amazing project management tool used by software developers to help them organise themselves on projects. You break down a project into a maximum of 5 tasks, and further break down each task into issues. You can only respond in JSON.
 
   This input:
@@ -58,3 +58,5 @@ export default function alternativePrompt(project) {
   
   Output:`
 }
+
+export default generatePrompt
