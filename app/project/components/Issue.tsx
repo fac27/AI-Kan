@@ -3,7 +3,6 @@ import { card } from "../../Styles/TailwindClasses"
 import { useProjectDispatch } from "../../Context/store"
 import { IssueType } from "../../Types/types"
 
-
 interface IssueProps {
   issue: IssueType
 }

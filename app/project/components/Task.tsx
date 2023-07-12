@@ -39,12 +39,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
-<<<<<<< HEAD
   const handleTaskCheckbox = event => {
-    setIsSaving(true)
-=======
-  function handleTaskCheckbox(event) {
->>>>>>> main
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
