@@ -19,19 +19,19 @@ export default function Project({ userId }) {
   const project = useProject()
 
   const fetchData = async () => {
-     const { data } =
-       userId &&
-       (await supabase
-         .from("projects")
-         .select("project_object")
-         .eq("user_id", userId))
- 
-     if (data && data.length > 0) {
-       const savedProject = data[0].project_object
-       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
-     }
-   }
-  
+    const { data } =
+      userId &&
+      (await supabase
+        .from("projects")
+        .select("project_object")
+        .eq("user_id", userId))
+
+    if (data && data.length > 0) {
+      const savedProject = data[0].project_object
+      dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
+    }
+  }
+
   if (userId && project?.name === "") {
     fetchData()
   }
@@ -44,17 +44,18 @@ export default function Project({ userId }) {
   }, [project])
 
   useEffect(() => {
-    const autoSave = () => setTimeout(async () => {
-      if (project?.name !== "") {
+    const autoSave = () =>
+      setTimeout(async () => {
+        if (project?.name !== "") {
           await supabase
             .from("projects")
             .upsert(
               { user_id: userId, project_object: project },
               { onConflict: "user_id" }
             )
-      }
-    }, 60 * 60)
-    
+        }
+      }, 60 * 60)
+
     autoSave()
 
     return () => clearTimeout(autoSave())

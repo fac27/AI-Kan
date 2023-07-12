@@ -27,7 +27,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         },
       })
     }
-    return setTimeout(() => setIsSaving(false), 60 * 60)
+    return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
   function handleEditDescription(event) {

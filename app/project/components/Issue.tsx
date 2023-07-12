@@ -24,7 +24,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         },
       })
     }
-    return setTimeout(() => setIsSaving(false), 60 * 60)
+    return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
   function handleEditDescription(event) {
