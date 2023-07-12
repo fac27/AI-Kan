@@ -3,7 +3,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
-export default async function AuthProject() {
+const AuthProject = async () => {
   const supabase = createRouteHandlerClient({ cookies })
 
   const {
@@ -17,3 +17,5 @@ export default async function AuthProject() {
 
   return <Project userId={userId} />
 }
+
+export default AuthProject

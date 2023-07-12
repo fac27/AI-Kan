@@ -12,7 +12,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
   const [isSaving, setIsSaving] = useState<boolean>(false)
   const dispatch = useProjectDispatch()
 
-  function handleEditTitle(event) {
+  const handleEditTitle = (event) => {
     const newTitle = event.target.value
     setIsSaving(true)
     if (dispatch) {
@@ -27,7 +27,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
-  function handleEditDescription(event) {
+  const handleEditDescription = (event) => {
     const newDescription = event.target.value
     setIsSaving(true)
     if (dispatch) {
@@ -42,7 +42,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     return setTimeout(() => setIsSaving(false), 60 * 60)
   }
 
-  function handleIssueCheckbox(event) {
+  const handleIssueCheckbox = (event) => {
     const isChecked = event.target.checked
     setIsSaving(true)
     if (dispatch) {
@@ -57,7 +57,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     return setTimeout(() => setIsSaving(false), 60 * 10)
   }
 
-  function handleDeleteIssue() {
+  const handleDeleteIssue = () => {
     if (dispatch) {
       dispatch({
         type: "DELETE_ISSUE",

@@ -6,7 +6,7 @@ import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
 const ProjectContext = createContext<Project | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
-export function ProjectProvider({ children }: { children: ReactNode }) {
+export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   const [project, dispatch] = useReducer(projectReducer, {
     id: 0,
     name: "",
@@ -22,15 +22,15 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   )
 }
 
-export function useProject() {
+export const useProject = () => {
   return useContext(ProjectContext)
 }
 
-export function useProjectDispatch() {
+export const useProjectDispatch = () => {
   return useContext(ProjectDispatchContext)
 }
 
-function projectReducer(project: Project, action: ActionTypes): Project {
+export const projectReducer = (project: Project, action: ActionTypes): Project => {
   switch (action.type) {
     case "EDIT_TASK_TITLE": {
       const tasks = project.tasks.map((task: Task) => {

@@ -18,7 +18,7 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
 
   const dispatch = useProjectDispatch()
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const prompt = projectInput

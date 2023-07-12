@@ -6,7 +6,7 @@ interface ConfettiInstance {
   (options: confetti.Options): void
 }
 
-function randomInRange(min: number, max: number) {
+const randomInRange = (min: number, max: number) => {
   return Math.random() * (max - min) + min
 }
 
@@ -19,7 +19,7 @@ const canvasStyles: React.CSSProperties = {
   left: 0,
 }
 
-function getAnimationSettings(originXA: number, originXB: number) {
+const getAnimationSettings = (originXA: number, originXB: number) => {
   return {
     startVelocity: 30,
     spread: 360,
@@ -33,7 +33,7 @@ function getAnimationSettings(originXA: number, originXB: number) {
   }
 }
 
-export default function Fireworks() {
+const Fireworks = () => {
   const refAnimationInstance = useRef<ConfettiInstance | null>(null)
 
   const getInstance = useCallback((instance: ConfettiInstance | null) => {
@@ -51,7 +51,6 @@ export default function Fireworks() {
     const intervalId = setInterval(nextTickAnimation, 400)
     const timeoutId = setTimeout(() => clearInterval(intervalId), 5000)
 
-    // return a cleanup function to stop the interval and timeout when the component is unmounted
     return () => {
       clearInterval(intervalId)
       clearTimeout(timeoutId)
@@ -60,3 +59,5 @@ export default function Fireworks() {
 
   return <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
 }
+
+export default Fireworks

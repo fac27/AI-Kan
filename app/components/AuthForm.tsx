@@ -4,7 +4,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { Database } from "../database.types"
 
-export default function AuthForm() {
+const AuthForm = () => {
   const supabase = createClientComponentClient<Database>()
 
   return (
@@ -42,3 +42,5 @@ export default function AuthForm() {
     />
   )
 }
+
+export default AuthForm

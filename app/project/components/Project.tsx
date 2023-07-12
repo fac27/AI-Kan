@@ -11,7 +11,7 @@ import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
 import Fireworks from "./Fireworks"
 
-export default function Project({ userId }) {
+const Project = ({ userId }) => {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
@@ -137,3 +137,5 @@ export default function Project({ userId }) {
     </Xwrapper>
   )
 }
+
+export default Project
