@@ -1,21 +1,21 @@
-import { OpenAIStream, OpenAIStreamPayload } from "../../../utils/openAIStream";
-import alternativePrompt from "./alternativePrompt";
+import { OpenAIStream, OpenAIStreamPayload } from "../../../utils/openAIStream"
+import alternativePrompt from "./alternativePrompt"
 
 if (!process.env.OPENAI_API_KEY) {
-  throw new Error("Missing env var from OpenAI");
+  throw new Error("Missing env var from OpenAI")
 }
 
 export const config = {
   runtime: "edge",
-};
+}
 
 export async function POST(req: Request): Promise<Response> {
   const { prompt } = (await req.json()) as {
-    prompt?: string;
-  };
+    prompt?: string
+  }
 
   if (!prompt) {
-    return new Response("No prompt in the request", { status: 400 });
+    return new Response("No prompt in the request", { status: 400 })
   }
 
   const payload: OpenAIStreamPayload = {
@@ -28,8 +28,8 @@ export async function POST(req: Request): Promise<Response> {
     max_tokens: 1000,
     stream: true,
     n: 1,
-  };
+  }
 
-  const stream = await OpenAIStream(payload);
-  return new Response(stream);
+  const stream = await OpenAIStream(payload)
+  return new Response(stream)
 }

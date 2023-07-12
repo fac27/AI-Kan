@@ -1,10 +1,11 @@
-import { FC, useState } from "react"
+import { FC, useState, useRef, useEffect } from "react"
 import { card, projectstyle } from "../Styles/TailwindClasses"
 import sanitise from "../../utils/sanitise"
 import { useProjectDispatch } from "../Context/store"
 import exampleData from "../../data/exampleData"
 import Loading from "./Loading"
 import Error from "./Error"
+import { chunk } from "cypress/types/lodash"
 
 interface Props {
   id: string
@@ -15,6 +16,7 @@ const Title: FC<Props> = ({ id }: Props) => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [stream, setStream] = useState("")
+  const divRef = useRef(null);
 
   const dispatch = useProjectDispatch()
 
@@ -29,8 +31,6 @@ const Title: FC<Props> = ({ id }: Props) => {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-
-    setLoading(true)
 
     const prompt = projectInput
     const response = await fetch("/api/generate", {
@@ -65,24 +65,41 @@ const Title: FC<Props> = ({ id }: Props) => {
       setTimeout(() => setError(""), time)
     }
 
-    const data = response.body;
+    const data = response.body
 
     if (!data) {
-      return;
+      return
     }
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+    setLoading(true)
+
+    const reader = data.getReader()
+    const decoder = new TextDecoder()
+    let done = false
+
+    const streamedData = []
 
     while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setStream((prev) => prev + chunkValue);
+      const { value, done: doneReading } = await reader.read()
+      done = doneReading
+      const chunkValue = decoder.decode(value)
+      setStream(prev => prev + chunkValue)
+      streamedData.push(chunkValue)
     }
-    const sanitisedData = await sanitise(stream)
+    
+    const finalData = streamedData.join("")
+
+    const sanitisedData = sanitise(finalData)
+    if (sanitisedData === "not valid object") {
+      setError('OpenAI returned invalid JSON \n Try re-sending request.')
+      setTimeout(() => setError(""), time + 1500)
+      setLoading(false)
+      return
+    }
+    
+    setStream('')
     setLoading(false)
+    
     if (dispatch) {
       dispatch({
         type: "NEW_PROJECT",
@@ -90,6 +107,12 @@ const Title: FC<Props> = ({ id }: Props) => {
       })
     }
   }
+
+  useEffect(() => {
+    if (divRef.current) {
+      divRef.current.scrollTop = divRef.current.scrollHeight;
+    }
+  }, [stream]);
 
   return (
     <>
@@ -115,7 +138,7 @@ const Title: FC<Props> = ({ id }: Props) => {
             >
               Submit
             </button>
-            {loading && <Loading />}
+            {/* {loading && <Loading />} */}
           </div>
         </form>
         <button
@@ -125,7 +148,7 @@ const Title: FC<Props> = ({ id }: Props) => {
           Example
         </button>
       </div>
-      <div>{stream}</div>
+      {loading && <div ref={divRef} className="w-1/5 h-20 overflow-y-auto font-mono text-black bg-indigo-50 border-4 border-gray-400 border-double rounded">{stream}</div>}
     </>
   )
 }
