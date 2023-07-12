@@ -1,42 +1,39 @@
-import { FC, useState } from "react"
+import { FC, useState, useRef, useEffect } from "react"
 import { card, projectstyle } from "../../Styles/TailwindClasses"
 import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
+<<<<<<< HEAD
 import exampleData from "../../../data/exampleData"
 import Loading from "./Saving"
 import Error from "./../components/Error"
+=======
+import Error from "./Error"
+>>>>>>> main
 
 interface Props {
   id: string
+  loading: boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Title: FC<Props> = ({ id }: Props) => {
+const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
+  const [stream, setStream] = useState("")
+  const divRef = useRef<HTMLDivElement>(null)
 
   const dispatch = useProjectDispatch()
-  const [loading, setLoading] = useState(false)
-
-  const handleExample = () => {
-    if (dispatch) {
-      dispatch({
-        type: "NEW_PROJECT",
-        payload: exampleData[0],
-      })
-    }
-  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    setLoading(true)
-
+    const prompt = projectInput
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ project: projectInput }),
+      body: JSON.stringify({ prompt }),
     })
 
     const time = 1000
@@ -53,7 +50,7 @@ const Title: FC<Props> = ({ id }: Props) => {
       return
     }
     if (response.status === 500) {
-      setError("API Key Deprecated, contact developers.")
+      setError("API Key Depracated, contact developers.")
       setTimeout(() => setError(""), time)
       return
     }
@@ -62,15 +59,42 @@ const Title: FC<Props> = ({ id }: Props) => {
       setError(data.statusText)
       setTimeout(() => setError(""), time)
     }
-    const data = await response.json()
-    const sanitisedData = await sanitise(data.result.content)
+
+    const data = response.body
+
+    if (!data) {
+      return
+    }
+
+    setLoading(true)
+
+    const reader = data.getReader()
+    const decoder = new TextDecoder()
+    let done = false
+
+    const streamedData: string[] = []
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read()
+      done = doneReading
+      const chunkValue = decoder.decode(value)
+      setStream(prev => prev + chunkValue)
+      streamedData.push(chunkValue)
+    }
+
+    const finalData = streamedData.join("")
+
+    const sanitisedData = sanitise(finalData)
     if (sanitisedData === "not valid object") {
-      setError(`OpenAI returned invalid JSON \n Try re-sending request.`)
+      setError("OpenAI returned invalid JSON \n Try re-sending request.")
       setTimeout(() => setError(""), time + 1500)
       setLoading(false)
       return
     }
+
+    setStream("")
     setLoading(false)
+
     if (dispatch) {
       dispatch({
         type: "NEW_PROJECT",
@@ -78,6 +102,12 @@ const Title: FC<Props> = ({ id }: Props) => {
       })
     }
   }
+
+  useEffect(() => {
+    if (divRef.current) {
+      divRef.current.scrollTop = divRef.current.scrollHeight
+    }
+  }, [stream])
 
   return (
     <>
@@ -103,16 +133,17 @@ const Title: FC<Props> = ({ id }: Props) => {
             >
               Submit
             </button>
-            {loading && <Loading />}
           </div>
         </form>
-        <button
-          onClick={handleExample}
-          className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
-        >
-          Example
-        </button>
       </div>
+      {loading && (
+        <div
+          ref={divRef}
+          className="w-1/5 h-20 overflow-y-auto font-mono text-black bg-indigo-50 border-4 border-gray-400 border-double rounded"
+        >
+          {stream}
+        </div>
+      )}
     </>
   )
 }

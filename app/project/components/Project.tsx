@@ -14,6 +14,7 @@ import Fireworks from "./Fireworks"
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useProjectDispatch()
   const project = useProject()
@@ -68,43 +69,46 @@ export default function Project({ userId }) {
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
       {isProjComplete() && <Fireworks />}
-      <Title id={"ProjTitle"} />
+      <Title id={"ProjTitle"} loading={loading} setLoading={setLoading} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-          {project?.tasks.map((task, index) => (
-            <Task
-              key={task.id}
-              task={task}
-              id={`Task${index}`}
-              targetRef={targetRef}
-            />
-          ))}
+          {!loading &&
+            project?.tasks.map((task, index) => (
+              <Task
+                key={task.id}
+                task={task}
+                id={`Task${index}`}
+                targetRef={targetRef}
+              />
+            ))}
         </div>
         {width && (
           <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-            {project?.tasks.map((task, index) => {
-              const hasIssues = task.issues.length > 0
-              const conditionalVisibility = hasIssues
-                ? `${card} ${issuestyle}`
-                : `${card} ${issuestyle} invisible`
-              return (
-                <div
-                  style={{ width: `${width}px` }}
-                  key={task.id}
-                  className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
-                  id={`Issues${index}`}
-                >
-                  {task.issues.map(issue => (
-                    <Issue key={issue.id} issue={issue} />
-                  ))}
-                </div>
-              )
-            })}
+            {!loading &&
+              project?.tasks.map((task, index) => {
+                const hasIssues = task.issues.length > 0
+                const conditionalVisibility = hasIssues
+                  ? `${card} ${issuestyle}`
+                  : `${card} ${issuestyle} invisible`
+                return (
+                  <div
+                    style={{ width: `${width}px` }}
+                    key={task.id}
+                    className={`${conditionalVisibility} px-2.5 py-2.5 bg-pink-100`}
+                    id={`Issues${index}`}
+                  >
+                    {task.issues.map(issue => (
+                      <Issue key={issue.id} issue={issue} />
+                    ))}
+                  </div>
+                )
+              })}
           </div>
         )}
       </div>
 
       {width &&
+        !loading &&
         project?.tasks.map((task, index) => (
           <>
             <Xarrow

@@ -82,7 +82,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         <input
           type="checkbox"
           checked={task.done}
-          className={`TestTaskCheckbox${task.id}`}
+          className={`TestTaskCheckbox${task.id} cursor-pointer`}
           onChange={handleTaskCheckbox}
         ></input>
         {isSaving && <Saving />}
@@ -103,7 +103,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         } TestTaskTitle${task.id}`}
       />
       <textarea
-        rows={4}
+        rows={5}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
@@ -111,12 +111,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           !task.done ? "border-black" : "border-gray-400"
         } TestTaskDescription${task.id}`}
       ></textarea>
-      <div className="mt-2 flex items-center justify-between">
-        <button type="button" className="-translate-y-1">
-          ⌄
-        </button>
-        <button type="button">＋</button>
-      </div>
     </div>
   )
 }
