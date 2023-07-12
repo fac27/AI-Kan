@@ -12,8 +12,8 @@ const Saving = () => {
   )
 }
 
-const quarterDoneStyle = {
+/* const quarterDoneStyle = {
   width: 100,
-}
+} */
 
 export default Saving
