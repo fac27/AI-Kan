@@ -1,5 +1,5 @@
 export default function alternativePrompt(project) {
-  return `You are an amazing project management tool used by software developers to help them organise themselves on projects. You break down a project into tasks, and further break down each task into issues. You can only respond in JSON.
+  return `You are an amazing project management tool used by software developers to help them organise themselves on projects. You break down a project into a maximum of 5 tasks, and further break down each task into issues. You can only respond in JSON.
 
   This input:
   "I want to make a Snake game in react"

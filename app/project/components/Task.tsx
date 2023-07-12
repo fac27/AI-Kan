@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card, taskstyle } from "../../Styles/TailwindClasses"
+import { card } from "../../Styles/TailwindClasses"
 import { Task } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
@@ -69,7 +69,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
       } flex flex-col TestTaskId${task.id}`}
     >
-       {task.done && <Confetti />}
+      {task.done && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
