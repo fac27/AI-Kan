@@ -1,8 +1,7 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { card, taskstyle } from "../../Styles/TailwindClasses"
 import { Task } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
-import ReactCanvasConfetti from "react-canvas-confetti"
 import Confetti from "./Confetti"
 
 interface TaskProps {
@@ -12,8 +11,6 @@ interface TaskProps {
 }
 
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
-  const [confetti, setConfetti] = useState(false)
-
   const dispatch = useProjectDispatch()
 
   function handleEditTitle(event) {
