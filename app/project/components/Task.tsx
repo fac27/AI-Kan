@@ -94,7 +94,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         } TestTaskTitle${task.id}`}
       />
       <textarea
-        rows={4}
+        rows={5}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
