@@ -14,7 +14,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <ProjectProvider>
-        <body>
+        <body className="h-screen w-screen">
           <main className="flex flex-col items-center justify-center gap-4">
             {children}
           </main>
