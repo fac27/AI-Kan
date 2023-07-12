@@ -7,12 +7,18 @@ import Error from "./Error"
 interface Props {
   id: string
   isLoading: boolean
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   isCleared: boolean
-  setIsCleared: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCleared: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared }: Props) => {
+const Title: FC<Props> = ({
+  id,
+  isLoading,
+  setIsLoading,
+  isCleared,
+  setIsCleared,
+}: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
@@ -24,14 +30,14 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
     event.preventDefault()
     const time = 1000
 
-    if(!isCleared) {
+    if (!isCleared) {
       setError("Need to clear project first")
       setTimeout(() => setError(""), time)
       return
     }
 
     const prompt = projectInput
-    
+
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -87,7 +93,7 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
     const finalData = streamedData.join("")
 
     const sanitisedData = sanitise(finalData)
-    
+
     if (sanitisedData === "not valid object") {
       setError("OpenAI returned invalid JSON \n Try re-sending request.")
       setTimeout(() => setError(""), time + 1500)
@@ -133,7 +139,7 @@ const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared
             <button
               type="submit"
               className={`border border-black bg-gray-50 p-1.5 rounded ml-5 ${
-                isCleared ? '' : 'text-gray-300'
+                isCleared ? "" : "text-gray-300"
               }`}
             >
               Submit

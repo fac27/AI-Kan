@@ -8,8 +8,8 @@ const ProjectContext = createContext<Project>({
   name: "",
   tasks: [],
   xarrowChangeCounter: 0,
-});
-const ProjectDispatchContext = createContext<DispatchType | null>(null);
+})
+const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const [project, dispatch] = useReducer(projectReducer, {
@@ -189,10 +189,9 @@ function projectReducer(project: Project, action: ActionTypes): Project {
         name: "clearedProject",
         tasks: [],
         xarrowChangeCounter: 0,
-      };
-      return emptyProject;
+      }
+      return emptyProject
     }
-    
 
     default: {
       return project

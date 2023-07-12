@@ -64,28 +64,40 @@ export default function Project({ userId }) {
   }, [project, userId])
   const isProjComplete = () => {
     if (!project || !project.tasks || project.tasks.length === 0) {
-      return false;
+      return false
     }
-    return project.tasks.every((task) => task.done);
-  };
-  
+    return project.tasks.every(task => task.done)
+  }
 
   function handleClearProject() {
-    if(!isLoading) {
-    if (dispatch) {
-      dispatch({
-        type: "CLEAR_PROJECT",
-        payload: project
-      })
+    if (!isLoading) {
+      if (dispatch) {
+        dispatch({
+          type: "CLEAR_PROJECT",
+          payload: project,
+        })
+      }
+      setIsCleared(true)
     }
-    setIsCleared(true)}
   }
 
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
-      <button type="button" className="border border-black bg-gray-50 p-1.5 rounded ml-5 fixed top-4 right-4" onClick={handleClearProject}>Clear Project</button>
+      <button
+        type="button"
+        className="border border-black bg-gray-50 p-1.5 rounded ml-5 fixed top-4 right-4"
+        onClick={handleClearProject}
+      >
+        Clear Project
+      </button>
       {isProjComplete() && <Fireworks />}
-      <Title id={"ProjTitle"} isLoading={isLoading} setIsLoading={setIsLoading} isCleared={isCleared} setIsCleared={setIsCleared} />
+      <Title
+        id={"ProjTitle"}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
+        isCleared={isCleared}
+        setIsCleared={setIsCleared}
+      />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {!isLoading &&
