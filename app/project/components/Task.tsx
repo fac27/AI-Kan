@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { Task } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
@@ -14,6 +14,7 @@ interface TaskProps {
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
   const [isSaving, setIsSaving] = useState<boolean>(false)
+  const [confetti, setConfetti] = useState<boolean>(false)
 
   function handleEditTitle(event) {
     const newTitle = event.target.value
@@ -48,6 +49,8 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   function handleTaskCheckbox(event) {
     setIsSaving(true)
     const isChecked = event.target.checked
+    if (isChecked) setConfetti(true)
+    setTimeout(() => setConfetti(false), 5000)
     if (dispatch) {
       dispatch({
         type: "EDIT_TASK_CHECKBOX",
@@ -77,7 +80,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
       } flex flex-col TestTaskId${task.id} text-ellipsis`}
     >
-      {task.done && <Confetti />}
+      {confetti && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
