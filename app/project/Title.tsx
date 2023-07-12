@@ -16,7 +16,7 @@ const Title: FC<Props> = ({ id }: Props) => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [stream, setStream] = useState("")
-  const divRef = useRef(null);
+  const divRef = useRef(null)
 
   const dispatch = useProjectDispatch()
 
@@ -86,20 +86,20 @@ const Title: FC<Props> = ({ id }: Props) => {
       setStream(prev => prev + chunkValue)
       streamedData.push(chunkValue)
     }
-    
+
     const finalData = streamedData.join("")
 
     const sanitisedData = sanitise(finalData)
     if (sanitisedData === "not valid object") {
-      setError('OpenAI returned invalid JSON \n Try re-sending request.')
+      setError("OpenAI returned invalid JSON \n Try re-sending request.")
       setTimeout(() => setError(""), time + 1500)
       setLoading(false)
       return
     }
-    
-    setStream('')
+
+    setStream("")
     setLoading(false)
-    
+
     if (dispatch) {
       dispatch({
         type: "NEW_PROJECT",
@@ -110,9 +110,9 @@ const Title: FC<Props> = ({ id }: Props) => {
 
   useEffect(() => {
     if (divRef.current) {
-      divRef.current.scrollTop = divRef.current.scrollHeight;
+      divRef.current.scrollTop = divRef.current.scrollHeight
     }
-  }, [stream]);
+  }, [stream])
 
   return (
     <>
@@ -148,7 +148,14 @@ const Title: FC<Props> = ({ id }: Props) => {
           Example
         </button>
       </div>
-      {loading && <div ref={divRef} className="w-1/5 h-20 overflow-y-auto font-mono text-black bg-indigo-50 border-4 border-gray-400 border-double rounded">{stream}</div>}
+      {loading && (
+        <div
+          ref={divRef}
+          className="w-1/5 h-20 overflow-y-auto font-mono text-black bg-indigo-50 border-4 border-gray-400 border-double rounded"
+        >
+          {stream}
+        </div>
+      )}
     </>
   )
 }
