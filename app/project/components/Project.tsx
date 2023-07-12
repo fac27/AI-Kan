@@ -3,15 +3,14 @@ import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
 import Title from "./Title"
 import Task from "./Task"
-import Issue from "./Issue"
+import IssueType from "./Issue"
 import Logout from "./Logout"
 import { useProject, useProjectDispatch } from "../../Context/store"
-import { Project } from "../../types/types"
 import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
 import Fireworks from "./Fireworks"
 
-const Project = ({ userId }) => {
+function Project ({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)
@@ -98,7 +97,7 @@ const Project = ({ userId }) => {
                     id={`Issues${index}`}
                   >
                     {task.issues.map(issue => (
-                      <Issue key={issue.id} issue={issue} />
+                      <IssueType key={issue.id} issue={issue} />
                     ))}
                   </div>
                 )

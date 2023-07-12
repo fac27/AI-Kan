@@ -1,11 +1,11 @@
 import { FC, useState } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { useProjectDispatch } from "../../Context/store"
-import { Issue } from "../../types/types"
-import Saving from "../components/Saving"
+import { IssueType } from "../../Types/types"
+import Saving from "./Saving"
 
 interface IssueProps {
-  issue: Issue
+  issue: IssueType
 }
 
 const Issue: FC<IssueProps> = ({ issue }) => {

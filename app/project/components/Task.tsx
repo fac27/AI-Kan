@@ -1,13 +1,13 @@
 import { FC, useState } from "react"
 import { card } from "../../Styles/TailwindClasses"
-import { Task } from "../../types/types"
+import { TaskType } from "../../Types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
 import Saving from "./Saving"
 
 interface TaskProps {
   id: string
-  task: Task
+  task: TaskType
   targetRef: React.RefObject<HTMLDivElement>
 }
 

@@ -1,9 +1,9 @@
 "use client"
 
 import { ReactNode, createContext, useContext, useReducer } from "react"
-import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
+import { ActionTypes, DispatchType, ProjectType, TaskType, IssueType } from "../Types/types"
 
-const ProjectContext = createContext<Project | null>(null)
+const ProjectContext = createContext<ProjectType | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export const ProjectProvider = ({ children }: { children: ReactNode }) => {
@@ -30,12 +30,12 @@ export const useProjectDispatch = () => {
   return useContext(ProjectDispatchContext)
 }
 
-export const projectReducer = (project: Project, action: ActionTypes): Project => {
+export const projectReducer = (project: ProjectType, action: ActionTypes): ProjectType => {
   switch (action.type) {
     case "EDIT_TASK_TITLE": {
-      const tasks = project.tasks.map((task: Task) => {
+      const tasks = project.tasks.map((task: TaskType) => {
         if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task
+          const actionPayload = action.payload as TaskType
           return {
             ...task,
             title: actionPayload.title,
@@ -49,7 +49,7 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
     case "EDIT_TASK_DESCRIPTION": {
       const tasks = project.tasks.map(task => {
         if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task
+          const actionPayload = action.payload as TaskType
           return {
             ...task,
             description: actionPayload.description,
@@ -61,12 +61,12 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
     }
 
     case "EDIT_ISSUE_TITLE": {
-      const tasks = project.tasks.map((task: Task) => {
-        const issuePayload = action.payload as Issue
+      const tasks = project.tasks.map((task: TaskType) => {
+        const issuePayload = action.payload as IssueType
         if (task.id === issuePayload.taskId) {
           return {
             ...task,
-            issues: task.issues.map((issue: Issue) => {
+            issues: task.issues.map((issue: IssueType) => {
               if (issue.id === issuePayload.id) {
                 return {
                   ...issue,
@@ -83,12 +83,12 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
     }
 
     case "EDIT_ISSUE_DESCRIPTION": {
-      const tasks = project.tasks.map((task: Task) => {
-        const issuePayload = action.payload as Issue
+      const tasks = project.tasks.map((task: TaskType) => {
+        const issuePayload = action.payload as IssueType
         if (task.id === issuePayload.taskId) {
           return {
             ...task,
-            issues: task.issues.map((issue: Issue) => {
+            issues: task.issues.map((issue: IssueType) => {
               if (issue.id === issuePayload.id) {
                 return {
                   ...issue,
@@ -107,7 +107,7 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
     case "EDIT_TASK_CHECKBOX": {
       const tasks = project.tasks.map(task => {
         if (task.id === action.payload.id) {
-          const actionPayload = action.payload as Task | Issue
+          const actionPayload = action.payload as TaskType | IssueType
           return {
             ...task,
             done: actionPayload.done,
@@ -126,7 +126,7 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
 
     case "EDIT_ISSUE_CHECKBOX": {
       const tasks = project.tasks.map(task => {
-        const issuePayload = action.payload as Issue
+        const issuePayload = action.payload as IssueType
         if (task.id === issuePayload.taskId) {
           const updatedIssues = task.issues.map(issue => {
             if (
@@ -154,18 +154,18 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
 
     case "DELETE_TASK": {
       const tasks = project.tasks.filter(
-        (task: Task) => task.id !== action.payload.id
+        (task: TaskType) => task.id !== action.payload.id
       )
       const newXarrowChangeCounter = project.xarrowChangeCounter + 1
       return { ...project, tasks, xarrowChangeCounter: newXarrowChangeCounter }
     }
 
     case "DELETE_ISSUE": {
-      const tasks = project.tasks.map((task: Task) => {
+      const tasks = project.tasks.map((task: TaskType) => {
         return {
           ...task,
           issues: task.issues.filter(
-            (issue: Issue) => issue.id !== action.payload.id
+            (issue: IssueType) => issue.id !== action.payload.id
           ),
         }
       })
@@ -174,7 +174,7 @@ export const projectReducer = (project: Project, action: ActionTypes): Project =
     }
 
     case "NEW_PROJECT": {
-      const actionPayload = action.payload as Project
+      const actionPayload = action.payload as ProjectType
       return actionPayload
     }
 
