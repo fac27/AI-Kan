@@ -67,7 +67,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
       ref={targetRef}
       className={`${card} ${
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
-      } flex flex-col TestTaskId${task.id}`}
+      } flex flex-col TestTaskId${task.id} text-ellipsis`}
     >
       {task.done && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
@@ -89,7 +89,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         type="text"
         value={task.title}
         onChange={handleEditTitle}
-        className={`mb-2 p-2 rounded border ${
+        className={`mb-2 p-2 rounded border text-ellipsis overflow-hidden ${
           !task.done ? "border-black" : "border-gray-400"
         } TestTaskTitle${task.id}`}
       />
