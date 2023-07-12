@@ -69,12 +69,12 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
       } flex flex-col TestTaskId${task.id}`}
     >
-       {task.done && <Confetti />}
+      {task.done && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
           checked={task.done}
-          className={`TestTaskCheckbox${task.id}`}
+          className={`TestTaskCheckbox${task.id} cursor-pointer`}
           onChange={handleTaskCheckbox}
         ></input>
         <button
