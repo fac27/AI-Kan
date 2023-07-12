@@ -94,7 +94,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         onChange={handleEditTitle}
         className={`mb-2 p-2 rounded border ${
           !issue.done ? "border-black" : "border-gray-400"
-        } TestIssueTitle${issue.id}`}
+        } TestIssueTitle${issue.id} text-ellipsis overflow-hidden`}
       />
       <textarea
         rows={4}
@@ -103,7 +103,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         onChange={handleEditDescription}
         className={`mb-2 p-2 resize-none rounded border ${
           !issue.done ? "border-black" : "border-gray-400"
-        } TestIssueDescription${issue.id}`}
+        } TestIssueDescription${issue.id} text-ellipsis overflow-scroll`}
       ></textarea>
     </div>
   )
