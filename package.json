@@ -44,6 +44,7 @@
     "cypress": "^12.16.0",
     "eslint": "^8.43.0",
     "eslint-config-next": "13.4.7",
+    "eventsource-parser": "^1.0.0",
     "husky": "^8.0.3",
     "prettier": "2.8.8",
     "start-server-and-test": "^2.0.0",

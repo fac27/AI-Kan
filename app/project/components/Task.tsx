@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { card, taskstyle } from "../../Styles/TailwindClasses"
+import { card } from "../../Styles/TailwindClasses"
 import { Task } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
@@ -69,12 +69,12 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
       } flex flex-col TestTaskId${task.id}`}
     >
-       {task.done && <Confetti />}
+      {task.done && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
           checked={task.done}
-          className={`TestTaskCheckbox${task.id}`}
+          className={`TestTaskCheckbox${task.id} cursor-pointer`}
           onChange={handleTaskCheckbox}
         ></input>
         <button
@@ -94,7 +94,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         } TestTaskTitle${task.id}`}
       />
       <textarea
-        rows={4}
+        rows={5}
         cols={20}
         value={task.description}
         onChange={handleEditDescription}
@@ -102,12 +102,6 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
           !task.done ? "border-black" : "border-gray-400"
         } TestTaskDescription${task.id}`}
       ></textarea>
-      <div className="mt-2 flex items-center justify-between">
-        <button type="button" className="-translate-y-1">
-          ⌄
-        </button>
-        <button type="button">＋</button>
-      </div>
     </div>
   )
 }
