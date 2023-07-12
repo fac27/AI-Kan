@@ -21,7 +21,7 @@ export async function POST(req: Request): Promise<Response> {
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",
     messages: [{ role: "user", content: alternativePrompt(prompt) }],
-    temperature: 0.7,
+    temperature: 1,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,

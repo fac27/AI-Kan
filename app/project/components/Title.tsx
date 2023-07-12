@@ -1,20 +1,17 @@
 import { FC, useState, useRef, useEffect } from "react"
-import { card, projectstyle } from "../Styles/TailwindClasses"
-import sanitise from "../../utils/sanitise"
-import { useProjectDispatch } from "../Context/store"
-import exampleData from "../../data/exampleData"
-import Loading from "./Loading"
+import { card, projectstyle } from "../../Styles/TailwindClasses"
+import sanitise from "../../../utils/sanitise"
+import { useProjectDispatch } from "../../Context/store"
+import exampleData from "../../../data/exampleData"
 import Error from "./Error"
-import { chunk } from "cypress/types/lodash"
 
 interface Props {
   id: string
 }
 
-const Title: FC<Props> = ({ id }: Props) => {
+const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
   const [stream, setStream] = useState("")
   const divRef = useRef(null)
 
@@ -138,7 +135,6 @@ const Title: FC<Props> = ({ id }: Props) => {
             >
               Submit
             </button>
-            {/* {loading && <Loading />} */}
           </div>
         </form>
         <button
