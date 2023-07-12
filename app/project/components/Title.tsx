@@ -7,11 +7,13 @@ import Error from "./Error"
 
 interface Props {
   id: string
-  loading: boolean
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isCleared: boolean
+  setIsCleared: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
+const Title: FC<Props> = ({ id, isLoading, setIsLoading, isCleared, setIsCleared }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
@@ -30,7 +32,13 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const time = 1000
 
+    if(!isCleared) {
+      setError("Need to clear project first")
+      setTimeout(() => setError(""), time)
+      return
+    }
     const prompt = projectInput
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -39,8 +47,6 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
       },
       body: JSON.stringify({ prompt }),
     })
-
-    const time = 1000
 
     if (response.status === 400) {
       setError(response.statusText)
@@ -69,8 +75,8 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
     if (!data) {
       return
     }
-
-    setLoading(true)
+    setIsCleared(false)
+    setIsLoading(true)
 
     const reader = data.getReader()
     const decoder = new TextDecoder()
@@ -92,12 +98,12 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
     if (sanitisedData === "not valid object") {
       setError("OpenAI returned invalid JSON \n Try re-sending request.")
       setTimeout(() => setError(""), time + 1500)
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
     setStream("")
-    setLoading(false)
+    setIsLoading(false)
 
     if (dispatch) {
       dispatch({
@@ -133,20 +139,16 @@ const Title: FC<Props> = ({ id, loading, setLoading }: Props) => {
             />
             <button
               type="submit"
-              className="border border-black bg-gray-50 p-1.5 rounded ml-5"
+              className={`border border-black bg-gray-50 p-1.5 rounded ml-5 ${
+                isCleared ? '' : 'text-gray-300'
+              }`}
             >
               Submit
             </button>
           </div>
         </form>
-        <button
-          onClick={handleExample}
-          className="TEST-example-btn border border-black bg-gray-50 p-1.5 rounded ml-5"
-        >
-          Example
-        </button>
       </div>
-      {loading && (
+      {isLoading && (
         <div
           ref={divRef}
           className="w-1/5 h-20 overflow-y-auto font-mono text-black bg-indigo-50 border-4 border-gray-400 border-double rounded"

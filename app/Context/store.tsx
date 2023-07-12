@@ -3,8 +3,13 @@
 import { ReactNode, createContext, useContext, useReducer } from "react"
 import { ActionTypes, DispatchType, Project, Task, Issue } from "../types/types"
 
-const ProjectContext = createContext<Project | null>(null)
-const ProjectDispatchContext = createContext<DispatchType | null>(null)
+const ProjectContext = createContext<Project>({
+  id: 0,
+  name: "",
+  tasks: [],
+  xarrowChangeCounter: 0,
+});
+const ProjectDispatchContext = createContext<DispatchType | null>(null);
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
   const [project, dispatch] = useReducer(projectReducer, {
@@ -177,6 +182,17 @@ function projectReducer(project: Project, action: ActionTypes): Project {
       const actionPayload = action.payload as Project
       return actionPayload
     }
+
+    case "CLEAR_PROJECT": {
+      const emptyProject: Project = {
+        id: 0,
+        name: "clearedProject",
+        tasks: [],
+        xarrowChangeCounter: 0,
+      };
+      return emptyProject;
+    }
+    
 
     default: {
       return project

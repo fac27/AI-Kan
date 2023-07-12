@@ -14,7 +14,8 @@ import Fireworks from "./Fireworks"
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isCleared, setIsCleared] = useState<boolean>(true)
 
   const dispatch = useProjectDispatch()
   const project = useProject()
@@ -66,13 +67,25 @@ export default function Project({ userId }) {
     return project?.tasks.every(task => task.done)
   }
 
+  function handleClearProject() {
+    if(!isLoading) {
+    if (dispatch) {
+      dispatch({
+        type: "CLEAR_PROJECT",
+        payload: project
+      })
+    }
+    setIsCleared(true)}
+  }
+
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
+      <button type="button" className="border border-black bg-gray-50 p-1.5 rounded ml-5 fixed top-4 right-4" onClick={handleClearProject}>Clear Project</button>
       {isProjComplete() && <Fireworks />}
-      <Title id={"ProjTitle"} loading={loading} setLoading={setLoading} />
+      <Title id={"ProjTitle"} isLoading={isLoading} setIsLoading={setIsLoading} isCleared={isCleared} setIsCleared={setIsCleared} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-          {!loading &&
+          {!isLoading &&
             project?.tasks.map((task, index) => (
               <Task
                 key={task.id}
@@ -84,7 +97,7 @@ export default function Project({ userId }) {
         </div>
         {width && (
           <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
-            {!loading &&
+            {!isLoading &&
               project?.tasks.map((task, index) => {
                 const hasIssues = task.issues.length > 0
                 const conditionalVisibility = hasIssues
@@ -108,7 +121,7 @@ export default function Project({ userId }) {
       </div>
 
       {width &&
-        !loading &&
+        !isLoading &&
         project?.tasks.map((task, index) => (
           <>
             <Xarrow
