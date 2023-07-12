@@ -1,10 +1,10 @@
 "use client"
+import { useEffect, useState, useRef } from "react"
+import Xarrow, { Xwrapper } from "react-xarrows"
 import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { useEffect, useState, useRef } from "react"
-import Xarrow, { Xwrapper } from "react-xarrows"
 import { card } from "../Styles/TailwindClasses"
 import { useProject, useProjectDispatch } from "../Context/store"
 import { Project } from "../types/types"
@@ -18,20 +18,22 @@ export default function Project({ userId }) {
   const project = useProject()
 
   const fetchData = async () => {
-    const { data } =
-      userId &&
-      (await supabase
-        .from("projects")
-        .select("project_object")
-        .eq("user_id", userId))
-
-    if (data && data.length > 0) {
-      const savedProject = data[0].project_object
-      dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
-    }
+     const { data } =
+       userId &&
+       (await supabase
+         .from("projects")
+         .select("project_object")
+         .eq("user_id", userId))
+ 
+     if (data && data.length > 0) {
+       const savedProject = data[0].project_object
+       dispatch && dispatch({ type: "NEW_PROJECT", payload: savedProject })
+     }
+   }
+  
+  if (userId && project?.name === "") {
+    fetchData()
   }
-
-  if (userId && project?.name === "") fetchData()
 
   useEffect(() => {
     if (targetRef.current) {
@@ -40,24 +42,22 @@ export default function Project({ userId }) {
     }
   }, [project])
 
-  async function autoSave() {
-    if (project?.name !== "") {
-      try {
-        await supabase
-          .from("projects")
-          .upsert({ user_id: userId, project_object: project }, { onConflict: 'user_id' })
-          .eq("user_id", userId)
-      } catch (error) {
-        console.log(error) // HANDLE THIS MORE GRACEFULLY
-      }
-    }
-  }
-
   useEffect(() => {
-    const saveTimeout = () => setTimeout(autoSave, 60 * 60)
-    saveTimeout()
-    return () => clearTimeout(saveTimeout())
-  }, [project])
+    const autoSave = () => setTimeout(async () => {
+      if (project?.name !== "") {
+          await supabase
+            .from("projects")
+            .upsert(
+              { user_id: userId, project_object: project },
+              { onConflict: "user_id" }
+            )
+      }
+    }, 60 * 60)
+    
+    autoSave()
+
+    return () => clearTimeout(autoSave())
+  }, [project, userId])
 
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
