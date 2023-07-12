@@ -1,7 +1,7 @@
 import Image from "next/image"
 import LOGO from "../../public/LOGO.png"
 
- const Heading = () => {
+const Heading = () => {
   return (
     <div className="text-center">
       <h1 className="text-5xl mb-5">Ai-Kan</h1>

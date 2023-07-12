@@ -15,7 +15,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
   const [isSaving, setIsSaving] = useState<boolean>(false)
 
-  const handleEditTitle = (event) => {
+  const handleEditTitle = event => {
     const newTitle = event.target.value
     setIsSaving(true)
     if (dispatch) {
@@ -30,7 +30,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
-  const handleEditDescription = (event) => {
+  const handleEditDescription = event => {
     const newDescription = event.target.value
     setIsSaving(true)
     if (dispatch) {
@@ -45,7 +45,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     return setTimeout(() => setIsSaving(false), 60 * 60)
   }
 
-  const handleTaskCheckbox = (event) => {
+  const handleTaskCheckbox = event => {
     setIsSaving(true)
     const isChecked = event.target.checked
     if (dispatch) {

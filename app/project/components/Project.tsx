@@ -10,7 +10,7 @@ import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
 import Fireworks from "./Fireworks"
 
-function Project ({ userId }) {
+function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
   const [loading, setLoading] = useState(false)

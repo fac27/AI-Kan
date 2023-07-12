@@ -1,7 +1,13 @@
 "use client"
 
 import { ReactNode, createContext, useContext, useReducer } from "react"
-import { ActionTypes, DispatchType, ProjectType, TaskType, IssueType } from "../Types/types"
+import {
+  ActionTypes,
+  DispatchType,
+  ProjectType,
+  TaskType,
+  IssueType,
+} from "../Types/types"
 
 const ProjectContext = createContext<ProjectType | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
@@ -30,7 +36,10 @@ export const useProjectDispatch = () => {
   return useContext(ProjectDispatchContext)
 }
 
-export const projectReducer = (project: ProjectType, action: ActionTypes): ProjectType => {
+export const projectReducer = (
+  project: ProjectType,
+  action: ActionTypes
+): ProjectType => {
   switch (action.type) {
     case "EDIT_TASK_TITLE": {
       const tasks = project.tasks.map((task: TaskType) => {
