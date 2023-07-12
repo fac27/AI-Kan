@@ -5,6 +5,7 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
+import Saving from "./Saving"
 import { useProject, useProjectDispatch } from "../../Context/store"
 import { Project } from "../../types/types"
 import { supabase } from "../../auth/client"
@@ -15,6 +16,7 @@ export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isSaving, setIsSaving] = useState<boolean>(false)
   const [isCleared, setIsCleared] = useState<boolean>(true)
 
   const dispatch = useProjectDispatch()
@@ -46,6 +48,7 @@ export default function Project({ userId }) {
   }, [project])
 
   useEffect(() => {
+    setIsSaving(true)
     const autoSave = () =>
       setTimeout(async () => {
         if (project?.name !== "") {
@@ -56,6 +59,7 @@ export default function Project({ userId }) {
               { onConflict: "user_id" }
             )
         }
+        setIsSaving(false)
       }, 60 * 60)
 
     autoSave()
@@ -70,34 +74,22 @@ export default function Project({ userId }) {
   }
 
   function handleClearProject() {
-    if (!isLoading) {
-      if (dispatch) {
-        dispatch({
-          type: "CLEAR_PROJECT",
-          payload: project,
-        })
-      }
-      setIsCleared(true)
+    if(!isLoading) {
+    if (dispatch) {
+      dispatch({
+        type: "CLEAR_PROJECT",
+        payload: project
+      })
     }
+    setIsCleared(true)}
   }
 
   return (
     <Xwrapper key={project?.xarrowChangeCounter}>
-      <button
-        type="button"
-        className="border border-black bg-gray-50 p-1.5 rounded ml-5 fixed top-4 right-4"
-        onClick={handleClearProject}
-      >
-        Clear Project
-      </button>
+      <button type="button" className="border border-black bg-gray-50 p-1.5 rounded ml-5 fixed top-4 right-4" onClick={handleClearProject}>Clear Project</button>
       {isProjComplete() && <Fireworks />}
-      <Title
-        id={"ProjTitle"}
-        isLoading={isLoading}
-        setIsLoading={setIsLoading}
-        isCleared={isCleared}
-        setIsCleared={setIsCleared}
-      />
+      {isSaving && <Saving />}
+      <Title id={"ProjTitle"} isLoading={isLoading} setIsLoading={setIsLoading} isCleared={isCleared} setIsCleared={setIsCleared} />
       <div key={project?.id}>
         <div className="m-4 mt-10 flex space-x-4 w-500 justify-center">
           {!isLoading &&

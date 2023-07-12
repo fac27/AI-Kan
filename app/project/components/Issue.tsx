@@ -1,20 +1,17 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { useProjectDispatch } from "../../Context/store"
 import { Issue } from "../../types/types"
-import Saving from "../components/Saving"
 
 interface IssueProps {
   issue: Issue
 }
 
 const Issue: FC<IssueProps> = ({ issue }) => {
-  const [isSaving, setIsSaving] = useState<boolean>(false)
   const dispatch = useProjectDispatch()
 
   function handleEditTitle(event) {
     const newTitle = event.target.value
-    setIsSaving(true)
     if (dispatch) {
       dispatch({
         type: "EDIT_ISSUE_TITLE",
@@ -24,12 +21,10 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         },
       })
     }
-    return setTimeout(() => setIsSaving(false), 60 * 20)
   }
 
   function handleEditDescription(event) {
     const newDescription = event.target.value
-    setIsSaving(true)
     if (dispatch) {
       dispatch({
         type: "EDIT_ISSUE_DESCRIPTION",
@@ -39,12 +34,10 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         },
       })
     }
-    return setTimeout(() => setIsSaving(false), 60 * 60)
   }
 
   function handleIssueCheckbox(event) {
     const isChecked = event.target.checked
-    setIsSaving(true)
     if (dispatch) {
       dispatch({
         type: "EDIT_ISSUE_CHECKBOX",
@@ -54,7 +47,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         },
       })
     }
-    return setTimeout(() => setIsSaving(false), 60 * 10)
   }
 
   function handleDeleteIssue() {
@@ -79,7 +71,6 @@ const Issue: FC<IssueProps> = ({ issue }) => {
           onChange={handleIssueCheckbox}
           className={`TestIssueCheckbox${issue.taskId}-${issue.id} cursor-pointer`}
         ></input>
-        {isSaving && <Saving />}
         <button
           type="button"
           className={`TestIssueDelete${issue.taskId}-${issue.id}`}
@@ -94,7 +85,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         onChange={handleEditTitle}
         className={`mb-2 p-2 rounded border ${
           !issue.done ? "border-black" : "border-gray-400"
-        } TestIssueTitle${issue.id}`}
+        } TestIssueTitle${issue.id} text-ellipsis overflow-hidden`}
       />
       <textarea
         rows={4}
@@ -103,7 +94,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
         onChange={handleEditDescription}
         className={`mb-2 p-2 resize-none rounded border ${
           !issue.done ? "border-black" : "border-gray-400"
-        } TestIssueDescription${issue.id}`}
+        } TestIssueDescription${issue.id} text-ellipsis overflow-scroll`}
       ></textarea>
     </div>
   )
