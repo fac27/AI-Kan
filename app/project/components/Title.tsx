@@ -1,8 +1,8 @@
 import { FC, useState } from "react"
-import { card, projectstyle } from "../Styles/TailwindClasses"
-import sanitise from "../../utils/sanitise"
-import { useProjectDispatch } from "../Context/store"
-import exampleData from "../../data/exampleData"
+import { card, projectstyle } from "../../Styles/TailwindClasses"
+import sanitise from "../../../utils/sanitise"
+import { useProjectDispatch } from "../../Context/store"
+import exampleData from "../../../data/exampleData"
 import Loading from "./Loading"
 import Error from "./Error"
 

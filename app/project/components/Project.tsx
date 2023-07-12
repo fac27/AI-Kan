@@ -5,10 +5,10 @@ import Title from "./Title"
 import Task from "./Task"
 import Issue from "./Issue"
 import Logout from "./Logout"
-import { card } from "../Styles/TailwindClasses"
-import { useProject, useProjectDispatch } from "../Context/store"
-import { Project } from "../types/types"
-import { supabase } from "../auth/client"
+import { card } from "../../Styles/TailwindClasses"
+import { useProject, useProjectDispatch } from "../../Context/store"
+import { Project } from "../../types/types"
+import { supabase } from "../../auth/client"
 
 export default function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)

@@ -1,4 +1,4 @@
-import Project from "./Project"
+import Project from "./components/Project"
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"

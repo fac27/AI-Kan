@@ -1,7 +1,7 @@
-import { FC, useState } from "react"
-import { card } from "../Styles/TailwindClasses"
-import { Task } from "../types/types"
-import { useProjectDispatch } from "../Context/store"
+import { FC } from "react"
+import { card } from "../../Styles/TailwindClasses"
+import { Task } from "../../types/types"
+import { useProjectDispatch } from "../../Context/store"
 
 interface TaskProps {
   id: string
