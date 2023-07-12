@@ -47,18 +47,19 @@ export default function Project({ userId }) {
   }, [project])
 
   useEffect(() => {
-    const autoSave = () => setIsSaving(true)
-    setTimeout(async () => {
-      if (project?.name !== "") {
-        await supabase
-          .from("projects")
-          .upsert(
-            { user_id: userId, project_object: project },
-            { onConflict: "user_id" }
-          )
-      }
-      setIsSaving(false)
-    }, 60 * 60)
+    setIsSaving(true)
+    const autoSave = () =>
+      setTimeout(async () => {
+        if (project?.name !== "") {
+          await supabase
+            .from("projects")
+            .upsert(
+              { user_id: userId, project_object: project },
+              { onConflict: "user_id" }
+            )
+        }
+        setIsSaving(false)
+      }, 60 * 60)
 
     autoSave()
 
