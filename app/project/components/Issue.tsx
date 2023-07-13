@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { useProjectDispatch } from "../../Context/store"
-import { IssueType } from "../../Types/types"
+import { IssueType } from "../../types/types"
 
 interface IssueProps {
   issue: IssueType

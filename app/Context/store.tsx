@@ -7,7 +7,7 @@ import {
   ProjectType,
   TaskType,
   IssueType,
-} from "../Types/types"
+} from "../types/types"
 
 const ProjectContext = createContext<ProjectType | null>(null)
 const ProjectDispatchContext = createContext<DispatchType | null>(null)

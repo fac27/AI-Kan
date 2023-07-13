@@ -1,4 +1,4 @@
-import { TaskType } from "../app/Types/types"
+import { TaskType } from "../app/types/types"
 
 const sanitise = (response: string) => {
   const jsonData = JSON.parse(`{${response}`)

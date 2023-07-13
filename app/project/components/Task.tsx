@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { card } from "../../Styles/TailwindClasses"
-import { TaskType } from "../../Types/types"
+import { TaskType } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
 
