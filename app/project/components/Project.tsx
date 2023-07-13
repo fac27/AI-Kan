@@ -122,8 +122,9 @@ function Project({ userId }) {
               end={`Task${index}`}
               startAnchor={"bottom"}
               endAnchor={"top"}
-              color={"black"}
-              strokeWidth={1}
+              color={"gray"}
+              strokeWidth={2.5}
+              animateDrawing={1.2}
             />
             {task.issues.length > 0 && (
               <Xarrow
@@ -132,8 +133,9 @@ function Project({ userId }) {
                 end={`Issues${index}`}
                 startAnchor={"bottom"}
                 endAnchor={"top"}
-                color={"black"}
-                strokeWidth={1}
+                color={"gray"}
+                strokeWidth={2.5}
+                animateDrawing={1.2}
               />
             )}
           </>
