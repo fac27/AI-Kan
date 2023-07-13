@@ -1,4 +1,4 @@
-import "./globals.css"
+import "../app/Styles/globals.css"
 import { ProjectProvider } from "./Context/store"
 
 export const metadata = {

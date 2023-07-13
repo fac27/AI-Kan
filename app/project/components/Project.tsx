@@ -6,10 +6,11 @@ import Task from "./Task"
 import IssueType from "./Issue"
 import Logout from "./Logout"
 import Saving from "./Saving"
+import Fireworks from "./Fireworks"
 import { useProject, useProjectDispatch } from "../../Context/store"
 import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
-import Fireworks from "./Fireworks"
+
 
 function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)

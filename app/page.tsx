@@ -1,12 +1,14 @@
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+
 import CallToAction from "./components/CallToAction"
 import Image from "next/image"
 import LOGO from "../public/LOGO.png"
 import Features from "./components/Features"
 import React from "react"
 import AuthForm from "./components/AuthForm"
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+
 
 const Home: React.FC = async () => {
   const supabase = createRouteHandlerClient({ cookies })
