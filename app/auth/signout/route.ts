@@ -5,7 +5,6 @@ import { type NextRequest, NextResponse } from "next/server"
 export const POST = async (req: NextRequest) => {
   const supabase = createRouteHandlerClient({ cookies })
 
-  // Check if we have a session
   const {
     data: { session },
   } = await supabase.auth.getSession()

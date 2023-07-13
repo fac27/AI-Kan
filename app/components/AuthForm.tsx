@@ -14,7 +14,6 @@ const AuthForm = () => {
       appearance={{
         theme: ThemeSupa,
         extend: true,
-        // Your custom classes
         style: {
           label: {
             color: "black",
