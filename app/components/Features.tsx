@@ -1,4 +1,4 @@
-export default function Features() {
+const Features = () => {
   return (
     <div className="flex m-10 justify-around text-white w-screen">
       <div className="w-1/6 text-md">
@@ -40,3 +40,5 @@ export default function Features() {
     </div>
   )
 }
+
+export default Features

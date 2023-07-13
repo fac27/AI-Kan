@@ -1,5 +1,5 @@
 import { FC, useState, useRef, useEffect } from "react"
-import { card, projectstyle } from "../../Styles/TailwindClasses"
+import { card } from "../../Styles/TailwindClasses"
 import sanitise from "../../../utils/sanitise"
 import { useProjectDispatch } from "../../Context/store"
 import Error from "./Error"
@@ -26,7 +26,7 @@ const Title: FC<Props> = ({
 
   const dispatch = useProjectDispatch()
 
-  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const time = 1000
 
@@ -123,7 +123,7 @@ const Title: FC<Props> = ({
       {error && <Error error={error} />}
       <div
         id={id}
-        className={`mt-10 flex flex-col items-center justify-center ${card} ${projectstyle}`}
+        className={`mt-10 flex flex-col items-center justify-center ${card} bg-orange-50`}
       >
         <form onSubmit={onSubmit}>
           <label htmlFor="promptInput">I want to make a...</label>

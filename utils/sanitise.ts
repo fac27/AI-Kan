@@ -1,6 +1,6 @@
-import { Task } from "../app/types/types"
+import { TaskType } from "../app/types/types"
 
-export default function sanitise(response: string) {
+const sanitise = (response: string) => {
   try {
     const jsonData = JSON.parse(`{${response}`);
     if (typeof jsonData !== "object" || !jsonData.tasks) {
@@ -9,7 +9,7 @@ export default function sanitise(response: string) {
     let issueid = 0;
     jsonData.id = 0;
     jsonData.xarrowChangeCounter = 0;
-    jsonData.tasks.forEach((task: Task, index: number) => {
+    jsonData.tasks.forEach((task: TaskType, index: number) => {
       // Adding task id
       task.id = index;
       if (task.issues) {
@@ -26,3 +26,5 @@ export default function sanitise(response: string) {
     return
   }
 }
+
+export default sanitise

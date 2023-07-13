@@ -1,19 +1,19 @@
 import { FC } from "react"
 import { card } from "../../Styles/TailwindClasses"
-import { Task } from "../../types/types"
+import { TaskType } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
 import Confetti from "./Confetti"
 
 interface TaskProps {
   id: string
-  task: Task
+  task: TaskType
   targetRef: React.RefObject<HTMLDivElement>
 }
 
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
   const dispatch = useProjectDispatch()
 
-  function handleEditTitle(event) {
+  const handleEditTitle = event => {
     const newTitle = event.target.value
     if (dispatch) {
       dispatch({
@@ -26,7 +26,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
-  function handleEditDescription(event) {
+  const handleEditDescription = event => {
     const newDescription = event.target.value
     if (dispatch) {
       dispatch({
@@ -39,7 +39,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
-  function handleTaskCheckbox(event) {
+  const handleTaskCheckbox = event => {
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
@@ -52,7 +52,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
     }
   }
 
-  function handleDeleteTask() {
+  const handleDeleteTask = () => {
     if (dispatch) {
       dispatch({
         type: "DELETE_TASK",

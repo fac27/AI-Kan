@@ -1,16 +1,16 @@
 import { FC } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { useProjectDispatch } from "../../Context/store"
-import { Issue } from "../../types/types"
+import { IssueType } from "../../types/types"
 
 interface IssueProps {
-  issue: Issue
+  issue: IssueType
 }
 
 const Issue: FC<IssueProps> = ({ issue }) => {
   const dispatch = useProjectDispatch()
 
-  function handleEditTitle(event) {
+  const handleEditTitle = event => {
     const newTitle = event.target.value
     if (dispatch) {
       dispatch({
@@ -23,7 +23,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
 
-  function handleEditDescription(event) {
+  const handleEditDescription = event => {
     const newDescription = event.target.value
     if (dispatch) {
       dispatch({
@@ -36,7 +36,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
 
-  function handleIssueCheckbox(event) {
+  const handleIssueCheckbox = event => {
     const isChecked = event.target.checked
     if (dispatch) {
       dispatch({
@@ -49,7 +49,7 @@ const Issue: FC<IssueProps> = ({ issue }) => {
     }
   }
 
-  function handleDeleteIssue() {
+  const handleDeleteIssue = () => {
     if (dispatch) {
       dispatch({
         type: "DELETE_ISSUE",

@@ -6,7 +6,7 @@ interface ConfettiInstance {
   (options: confetti.Options): void
 }
 
-export default function Confetti() {
+const Confetti = () => {
   const refAnimationInstance = useRef<ConfettiInstance | null>(null)
 
   const getInstance = useCallback((instance: confetti.CreateTypes) => {
@@ -70,3 +70,5 @@ export default function Confetti() {
     />
   )
 }
+
+export default Confetti

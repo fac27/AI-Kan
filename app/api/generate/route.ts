@@ -1,11 +1,11 @@
 import { OpenAIStream, OpenAIStreamPayload } from "../../../utils/openAIStream"
-import alternativePrompt from "./alternativePrompt"
+import generatePrompt from "./generatePrompt"
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("Missing env var from OpenAI")
 }
 
-export async function POST(req: Request): Promise<Response> {
+export const POST = async (req: Request): Promise<Response> => {
   const { prompt } = (await req.json()) as {
     prompt?: string
   }
@@ -16,7 +16,7 @@ export async function POST(req: Request): Promise<Response> {
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: alternativePrompt(prompt) }],
+    messages: [{ role: "user", content: generatePrompt(prompt) }],
     temperature: 1,
     top_p: 1,
     frequency_penalty: 0,

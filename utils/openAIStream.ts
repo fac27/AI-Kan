@@ -23,7 +23,7 @@ import {
     n: number;
   }
   
-  export async function OpenAIStream(payload: OpenAIStreamPayload) {
+  export const OpenAIStream = async (payload: OpenAIStreamPayload) => {
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
   
@@ -41,7 +41,7 @@ import {
     const stream = new ReadableStream({
       async start(controller) {
         // callback
-        function onParse(event: ParsedEvent | ReconnectInterval) {
+        const onParse = (event: ParsedEvent | ReconnectInterval) => {
           if (event.type === "event") {
             const data = event.data;
             // https://beta.openai.com/docs/api-reference/completions/create#completions/create-stream
