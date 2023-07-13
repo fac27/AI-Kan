@@ -42,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "babel-jest": "^29.5.0",
-    "cypress": "^12.16.0",
+    "cypress": "^4.2.0",
     "eslint": "^8.43.0",
     "eslint-config-next": "13.4.7",
     "eventsource-parser": "^1.0.0",
