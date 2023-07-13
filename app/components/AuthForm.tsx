@@ -39,7 +39,7 @@ const AuthForm = () => {
       theme="dark"
       showLinks={false}
       providers={[]}
-      redirectTo="http://localhost:3000/auth/callback"
+      redirectTo="https://ai-kan.vercel.app/auth/callback"
     />
   )
 }

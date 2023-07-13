@@ -56,7 +56,11 @@ function Project({ userId }) {
           await supabase
             .from("projects")
             .upsert(
-              { user_id: userId, project_object: project, created_at: timeStamp },
+              {
+                user_id: userId,
+                project_object: project,
+                created_at: timeStamp,
+              },
               { onConflict: "user_id" }
             )
         }
