@@ -1,12 +1,12 @@
-export interface Task {
+export interface TaskType {
   id: number
   title: string
   description: string
-  issues: Issue[]
+  issues: IssueType[]
   done: boolean
 }
 
-export interface Issue {
+export interface IssueType {
   id: number
   taskId: number
   title: string
@@ -15,27 +15,27 @@ export interface Issue {
   done: boolean
 }
 
-export interface Project {
+export interface ProjectType {
   id: number
   name: string
-  tasks: Task[]
+  tasks: TaskType[]
   xarrowChangeCounter: number
 }
 
 type Action =
-  | { type: "EDIT_TASK_TITLE"; payload: Task }
-  | { type: "EDIT_TASK_DESCRIPTION"; payload: Task }
-  | { type: "EDIT_ISSUE_TITLE"; payload: Issue }
-  | { type: "EDIT_ISSUE_DESCRIPTION"; payload: Issue }
-  | { type: "EDIT_TASK_CHECKBOX"; payload: Task }
-  | { type: "EDIT_ISSUE_CHECKBOX"; payload: Issue }
-  | { type: "DELETE_TASK"; payload: Task }
-  | { type: "DELETE_ISSUE"; payload: Issue }
-  | { type: "NEW_PROJECT"; payload: Project }
+  | { type: "EDIT_TASK_TITLE"; payload: TaskType }
+  | { type: "EDIT_TASK_DESCRIPTION"; payload: TaskType }
+  | { type: "EDIT_ISSUE_TITLE"; payload: IssueType }
+  | { type: "EDIT_ISSUE_DESCRIPTION"; payload: IssueType }
+  | { type: "EDIT_TASK_CHECKBOX"; payload: TaskType }
+  | { type: "EDIT_ISSUE_CHECKBOX"; payload: IssueType }
+  | { type: "DELETE_TASK"; payload: TaskType }
+  | { type: "DELETE_ISSUE"; payload: IssueType }
+  | { type: "NEW_PROJECT"; payload: ProjectType }
 
 export type DispatchType = (value: Action) => void
 
 export type ActionTypes = {
   type: string
-  payload: Task | Issue | Project
+  payload: TaskType | IssueType | ProjectType
 }

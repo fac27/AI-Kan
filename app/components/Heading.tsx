@@ -1,6 +1,7 @@
 import Image from "next/image"
 import LOGO from "../../public/LOGO.png"
-export default function Heading() {
+
+const Heading = () => {
   return (
     <div className="text-center">
       <h1 className="text-5xl mb-5">Ai-Kan</h1>
@@ -12,3 +13,5 @@ export default function Heading() {
     </div>
   )
 }
+
+export default Heading
