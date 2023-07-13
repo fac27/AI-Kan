@@ -20,7 +20,7 @@ const Home: React.FC = async () => {
     return (
       <div className="flex flex-col h-screen w-screen items-center justify-around">
         <div className="flex flex-col h-screen w-screen items-center justify-center">
-          <Image src={LOGO} alt="Ai-Kan" className="mt-20 w-1/5 rounded-lg" />
+          <Image src={LOGO} alt="Ai-Kan" className="mt-20 w-1/6 rounded-lg" />
           <CallToAction/>
         </div>
         <AuthForm/>
