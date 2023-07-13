@@ -1,5 +1,12 @@
 import "../app/Styles/globals.css"
 import { ProjectProvider } from "./Context/store"
+import { Roboto } from 'next/font/google'
+ 
+const roboto = Roboto({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '300'
+})
 
 export const metadata = {
   title: "User Management",
@@ -10,7 +17,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <ProjectProvider>
-        <body className="h-screen w-screen">
+        <body className={`${roboto} h-screen w-screen`}>
           <main className="flex flex-col items-center justify-center gap-4">
             {children}
           </main>
