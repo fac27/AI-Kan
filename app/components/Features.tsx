@@ -1,8 +1,8 @@
 const Features = () => {
   return (
-    <div className="flex gap-5 m-10 justify-around text-white w-screen">
-      <div className="w-1/6 text-md">
-        <p className="text-3xl mb-5">Break It Down:</p>
+    <div className="flex m-10 justify-around text-white w-screen">
+      <div className="w-1/6 text-sm">
+        <p className="text-2xl mb-5">Break It Down:</p>
         <p className="flex">
           <span className="mr-2 text-2xl">🔨</span>
           <span>
@@ -11,15 +11,15 @@ const Features = () => {
           </span>
         </p>
       </div>
-      <div className="w-1/6 text-md">
-        <p className="text-3xl mb-5">Personalize:</p>
+      <div className="w-1/6 text-sm">
+        <p className="text-2xl mb-5">Personalize:</p>
         <p className="flex">
           <span className="mr-2 text-2xl">📝</span>
           <span>Edit tasks and issues to match your unique project.</span>
         </p>
       </div>
-      <div className="w-1/6 text-md">
-        <p className="text-3xl mb-5">Progress Tracking:</p>
+      <div className="w-1/6 text-sm">
+        <p className="text-2xl mb-5">Progress Tracking:</p>
         <p className="flex">
           <span className="mr-2 text-2xl">📈</span>
           <span>
@@ -27,8 +27,8 @@ const Features = () => {
           </span>
         </p>
       </div>
-      <div className="w-1/6 text-md">
-        <p className="text-3xl mb-5">Focus On The Fun:</p>
+      <div className="w-1/6 text-sm">
+        <p className="text-2xl mb-5">Focus On The Fun:</p>
         <p className="flex">
           <span className="mr-2 text-2xl">🥳</span>
           <span>

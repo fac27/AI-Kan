@@ -21,11 +21,12 @@ const AuthForm = () => {
           },
           container: {
             width: "30vw",
-            height: "25vh",
+            height: "205px",
             background: "#fff7ed",
-            padding: "30px",
+            padding: "20px",
             borderRadius: "10px",
             border: "1px solid rgba(0,0,0,0.18)",
+            marginTop: "40px",
           },
           button: {
             background: "#f9fafb",
@@ -33,6 +34,7 @@ const AuthForm = () => {
             border: "outset 1px black",
           },
           input: { background: "white", color: "black" },
+          message: { color: "red" },
         },
       }}
       theme="dark"
