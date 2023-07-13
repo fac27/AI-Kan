@@ -32,6 +32,7 @@ type Action =
   | { type: "DELETE_TASK"; payload: TaskType }
   | { type: "DELETE_ISSUE"; payload: IssueType }
   | { type: "NEW_PROJECT"; payload: ProjectType }
+  | { type: "CLEAR_PROJECT"; payload: ProjectType }
 
 export type DispatchType = (value: Action) => void
 
