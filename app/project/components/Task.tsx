@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { card } from "../../Styles/TailwindClasses"
 import { TaskType } from "../../types/types"
 import { useProjectDispatch } from "../../Context/store"
@@ -11,6 +11,8 @@ interface TaskProps {
 }
 
 const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
+  const [confettiEnabled, setConfettiEnabled] = useState<boolean>(false)
+
   const dispatch = useProjectDispatch()
 
   const handleEditTitle = event => {
@@ -50,6 +52,8 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         },
       })
     }
+    if (isChecked) return setConfettiEnabled(true)
+    setConfettiEnabled(false)
   }
 
   const handleDeleteTask = () => {
@@ -69,7 +73,7 @@ const Task: FC<TaskProps> = ({ id, task, targetRef }) => {
         !task.done ? "bg-teal-50" : "bg-teal-50 text-gray-400"
       } flex flex-col TestTaskId${task.id} text-ellipsis`}
     >
-      {task.done && <Confetti />}
+      {confettiEnabled && <Confetti />}
       <div className={`mb-2 flex items-center justify-between`}>
         <input
           type="checkbox"
