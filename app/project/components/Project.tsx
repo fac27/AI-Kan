@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState, useRef } from "react"
 import Xarrow, { Xwrapper } from "react-xarrows"
+
 import Title from "./Title"
 import Task from "./Task"
 import IssueType from "./Issue"
