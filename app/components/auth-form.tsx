@@ -21,11 +21,12 @@ export default function AuthForm() {
           },
           container: {
             width: "30vw",
-            height: "25vh",
+            height: "220px",
             background: "#fff7ed",
-            padding: "30px",
+            padding: "20px",
             borderRadius: "10px",
             border: "1px solid rgba(0,0,0,0.18)",
+            marginTop: "30px"
           },
           button: {
             background: "#f9fafb",

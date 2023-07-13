@@ -1,6 +1,6 @@
 export default function Features() {
   return (
-    <div className="flex gap-5 m-10 justify-around text-white w-screen">
+    <div className="flex m-10 justify-around text-white w-screen">
       <div className="w-1/6 text-md">
         <p className="text-3xl mb-5">Break It Down:</p>
         <p className="flex">
