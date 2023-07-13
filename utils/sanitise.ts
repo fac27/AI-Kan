@@ -7,11 +7,9 @@ const sanitise = (response: string) => {
   jsonData.id = 0
   jsonData.xarrowChangeCounter = 0
   jsonData.tasks.forEach((task: TaskType, index: number) => {
-    // Adding task id
     task.id = index
     if (task.issues) {
       task.issues.forEach(issue => {
-        // Adding taskId and issue id to each issue
         issue.taskId = task.id
         issue.id = issueid
         issueid++
