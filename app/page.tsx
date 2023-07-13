@@ -9,7 +9,6 @@ import Features from "./components/Features"
 import React from "react"
 import AuthForm from "./components/AuthForm"
 
-
 const Home: React.FC = async () => {
   const supabase = createRouteHandlerClient({ cookies })
 

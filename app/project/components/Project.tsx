@@ -12,7 +12,6 @@ import { useProject, useProjectDispatch } from "../../Context/store"
 import { supabase } from "../../auth/client"
 import { card, issuestyle } from "../../Styles/TailwindClasses"
 
-
 function Project({ userId }) {
   const targetRef = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState<number | null>(null)
