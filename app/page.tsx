@@ -18,13 +18,13 @@ const Home: React.FC = async () => {
 
   if (!session)
     return (
-      <div className="flex flex-col gap-10 h-screen w-screen items-center justify-around">
-        <div className="gap-5 flex flex-col h-screen w-screen items-center justify-center">
-          <Image src={LOGO} alt="Ai-Kan" className="w-1/5 rounded-lg" />
+      <div className="flex flex-col h-screen w-screen items-center justify-around">
+        <div className="flex flex-col h-screen w-screen items-center justify-center">
+          <Image src={LOGO} alt="Ai-Kan" className="mt-20 w-1/6 rounded-lg" />
           <CallToAction />
         </div>
         <AuthForm />
-        <div className="bg-gray-800">
+        <div className="mt-10 bg-gray-800">
           <Features />
         </div>
       </div>

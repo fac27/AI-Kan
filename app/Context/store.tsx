@@ -9,7 +9,12 @@ import {
   IssueType,
 } from "../types/types"
 
-const ProjectContext = createContext<ProjectType | null>(null)
+const ProjectContext = createContext<ProjectType>({
+  id: 0,
+  name: "",
+  tasks: [],
+  xarrowChangeCounter: 0,
+})
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
 export const ProjectProvider = ({ children }: { children: ReactNode }) => {
@@ -185,6 +190,16 @@ export const projectReducer = (
     case "NEW_PROJECT": {
       const actionPayload = action.payload as ProjectType
       return actionPayload
+    }
+
+    case "CLEAR_PROJECT": {
+      const emptyProject: ProjectType = {
+        id: 0,
+        name: "clearedProject",
+        tasks: [],
+        xarrowChangeCounter: 0,
+      }
+      return emptyProject
     }
 
     default: {
