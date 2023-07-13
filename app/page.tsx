@@ -21,11 +21,11 @@ const Home: React.FC = async () => {
       <div className="flex flex-col h-screen w-screen items-center justify-around">
         <div className="flex flex-col h-screen w-screen items-center justify-center">
           <Image src={LOGO} alt="Ai-Kan" className="mt-20 w-1/6 rounded-lg" />
-          <CallToAction/>
+          <CallToAction />
         </div>
-        <AuthForm/>
+        <AuthForm />
         <div className="mt-10 bg-gray-800">
-          <Features/>
+          <Features />
         </div>
       </div>
     )

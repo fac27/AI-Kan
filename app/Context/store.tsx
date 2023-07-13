@@ -193,7 +193,7 @@ export const projectReducer = (
     }
 
     case "CLEAR_PROJECT": {
-      const emptyProject: Project = {
+      const emptyProject: ProjectType = {
         id: 0,
         name: "clearedProject",
         tasks: [],

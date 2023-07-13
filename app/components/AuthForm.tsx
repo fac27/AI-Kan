@@ -26,7 +26,7 @@ const AuthForm = () => {
             padding: "20px",
             borderRadius: "10px",
             border: "1px solid rgba(0,0,0,0.18)",
-            marginTop: "40px"
+            marginTop: "40px",
           },
           button: {
             background: "#f9fafb",
@@ -34,7 +34,7 @@ const AuthForm = () => {
             border: "outset 1px black",
           },
           input: { background: "white", color: "black" },
-          message: { color: "red"}
+          message: { color: "red" },
         },
       }}
       theme="dark"
