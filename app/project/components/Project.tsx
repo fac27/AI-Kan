@@ -31,6 +31,8 @@ function Project() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
+  const [result, setResult] = useState<string>("")
+
   const onConnect = useCallback(
     connection => setEdges(eds => addEdge(connection, eds)),
     [setEdges]
@@ -47,9 +49,14 @@ function Project() {
         nodeTypes={nodeTypes}
         fitView
       >
-        <Background color="#ccc" />
-        <Panel position="top-left">Sign Out</Panel>
-        <Panel position="top-right">Clear Project</Panel>
+        <Background color="#18c" variant="cross" />
+        <Panel position="top-left">
+          <button>Sign Out</button>
+        </Panel>
+        <Panel position="top-right">
+          <button>Clear Project</button>
+        </Panel>
+        {result && <Panel position="bottom-center">{result}</Panel>}
         <Controls />
       </ReactFlow>
     </div>
