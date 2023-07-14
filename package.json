@@ -29,6 +29,7 @@
     "react-canvas-confetti": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-xarrows": "^2.0.2",
+    "reactflow": "^11.7.4",
     "tailwindcss": "^3.3.2"
   },
   "devDependencies": {

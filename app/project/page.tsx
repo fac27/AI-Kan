@@ -4,7 +4,7 @@ import { redirect } from "next/navigation"
 import Project from "./components/Project"
 
 const AuthProject = async () => {
-  const supabase = createRouteHandlerClient({ cookies })
+  /* const supabase = createRouteHandlerClient({ cookies })
 
   const {
     data: { session },
@@ -13,9 +13,9 @@ const AuthProject = async () => {
   const data = await supabase.auth.getUser()
   const userId = data.data?.user?.id
 
-  if (!session) return redirect("/")
+  if (!session) return redirect("/") */
 
-  return <Project userId={userId} />
+  return <Project />
 }
 
 export default AuthProject
