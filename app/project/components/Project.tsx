@@ -13,6 +13,7 @@ import "reactflow/dist/style.css"
 
 import TitleNode from "./TitleNode"
 import { useStreamContext } from "../../Context/store"
+import TaskNode from "./TasKNode"
 
 const initialNodes = [
   {
@@ -21,11 +22,17 @@ const initialNodes = [
     position: { x: 0, y: 0 },
     data: { value: 123 },
   },
+  {
+    id: "node-2",
+    type: "taskNode",
+    position: { x: 12, y: 400 },
+    data: { value: 100 },
+  },
 ]
 
 const initialEdges = []
 
-const nodeTypes = { titleNode: TitleNode }
+const nodeTypes = { titleNode: TitleNode, taskNode: TaskNode }
 
 function Project() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
