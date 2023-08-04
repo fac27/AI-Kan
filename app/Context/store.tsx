@@ -1,6 +1,12 @@
 "use client"
 
-import { ReactNode, createContext, useContext, useReducer } from "react"
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useReducer,
+  useState,
+} from "react"
 import {
   ActionTypes,
   DispatchType,
@@ -8,6 +14,7 @@ import {
   TaskType,
   IssueType,
 } from "../types/types"
+import sanitise from "../../utils/sanitise"
 
 const ProjectContext = createContext<ProjectType>({
   id: 0,
@@ -17,6 +24,22 @@ const ProjectContext = createContext<ProjectType>({
 })
 const ProjectDispatchContext = createContext<DispatchType | null>(null)
 
+interface StreamContextProps {
+  projectInput: string
+  setProjectInput: React.Dispatch<React.SetStateAction<string>>
+  error: string
+  setError: React.Dispatch<React.SetStateAction<string>>
+  stream: string
+  setStream: React.Dispatch<React.SetStateAction<string>>
+  isLoading: boolean
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  isCleared: boolean
+  setIsCleared: React.Dispatch<React.SetStateAction<boolean>>
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>
+}
+
+const StreamContext = createContext<StreamContextProps | undefined>(undefined)
+
 export const ProjectProvider = ({ children }: { children: ReactNode }) => {
   const [project, dispatch] = useReducer(projectReducer, {
     id: 0,
@@ -24,12 +47,121 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     tasks: [],
     xarrowChangeCounter: 0,
   })
+
+  const [projectInput, setProjectInput] = useState("")
+  const [error, setError] = useState("")
+  const [stream, setStream] = useState("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isCleared, setIsCleared] = useState<boolean>(true)
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const time = 1000
+
+    if (!isCleared) {
+      setError("Need to clear project first")
+      setTimeout(() => setError(""), time)
+      return
+    }
+
+    const prompt = projectInput
+
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt }),
+    })
+
+    if (response.status === 400) {
+      setError(response.statusText)
+      setTimeout(() => setError(""), time)
+      return
+    }
+
+    if (response.status === 404) {
+      setError("404 Not Found")
+      setTimeout(() => setError(""), time)
+      return
+    }
+    if (response.status === 500) {
+      setError("API Key Depracated, contact developers.")
+      setTimeout(() => setError(""), time)
+      return
+    }
+    if (response.status !== 200) {
+      const data = await response.json()
+      setError(data.statusText)
+      setTimeout(() => setError(""), time)
+    }
+
+    const data = response.body
+
+    if (!data) {
+      return
+    }
+    setIsCleared(false)
+    setIsLoading(true)
+
+    const reader = data.getReader()
+    const decoder = new TextDecoder()
+    let done = false
+
+    const streamedData: string[] = []
+
+    while (!done) {
+      const { value, done: doneReading } = await reader.read()
+      done = doneReading
+      const chunkValue = decoder.decode(value)
+      setStream(prev => prev + chunkValue)
+      streamedData.push(chunkValue)
+    }
+
+    const finalData = streamedData.join("")
+
+    const sanitisedData = sanitise(finalData)
+
+    if (sanitisedData === "not valid object") {
+      setError("OpenAI returned invalid JSON \n Try re-sending request.")
+      setTimeout(() => setError(""), time + 1500)
+      setIsLoading(false)
+      return
+    }
+
+    setStream("")
+    setIsLoading(false)
+
+    if (dispatch) {
+      dispatch({
+        type: "NEW_PROJECT",
+        payload: sanitisedData,
+      })
+    }
+  }
+
   return (
-    <ProjectContext.Provider value={project}>
-      <ProjectDispatchContext.Provider value={dispatch}>
-        {children}
-      </ProjectDispatchContext.Provider>
-    </ProjectContext.Provider>
+    <StreamContext.Provider
+      value={{
+        projectInput,
+        setProjectInput,
+        error,
+        setError,
+        stream,
+        setStream,
+        isLoading,
+        setIsLoading,
+        isCleared,
+        setIsCleared,
+        onSubmit,
+      }}
+    >
+      <ProjectContext.Provider value={project}>
+        <ProjectDispatchContext.Provider value={dispatch}>
+          {children}
+        </ProjectDispatchContext.Provider>
+      </ProjectContext.Provider>
+    </StreamContext.Provider>
   )
 }
 

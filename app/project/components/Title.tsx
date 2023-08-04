@@ -12,13 +12,7 @@ interface Props {
   setIsCleared: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Title: FC<Props> = ({
-  id,
-  isLoading,
-  setIsLoading,
-  isCleared,
-  setIsCleared,
-}: Props) => {
+const Title: FC<Props> = ({ id, isCleared, setIsCleared }: Props) => {
   const [projectInput, setProjectInput] = useState("")
   const [error, setError] = useState("")
   const [stream, setStream] = useState("")
