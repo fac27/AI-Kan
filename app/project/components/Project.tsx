@@ -1,6 +1,7 @@
 "use client"
 import ReactFlow, {
   Background,
+  BackgroundVariant,
   Controls,
   Panel,
   addEdge,
@@ -50,7 +51,12 @@ function Project() {
         nodeTypes={nodeTypes}
         fitView
       >
-        <Background color="#18c" gap={50} />
+        <Background
+          color="#18c"
+          gap={75}
+          size={3}
+          variant={BackgroundVariant.Dots}
+        />
         <Panel position="top-left">
           <button>Sign Out</button>
         </Panel>
