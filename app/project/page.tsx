@@ -1,6 +1,6 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
+//import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
+//import { cookies } from "next/headers"
+//import { redirect } from "next/navigation"
 import Project from "./components/Project"
 
 const AuthProject = async () => {

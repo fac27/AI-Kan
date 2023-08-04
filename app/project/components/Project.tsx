@@ -4,15 +4,14 @@ import ReactFlow, {
   Controls,
   Panel,
   addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
   useEdgesState,
   useNodesState,
 } from "reactflow"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback } from "react"
 import "reactflow/dist/style.css"
 
 import TitleNode from "./TitleNode"
+import { useStreamContext } from "../../Context/store"
 
 const initialNodes = [
   {
@@ -28,15 +27,17 @@ const initialEdges = []
 const nodeTypes = { titleNode: TitleNode }
 
 function Project() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-
-  const [result, setResult] = useState<string>("")
 
   const onConnect = useCallback(
     connection => setEdges(eds => addEdge(connection, eds)),
     [setEdges]
   )
+
+  const streamContext = useStreamContext()
+  const stream = streamContext?.stream
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -49,14 +50,14 @@ function Project() {
         nodeTypes={nodeTypes}
         fitView
       >
-        <Background color="#18c" variant="cross" />
+        <Background color="#18c" gap={50} />
         <Panel position="top-left">
           <button>Sign Out</button>
         </Panel>
         <Panel position="top-right">
           <button>Clear Project</button>
         </Panel>
-        {result && <Panel position="bottom-center">{result}</Panel>}
+        {stream && <Panel position="bottom-center">{stream}</Panel>}
         <Controls />
       </ReactFlow>
     </div>
