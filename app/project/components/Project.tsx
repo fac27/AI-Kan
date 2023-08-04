@@ -7,7 +7,7 @@ import ReactFlow, {
   useEdgesState,
   useNodesState,
 } from "reactflow"
-import { useCallback, useState } from "react"
+import { useCallback } from "react"
 import "reactflow/dist/style.css"
 
 import TitleNode from "./TitleNode"
@@ -27,6 +27,7 @@ const initialEdges = []
 const nodeTypes = { titleNode: TitleNode }
 
 function Project() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 

@@ -4,7 +4,7 @@ import { useStreamContext } from "../../Context/store"
 
 const TitleNode = ({ data }) => {
   const { onSubmit, projectInput, setProjectInput } = useStreamContext()
-
+  console.log(data)
   return (
     <>
       <div
