@@ -1,6 +1,7 @@
 "use client"
 import ReactFlow, {
   Background,
+  BackgroundVariant,
   Controls,
   Panel,
   addEdge,
@@ -12,6 +13,7 @@ import "reactflow/dist/style.css"
 
 import TitleNode from "./TitleNode"
 import { useStreamContext } from "../../Context/store"
+import TaskNode from "./TasKNode"
 
 const initialNodes = [
   {
@@ -20,11 +22,24 @@ const initialNodes = [
     position: { x: 0, y: 0 },
     data: { value: 123 },
   },
+  {
+    id: "node-2",
+    type: "taskNode",
+    position: { x: 12, y: 400 },
+    data: { value: 100 },
+  },
 ]
 
-const initialEdges = []
+const initialEdges = [
+  {
+    id: "edges-node-1-2",
+    source: "node-1",
+    target: "node-2",
+    style: { stroke: "black", strokeWidth: 3 },
+  },
+]
 
-const nodeTypes = { titleNode: TitleNode }
+const nodeTypes = { titleNode: TitleNode, taskNode: TaskNode }
 
 function Project() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -50,7 +65,12 @@ function Project() {
         nodeTypes={nodeTypes}
         fitView
       >
-        <Background color="#18c" gap={50} />
+        <Background
+          color="#18c"
+          gap={75}
+          size={3}
+          variant={BackgroundVariant.Dots}
+        />
         <Panel position="top-left">
           <button>Sign Out</button>
         </Panel>

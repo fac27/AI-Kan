@@ -14,7 +14,7 @@ const TitleNode = ({ data }) => {
           onSubmit={onSubmit}
           className="flex flex-col gap-5 items-center justify-center p-4"
         >
-          <label className="text-3xl" htmlFor="promptInput">
+          <label className="text-2xl" htmlFor="promptInput">
             I want to make...
           </label>
           <div className="flex justify-between mt-2.5">

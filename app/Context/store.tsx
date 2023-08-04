@@ -131,7 +131,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 
     setStream("")
     setIsLoading(false)
-
     if (dispatch) {
       dispatch({
         type: "NEW_PROJECT",
