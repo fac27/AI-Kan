@@ -3,8 +3,8 @@ import { card } from "../../Styles/TailwindClasses"
 import { useStreamContext } from "../../Context/store"
 
 const TitleNode = ({ data }) => {
-  const streamContext = useStreamContext()
-  const onSubmit = streamContext?.onSubmit
+  const { onSubmit, projectInput, setProjectInput } = useStreamContext()
+
   return (
     <>
       <div
@@ -23,6 +23,8 @@ const TitleNode = ({ data }) => {
               id="promptInput"
               placeholder="...a dating app for llamas"
               className="p-1.5 rounded border border-black"
+              value={projectInput}
+              onChange={e => setProjectInput(e.target.value)}
             />
           </div>
           <button

@@ -166,15 +166,27 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
 }
 
 export const useProject = () => {
-  return useContext(ProjectContext)
+  const context = useContext(ProjectContext)
+  if (context === undefined) {
+    throw new Error("Context is undefined")
+  }
+  return context
 }
 
 export const useProjectDispatch = () => {
-  return useContext(ProjectDispatchContext)
+  const context = useContext(ProjectDispatchContext)
+  if (context === null) {
+    throw new Error("Context is undefined")
+  }
+  return context
 }
 
 export const useStreamContext = () => {
-  return useContext(StreamContext)
+  const context = useContext(StreamContext)
+  if (context === undefined) {
+    throw new Error("Context is undefined")
+  }
+  return context
 }
 
 export const projectReducer = (
