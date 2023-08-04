@@ -1,8 +1,10 @@
 import { Handle, Position } from "reactflow"
 import { card } from "../../Styles/TailwindClasses"
-import { useProject } from "../../Context/store"
+import { useStreamContext } from "../../Context/store"
 
 const TitleNode = ({ data }) => {
+  const streamContext = useStreamContext()
+  const onSubmit = streamContext?.onSubmit
   return (
     <>
       <div

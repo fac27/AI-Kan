@@ -49,7 +49,7 @@ function Project() {
         nodeTypes={nodeTypes}
         fitView
       >
-        <Background color="#18c" gap={50} variant="cross" />
+        <Background color="#18c" gap={50} />
         <Panel position="top-left">
           <button>Sign Out</button>
         </Panel>
