@@ -10,36 +10,52 @@ import ReactFlow, {
 } from "reactflow"
 import { useCallback } from "react"
 import "reactflow/dist/style.css"
-
 import TitleNode from "./TitleNode"
 import { useStreamContext } from "../../Context/store"
 import TaskNode from "./TasKNode"
+import IssueNode from "./IssueNode"
 
 const initialNodes = [
   {
-    id: "node-1",
+    id: "Title",
     type: "titleNode",
     position: { x: 0, y: 0 },
     data: { value: 123 },
   },
   {
-    id: "node-2",
+    id: "Task-1",
     type: "taskNode",
     position: { x: 12, y: 400 },
     data: { value: 100 },
+  },
+  {
+    id: "Issue-1",
+    type: "issueNode",
+    position: { x: 12, y: 800 },
+    data: { value: 200 },
   },
 ]
 
 const initialEdges = [
   {
-    id: "edges-node-1-2",
-    source: "node-1",
-    target: "node-2",
+    id: "edges-Title-Task1",
+    source: "Title",
+    target: "Task-1",
+    style: { stroke: "black", strokeWidth: 3 },
+  },
+  {
+    id: "edges-Task1-Issue1",
+    source: "Task-1",
+    target: "Issue-1",
     style: { stroke: "black", strokeWidth: 3 },
   },
 ]
 
-const nodeTypes = { titleNode: TitleNode, taskNode: TaskNode }
+const nodeTypes = {
+  titleNode: TitleNode,
+  taskNode: TaskNode,
+  issueNode: IssueNode,
+}
 
 function Project() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
