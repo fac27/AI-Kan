@@ -3,6 +3,7 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Controls,
+  MarkerType,
   Panel,
   addEdge,
   useEdgesState,
@@ -30,7 +31,14 @@ const initialNodes = [
   },
 ]
 
-const initialEdges = []
+const initialEdges = [
+  {
+    id: "edges-node-1-2",
+    source: "node-1",
+    target: "node-2",
+    style: { stroke: "black", strokeWidth: 3 },
+  },
+]
 
 const nodeTypes = { titleNode: TitleNode, taskNode: TaskNode }
 
