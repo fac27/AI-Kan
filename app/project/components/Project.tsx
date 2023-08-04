@@ -4,15 +4,14 @@ import ReactFlow, {
   Controls,
   Panel,
   addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
   useEdgesState,
   useNodesState,
 } from "reactflow"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useState } from "react"
 import "reactflow/dist/style.css"
 
 import TitleNode from "./TitleNode"
+import { useStreamContext } from "../../Context/store"
 
 const initialNodes = [
   {
@@ -31,12 +30,13 @@ function Project() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
 
-  const [stream, setStream] = useState("")
-
   const onConnect = useCallback(
     connection => setEdges(eds => addEdge(connection, eds)),
     [setEdges]
   )
+
+  const streamContext = useStreamContext()
+  const stream = streamContext?.stream
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>

@@ -173,6 +173,10 @@ export const useProjectDispatch = () => {
   return useContext(ProjectDispatchContext)
 }
 
+export const useStreamContext = () => {
+  return useContext(StreamContext)
+}
+
 export const projectReducer = (
   project: ProjectType,
   action: ActionTypes
