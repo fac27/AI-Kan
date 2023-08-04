@@ -3,7 +3,6 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Controls,
-  MarkerType,
   Panel,
   addEdge,
   useEdgesState,

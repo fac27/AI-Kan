@@ -2,6 +2,7 @@ import { card } from "../../Styles/TailwindClasses"
 import { Handle, Position } from "reactflow"
 
 const TaskNode = ({ data }) => {
+  console.log(data)
   return (
     <div
       className={`${card} ${
